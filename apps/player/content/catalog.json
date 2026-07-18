@@ -23,6 +23,8 @@
               "id": "phase1",
               "title": "Phase 1",
               "lessonTrackId": "mr-sun-phase1-draft",
+              "loop": true,
+              "loopDurationMs": 5868.753,
               "referenceAudio": "./content/packs/original-sprunki/mr-sun/phase1/audio/piano1.wav",
               "animation": {
                 "idle": "./content/packs/original-sprunki/mr-sun/phase1/animation/idle.svg",

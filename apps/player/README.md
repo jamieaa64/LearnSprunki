@@ -31,7 +31,13 @@ It supports local MIDI file loading, a built-in track library, real-time note na
 The LearnSprunki fork also loads versioned character collections. Its first
 vertical slice is Mr Sun Phase 1, with a character selector, animation synced to
 the lesson timeline, character-coloured notes, original-loop playback and a
-visibly labelled draft transcription.
+visibly labelled draft transcription. Sprunki lessons repeat seamlessly at the
+source-loop boundary instead of showing the classical-song completion modal.
+
+For tablet performance, character SVGs are preloaded once and drawn through a
+fixed canvas instead of repeatedly replacing an image URL. Coarse-pointer
+devices use a 1.5× canvas pixel-ratio cap, disable large live backdrop blurs and
+collapse the settings panel after lesson selection; the gear button reopens it.
 
 ---
 

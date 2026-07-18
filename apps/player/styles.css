@@ -55,7 +55,6 @@
     align-items: center;
     justify-content: flex-end;
     pointer-events: none;
-    filter: drop-shadow(0 14px 24px rgba(0,0,0,0.45));
   }
   .character-stage.hidden { display: none; }
   .character-glow {
@@ -63,14 +62,12 @@
     inset: 15% -8% 8%;
     z-index: -1;
     border-radius: 50%;
-    background: radial-gradient(circle, color-mix(in srgb, var(--lesson-primary) 34%, transparent), transparent 68%);
-    filter: blur(8px);
+    background: radial-gradient(circle, color-mix(in srgb, var(--lesson-primary) 30%, transparent), transparent 68%);
   }
   .character-image {
     width: 100%;
     height: min(35vh, 270px);
-    object-fit: contain;
-    object-position: center bottom;
+    display: block;
   }
   .character-status {
     position: absolute;
@@ -93,9 +90,8 @@
     gap: 8px;
     padding: 7px 12px;
     border-radius: 12px;
-    background: rgba(10, 8, 5, 0.78);
+    background: rgba(10, 8, 5, 0.94);
     border: 1px solid color-mix(in srgb, var(--lesson-primary) 45%, transparent);
-    backdrop-filter: blur(12px);
   }
   .character-details strong { color: var(--lesson-primary); font-size: 15px; }
   .character-details span { color: var(--text-dim); font-size: 10px; }
@@ -971,4 +967,18 @@
     .character-details { padding: 5px 8px; }
     .character-details strong { font-size: 12px; }
     .reference-audio-btn { padding: 6px 9px; font-size: 9px; }
+  }
+
+  /* Tablet GPUs pay heavily for large live backdrop-blur layers over canvas. */
+  @media (pointer: coarse) {
+    .panel,
+    .brand,
+    .pill,
+    .score-hud,
+    .transport,
+    .toggle-panel {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .panel { background: rgba(18, 19, 32, 0.96); }
   }

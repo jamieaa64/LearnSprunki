@@ -38,6 +38,8 @@ export async function validateCatalogue(projectDirectory) {
       await requireAsset(projectDirectory, character.icon);
       for (const phase of character.phases || []) {
         requireValue(tracksById.has(phase.lessonTrackId), `missing lesson track ${phase.lessonTrackId}`);
+        requireValue(typeof phase.loop === "boolean", `${phase.id} is missing its loop setting`);
+        requireValue(Number.isFinite(phase.loopDurationMs) && phase.loopDurationMs > 0, `${phase.id} has an invalid loop duration`);
         await requireAsset(projectDirectory, phase.referenceAudio);
         await requireAsset(projectDirectory, phase.animation.idle);
         requireValue(Array.isArray(phase.animation.frames) && phase.animation.frames.length > 0, `${phase.id} has no animation frames`);

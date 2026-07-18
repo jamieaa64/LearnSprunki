@@ -45,4 +45,5 @@ catalogue containing paths to ordinary MIDI files.
 The first end-to-end Sprunki lesson is Original Sprunki / Mr Sun / Phase 1. It
 includes the real animated SVG frames, the original WAV reference loop, a
 yellow-orange lesson theme, and an explicitly labelled Basic Pitch draft MIDI.
-The draft must be reviewed before it is promoted to an approved lesson.
+The lesson loops at the source WAV boundary like the original game. The draft
+must be reviewed before it is promoted to an approved lesson.

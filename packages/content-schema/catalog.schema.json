@@ -60,11 +60,13 @@
     "phase": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "title", "lessonTrackId", "referenceAudio", "animation"],
+      "required": ["id", "title", "lessonTrackId", "loop", "loopDurationMs", "referenceAudio", "animation"],
       "properties": {
         "id": { "$ref": "#/$defs/id" },
         "title": { "$ref": "#/$defs/nonEmptyString" },
         "lessonTrackId": { "$ref": "#/$defs/id" },
+        "loop": { "type": "boolean" },
+        "loopDurationMs": { "type": "number", "exclusiveMinimum": 0 },
         "referenceAudio": { "$ref": "#/$defs/assetPath" },
         "animation": { "$ref": "#/$defs/animation" }
       }

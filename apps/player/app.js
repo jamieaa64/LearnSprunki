@@ -40,7 +40,11 @@ let lessonMetadataByTrackId = new Map();
 // ---------- Canvas setup ----------
 const canvas = document.getElementById('stage');
 const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
-let DPR = Math.min(window.devicePixelRatio || 1, 2);
+function preferredCanvasDpr() {
+  const coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  return Math.min(window.devicePixelRatio || 1, coarsePointer ? 1.5 : 2);
+}
+let DPR = preferredCanvasDpr();
 let W = 0, H = 0;        // CSS pixels
 let pianoY = 0;          // top Y of piano bed (CSS px)
 let pianoH = 0;          // piano bed height (CSS px)
@@ -93,7 +97,7 @@ function getKey(midi) {
 }
 
 function resize() {
-  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  DPR = preferredCanvasDpr();
   W = window.innerWidth;
   H = window.innerHeight;
   canvas.width  = Math.floor(W * DPR);
@@ -743,6 +747,10 @@ function loadMidiObject(midi) {
 
   state.notes = notes;
   state.songDuration = notes.length ? Math.max(...notes.map(n => n.endMs)) + 1000 : 0;
+  const lessonLoopDuration = state.activeLesson && state.activeLesson.phase.loopDurationMs;
+  if (Number.isFinite(lessonLoopDuration) && lessonLoopDuration > 0) {
+    state.songDuration = lessonLoopDuration;
+  }
   state.songTime = 0;
   state.waiting = false;
   state.waitingFor.clear();
@@ -788,6 +796,9 @@ async function loadDefaultSong(trackId) {
     updateDownloadButtonVisibility();
     const draftLabel = song.reviewStatus === 'draft' ? ' · draft transcription' : '';
     showToast(song.emoji + '  Loaded: ' + song.title + draftLabel, 'ok');
+    const tabletLayout = window.innerWidth <= 1180 ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    if (state.activeLesson && tabletLayout && panel) panel.classList.add('collapsed');
   } catch (err) {
     console.error('Failed to load built-in song:', err);
     showToast('Failed to load track: ' + err.message, 'err');
@@ -1575,12 +1586,16 @@ const tracksBtn  = document.getElementById('tracksBtn');
 const tracksMenu = document.getElementById('tracksMenu');
 const sprunkiLessons = document.getElementById('sprunkiLessons');
 const characterStage = document.getElementById('characterStage');
-const characterImage = document.getElementById('characterImage');
+const characterCanvas = document.getElementById('characterCanvas');
+const characterContext = characterCanvas ? characterCanvas.getContext('2d', { alpha: true }) : null;
 const characterName = document.getElementById('characterName');
 const characterPhase = document.getElementById('characterPhase');
 const characterStatus = document.getElementById('characterStatus');
 const referenceAudio = document.getElementById('referenceAudio');
 const referenceAudioBtn = document.getElementById('referenceAudioBtn');
+let characterLoadToken = 0;
+let characterIdleImage = null;
+let characterFrameImages = [];
 
 function renderSprunkiLessons(collections) {
   if (!sprunkiLessons) return;
@@ -1644,8 +1659,63 @@ function stopReferenceAudio() {
   referenceAudio.currentTime = 0;
 }
 
+function preloadCharacterImage(url) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.decoding = 'async';
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`Character frame failed to load: ${url}`));
+    image.src = url;
+  });
+}
+
+async function prepareCharacterFrames(phase, loadToken) {
+  try {
+    const images = await Promise.all([
+      preloadCharacterImage(phase.animation.idle),
+      ...(phase.animation.frames || []).map(preloadCharacterImage),
+    ]);
+    if (loadToken !== characterLoadToken) return;
+    characterIdleImage = images[0];
+    characterFrameImages = images.slice(1);
+    state.characterFrameIndex = -2;
+    updateCharacterAnimation();
+  } catch (err) {
+    console.warn('Character animation could not be prepared:', err);
+  }
+}
+
+function drawCharacterImage(image) {
+  if (!characterCanvas || !characterContext || !image) return;
+  const cssWidth = Math.max(1, characterCanvas.clientWidth);
+  const cssHeight = Math.max(1, characterCanvas.clientHeight);
+  const dpr = preferredCanvasDpr();
+  const pixelWidth = Math.round(cssWidth * dpr);
+  const pixelHeight = Math.round(cssHeight * dpr);
+  if (characterCanvas.width !== pixelWidth || characterCanvas.height !== pixelHeight) {
+    characterCanvas.width = pixelWidth;
+    characterCanvas.height = pixelHeight;
+  }
+
+  characterContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+  characterContext.clearRect(0, 0, cssWidth, cssHeight);
+  const sourceWidth = image.naturalWidth || cssWidth;
+  const sourceHeight = image.naturalHeight || cssHeight;
+  const scale = Math.min(cssWidth / sourceWidth, cssHeight / sourceHeight);
+  const drawWidth = sourceWidth * scale;
+  const drawHeight = sourceHeight * scale;
+  characterContext.drawImage(
+    image,
+    (cssWidth - drawWidth) / 2,
+    cssHeight - drawHeight,
+    drawWidth,
+    drawHeight
+  );
+}
+
 function activateLessonPresentation(trackId) {
   stopReferenceAudio();
+  characterLoadToken++;
   const lesson = lessonMetadataByTrackId.get(trackId) || null;
   state.activeLesson = lesson;
   state.characterFrameIndex = -1;
@@ -1659,7 +1729,12 @@ function activateLessonPresentation(trackId) {
     root.style.removeProperty('--lh');
     root.style.removeProperty('--rh');
     if (characterStage) characterStage.classList.add('hidden');
-    if (characterImage) characterImage.removeAttribute('src');
+    characterIdleImage = null;
+    characterFrameImages = [];
+    if (characterCanvas && characterContext) {
+      characterContext.clearRect(0, 0, characterCanvas.width, characterCanvas.height);
+      characterCanvas.setAttribute('aria-label', '');
+    }
     if (referenceAudio) referenceAudio.removeAttribute('src');
     return;
   }
@@ -1678,26 +1753,27 @@ function activateLessonPresentation(trackId) {
   root.style.setProperty('--rh', theme.rightHand);
 
   characterStage.classList.remove('hidden');
-  characterImage.src = phase.animation.idle;
-  characterImage.alt = `${character.name}, ${phase.title}`;
+  characterCanvas.setAttribute('aria-label', `${character.name}, ${phase.title}`);
   characterName.textContent = character.name;
   characterPhase.textContent = phase.title;
   characterStatus.textContent = track.reviewStatus === 'draft' ? 'Draft transcription' : 'Lesson ready';
   referenceAudio.src = phase.referenceAudio;
+  prepareCharacterFrames(phase, characterLoadToken);
 }
 
 function updateCharacterAnimation() {
   const lesson = state.activeLesson;
-  if (!lesson || !characterImage) return;
+  if (!lesson || !characterCanvas || !characterIdleImage) return;
   const animation = lesson.phase.animation;
-  const frames = animation.frames || [];
-  const nextIndex = state.playing && frames.length
-    ? Math.floor(state.songTime / animation.frameDurationMs) % frames.length
+  const nextIndex = state.playing && characterFrameImages.length
+    ? Math.floor(state.songTime / animation.frameDurationMs) % characterFrameImages.length
     : -1;
   if (nextIndex === state.characterFrameIndex) return;
   state.characterFrameIndex = nextIndex;
-  characterImage.src = nextIndex < 0 ? animation.idle : frames[nextIndex];
+  drawCharacterImage(nextIndex < 0 ? characterIdleImage : characterFrameImages[nextIndex]);
 }
+
+window.addEventListener('resize', () => { state.characterFrameIndex = -2; });
 
 function renderTracksMenu(tracks) {
   if (!tracksMenu) return;
@@ -2033,6 +2109,12 @@ function update(dtMs) {
   }
 
   if (state.songDuration > 0 && state.songTime >= state.songDuration) {
+    if (state.activeLesson && state.activeLesson.phase.loop) {
+      const overflow = Math.max(0, nextTime - state.songDuration);
+      state.songEnded = false;
+      scrubToTime(overflow % state.songDuration);
+      return;
+    }
     if (!state.songEnded) {
       state.songEnded = true;
       // Ensure no hardware notes are left hanging when the song wraps up.
