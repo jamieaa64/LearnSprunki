@@ -43,6 +43,7 @@ function noteLetter(midi) {
 let defaultSongs = Object.create(null);
 let activeTrackController = null;
 let extensionHost = null;
+let extensionInstrumentRestore = null;
 
 // ---------- Canvas setup ----------
 const canvas = document.getElementById('stage');
@@ -331,6 +332,48 @@ function buildInstrument(name) {
         envelope:   { attack: 0.85, decay: 0.4, sustain: 0.85, release: 2.4 }
       }).connect(filter);
       fx = [filter];
+      break;
+    }
+    case 'drums': {
+      const bus = new Tone.Volume(0).toDestination();
+      const kick = new Tone.MembraneSynth({
+        pitchDecay: 0.045, octaves: 7,
+        envelope: { attack: 0.001, decay: 0.34, sustain: 0.01, release: 0.16 }
+      }).connect(bus);
+      const tom = new Tone.MembraneSynth({
+        pitchDecay: 0.025, octaves: 3,
+        envelope: { attack: 0.001, decay: 0.2, sustain: 0.015, release: 0.12 }
+      }).connect(bus);
+      const snare = new Tone.NoiseSynth({
+        noise: { type: 'white' },
+        envelope: { attack: 0.001, decay: 0.16, sustain: 0, release: 0.08 }
+      }).connect(bus);
+      const metal = new Tone.MetalSynth({
+        frequency: 230, envelope: { attack: 0.001, decay: 0.13, release: 0.05 },
+        harmonicity: 5.1, modulationIndex: 28, resonance: 3900, octaves: 1.5
+      }).connect(bus);
+      const voices = { kick, tom, snare, metal };
+      const drumGroup = midi => {
+        if ([35, 36].includes(midi)) return 'kick';
+        if ([37, 38, 39, 40].includes(midi)) return 'snare';
+        if ([42, 44, 46, 49, 51, 52, 53, 55, 57, 59].includes(midi)) return 'metal';
+        return 'tom';
+      };
+      node = {
+        volume: bus.volume,
+        triggerAttackRelease(note, duration, time, velocity) {
+          const midi = Math.round(Tone.Frequency(note).toMidi());
+          const group = drumGroup(midi);
+          if (group === 'kick') kick.triggerAttackRelease('C1', '8n', time, velocity);
+          else if (group === 'snare') snare.triggerAttackRelease('16n', time, velocity);
+          else if (group === 'metal') metal.triggerAttackRelease(midi === 42 ? '32n' : '8n', time, velocity);
+          else tom.triggerAttackRelease(Tone.Frequency(midi, 'midi').toNote(), duration || '8n', time, velocity);
+        },
+        triggerAttack(note, time, velocity) { this.triggerAttackRelease(note, '8n', time, velocity); },
+        triggerRelease() {},
+        releaseAll() {},
+      };
+      fx = [bus, ...Object.values(voices)];
       break;
     }
     default:
@@ -1458,6 +1501,7 @@ function labelForInstrument(name) {
     case 'cyber':   return 'Cyber Synth';
     case 'arcade':  return '8-Bit Arcade';
     case 'strings': return 'Ambient Strings';
+    case 'drums':   return 'Drum Kit';
     default:        return name;
   }
 }
@@ -1469,6 +1513,7 @@ if (instrumentSelect) {
       try { await initAudio(); } catch (e) {}
     }
     const name = instrumentSelect.value;
+    if (extensionInstrumentRestore) extensionInstrumentRestore = { name, label: labelForInstrument(name) };
     setInstrument(name);
     if (instrumentVal) instrumentVal.textContent = labelForInstrument(name);
   });
@@ -1705,6 +1750,12 @@ function setExtensionTheme(theme) {
 function activateExtensionTrack(track) {
   resetExtensionTheme();
   activeTrackController = extensionHost?.activateTrack(track) || null;
+  if (!activeTrackController && extensionInstrumentRestore) {
+    setInstrument(extensionInstrumentRestore.name);
+    if (instrumentSelect) instrumentSelect.value = extensionInstrumentRestore.name;
+    if (instrumentVal) instrumentVal.textContent = extensionInstrumentRestore.label;
+    extensionInstrumentRestore = null;
+  }
 }
 
 function extensionRenderContext() {
@@ -1745,6 +1796,12 @@ function createExtensionApi() {
     getPlaybackState: () => ({ songTime: state.songTime, playing: state.playing }),
     setTheme: setExtensionTheme,
     setInstrument(voice, label) {
+      if (!extensionInstrumentRestore) {
+        extensionInstrumentRestore = {
+          name: currentInstrumentName,
+          label: instrumentVal?.textContent || labelForInstrument(currentInstrumentName),
+        };
+      }
       setInstrument(voice);
       if (instrumentSelect) instrumentSelect.value = voice;
       if (instrumentVal) instrumentVal.textContent = label || labelForInstrument(voice);

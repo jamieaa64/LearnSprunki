@@ -3,37 +3,161 @@
   "rhythmLabel": "Kick",
   "rhythmMidiNote": 36,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.22,
-    0.44,
-    0.65,
-    0.86,
-    1.08,
-    1.29,
-    1.51,
-    1.72,
-    1.93,
-    2.15,
-    2.36,
-    2.58,
-    2.79,
-    3.01,
-    3.22,
-    3.43,
-    3.65,
-    3.86,
-    4.08,
-    4.29,
-    4.51,
-    4.72,
-    4.94,
-    5.15,
-    5.36,
-    5.58,
-    5.79,
-    6.01,
-    6.22,
-    6.43,
-    6.65
+  "hits": [
+    {
+      "seconds": 0.22,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 0.44,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 0.65,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 0.86,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.08,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.29,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.51,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.72,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.93,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 2.15,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 2.36,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 2.58,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 2.79,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.01,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.22,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.43,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.65,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.86,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.08,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.29,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.51,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.72,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.94,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 5.15,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 5.36,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 5.58,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 5.79,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 6.01,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 6.22,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 6.43,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 6.65,
+      "midi": 36,
+      "group": "kick"
+    }
   ]
 }

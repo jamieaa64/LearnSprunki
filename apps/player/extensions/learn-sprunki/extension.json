@@ -7,6 +7,6 @@
   "stylesheet": "./extensions/learn-sprunki/styles.css",
   "catalog": "./extensions/learn-sprunki/content/catalog.json",
   "validator": "./extensions/learn-sprunki/validate.mjs",
-  "bundle": ["extension.js", "styles.css", "content"],
+  "bundle": ["extension.js", "drum-kit.js", "styles.css", "content"],
   "description": "Animated Sprunki character lessons, rhythm pads, looping and themed note effects."
 }

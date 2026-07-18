@@ -3,29 +3,121 @@
   "rhythmLabel": "Shaker",
   "rhythmMidiNote": 42,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.16,
-    0.45,
-    0.6,
-    0.76,
-    1.05,
-    1.2,
-    1.36,
-    1.65,
-    1.8,
-    1.96,
-    2.25,
-    2.4,
-    2.56,
-    2.85,
-    3,
-    3.16,
-    3.45,
-    3.6,
-    3.76,
-    4.05,
-    4.2,
-    4.36,
-    4.65
+  "hits": [
+    {
+      "seconds": 0.16,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.45,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.6,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.76,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.05,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.2,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.36,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.65,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.8,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.96,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.25,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.4,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.56,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.85,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.16,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.45,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.6,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.76,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.05,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.2,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.36,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.65,
+      "midi": 42,
+      "group": "shaker"
+    }
   ]
 }

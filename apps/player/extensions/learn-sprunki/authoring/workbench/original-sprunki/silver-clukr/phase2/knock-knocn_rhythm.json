@@ -3,21 +3,81 @@
   "rhythmLabel": "Knock",
   "rhythmMidiNote": 37,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.42,
-    0.85,
-    1.29,
-    1.72,
-    2.14,
-    2.57,
-    3,
-    3.42,
-    3.85,
-    4.29,
-    4.72,
-    5.14,
-    5.57,
-    6,
-    6.42
+  "hits": [
+    {
+      "seconds": 0.42,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 0.85,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 1.29,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 1.72,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 2.14,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 2.57,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 3,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 3.42,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 3.85,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 4.29,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 4.72,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 5.14,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 5.57,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 6,
+      "midi": 37,
+      "group": "knock"
+    },
+    {
+      "seconds": 6.42,
+      "midi": 37,
+      "group": "knock"
+    }
   ]
 }

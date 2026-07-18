@@ -3,11 +3,31 @@
   "rhythmLabel": "Snare",
   "rhythmMidiNote": 38,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.6,
-    1.8,
-    3,
-    4.2,
-    4.65
+  "hits": [
+    {
+      "seconds": 0.6,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 1.8,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 3,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 4.2,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 4.65,
+      "midi": 38,
+      "group": "snare"
+    }
   ]
 }

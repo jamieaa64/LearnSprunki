@@ -3,27 +3,111 @@
   "rhythmLabel": "Snare",
   "rhythmMidiNote": 38,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.43,
-    0.59,
-    0.69,
-    1.29,
-    1.54,
-    2.15,
-    2.3,
-    2.4,
-    3,
-    3.26,
-    3.86,
-    4.11,
-    4.72,
-    4.97,
-    5.58,
-    5.73,
-    5.83,
-    6.43,
-    6.58,
-    6.68,
-    7.4
+  "hits": [
+    {
+      "seconds": 0.43,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 0.59,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 0.69,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 1.29,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 1.54,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 2.15,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 2.3,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 2.4,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 3,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 3.26,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 3.86,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 4.11,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 4.72,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 4.97,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 5.58,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 5.73,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 5.83,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 6.43,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 6.58,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 6.68,
+      "midi": 38,
+      "group": "snare"
+    },
+    {
+      "seconds": 7.4,
+      "midi": 38,
+      "group": "snare"
+    }
   ]
 }

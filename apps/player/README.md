@@ -53,12 +53,13 @@ offer fullscreen controls so the interface can remain focused during play.
 
 ### Advanced Audio & Hardware Systems
 
-* **Multi-Instrument Sound Selector:** Swap between 4 custom Tone.js audio engines:
+* **Multi-Instrument Sound Selector:** Swap between 5 custom Tone.js audio engines:
 
   * Grand Piano
   * Cyber Synth
   * 8-Bit Arcade
   * Ambient Strings
+  * Drum Kit
 * **Hardware MIDI Output Pass-Through:** Sends MIDI Note On/Off commands back to a digital keyboard, allowing auto-playing tracks to play through the keyboard's physical speakers.
 * **Hardware Synth Muter:** A toggle to silence browser audio when using a real piano's internal sound engine.
 

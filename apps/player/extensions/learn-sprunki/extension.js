@@ -1,3 +1,5 @@
+import { drumAtPoint, drumKitLayout, pieceForKey, pieceForMidi } from './drum-kit.js';
+
 let api;
 let manifest;
 let tracksById;
@@ -13,7 +15,7 @@ let characterIdleImage = null;
 let characterFrameImages = [];
 let characterFrameIndex = -1;
 let particles = [];
-let spaceHeld = false;
+const heldDrumKeys = new Map();
 let elements = {};
 
 function controlsMarkup() {
@@ -236,31 +238,49 @@ function spawnParticles(note, effect, context) {
   if (particles.length > 220) particles.splice(0, particles.length - 220);
 }
 
-function drawRhythmPad(lesson, litInfo, context) {
+function litDrumInfo(lit, piece) {
+  for (const midi of piece.aliases) if (lit.has(midi)) return lit.get(midi);
+  return null;
+}
+
+function drawDrumKit(lesson, lit, context) {
   const { ctx, width, pianoY, pianoH, theme, roundRect, hexToRgba } = context;
   ctx.fillStyle = '#090a12';
   ctx.fillRect(0, pianoY, width, pianoH);
-  const x = width * 0.2;
-  const padWidth = width * 0.6;
-  const y = pianoY + 12;
-  const height = Math.max(58, pianoH - 24);
-  const color = litInfo?.color || theme.rh;
-  const gradient = ctx.createLinearGradient(0, y, 0, y + height);
-  gradient.addColorStop(0, hexToRgba(color, litInfo ? 0.95 : 0.42));
-  gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.48 : 0.12));
-  ctx.fillStyle = gradient;
-  ctx.shadowColor = litInfo ? color : 'transparent';
-  ctx.shadowBlur = litInfo ? 22 : 0;
-  roundRect(ctx, x, y, padWidth, height, 18); ctx.fill();
-  ctx.shadowBlur = 0;
-  ctx.strokeStyle = hexToRgba(color, 0.8); ctx.lineWidth = 2;
-  roundRect(ctx, x, y, padWidth, height, 18); ctx.stroke();
-  ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.font = '800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  ctx.fillText(lesson.rhythmLabel.toUpperCase(), width / 2, y + height / 2 - 8);
-  ctx.fillStyle = 'rgba(255,255,255,0.68)';
-  ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  ctx.fillText('TAP THE PAD · OR PRESS SPACE', width / 2, y + height / 2 + 17);
+  const layout = drumKitLayout(width, pianoY, pianoH);
+  for (const piece of layout) {
+    const litInfo = litDrumInfo(lit, piece);
+    const isFocus = piece.aliases.includes(lesson.rhythmMidiNote);
+    const color = litInfo?.color || (isFocus ? theme.rh : '#72809a');
+    const cx = piece.x + piece.w / 2;
+    const cy = piece.y + piece.h / 2;
+    const gradient = ctx.createRadialGradient(cx, cy - piece.h * 0.2, 2, cx, cy, Math.max(piece.w, piece.h) * 0.62);
+    gradient.addColorStop(0, hexToRgba(color, litInfo ? 0.98 : (isFocus ? 0.52 : 0.3)));
+    gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.42 : 0.09));
+    ctx.save();
+    ctx.fillStyle = gradient;
+    ctx.strokeStyle = hexToRgba(color, isFocus ? 0.95 : 0.62);
+    ctx.lineWidth = isFocus ? 3 : 1.5;
+    ctx.shadowColor = litInfo ? color : 'transparent';
+    ctx.shadowBlur = litInfo ? 24 : 0;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, piece.w / 2, piece.h / 2, 0, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+    if (piece.shape === 'drum' || piece.shape === 'kick') {
+      ctx.strokeStyle = hexToRgba(color, 0.32);
+      ctx.beginPath();
+      ctx.ellipse(cx, cy + piece.h * 0.08, piece.w * 0.43, piece.h * 0.34, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `800 ${Math.max(8, Math.min(13, piece.w * 0.1))}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+    ctx.fillText(piece.shortLabel, cx, cy - 3);
+    ctx.fillStyle = 'rgba(255,255,255,0.58)';
+    ctx.font = '700 8px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillText(piece.key, cx, cy + 11);
+    ctx.restore();
+  }
 }
 
 function createController(metadata) {
@@ -288,17 +308,21 @@ function createController(metadata) {
       ? (lesson.playerMode === 'rhythm' ? ' · draft rhythm lesson' : ' · draft transcription') : '',
     hidesKeyboardGuides: lesson.playerMode === 'rhythm',
     getKey(midi, context) {
-      if (lesson.playerMode === 'rhythm' && midi === lesson.rhythmMidiNote) {
-        return { midi, isBlack: false, x: context.width * 0.2, w: context.width * 0.6 };
+      if (lesson.playerMode === 'rhythm') {
+        const piece = pieceForMidi(midi);
+        if (!piece) return null;
+        const layoutPiece = drumKitLayout(context.width, context.pianoY, context.pianoH).find(item => item.id === piece.id);
+        return { midi, isBlack: false, x: layoutPiece.x, w: layoutPiece.w };
       }
       return null;
     },
-    hitTest(_x, _y, _context) {
-      return lesson.playerMode === 'rhythm' ? lesson.rhythmMidiNote : undefined;
+    hitTest(x, y, context) {
+      if (lesson.playerMode !== 'rhythm') return undefined;
+      return drumAtPoint(x, y, drumKitLayout(context.width, context.pianoY, context.pianoH))?.midi ?? null;
     },
     drawInputSurface(lit, context) {
       if (lesson.playerMode !== 'rhythm') return false;
-      drawRhythmPad(lesson, lit.get(lesson.rhythmMidiNote), context);
+      drawDrumKit(lesson, lit, context);
       return true;
     },
     noteTriggered(note, context) { spawnParticles(note, effect, context); },
@@ -371,13 +395,16 @@ function wireUi() {
     if (event.key === 'Escape' && !elements.gameBrowserOverlay.classList.contains('hidden')) closeBrowser();
     const lesson = activeController && lessonsByTrackId.get(api.getCurrentTrackId())?.lesson;
     const tagName = event.target?.tagName?.toLowerCase();
-    if (event.code !== 'Space' || lesson?.playerMode !== 'rhythm' || event.repeat || ['input', 'select', 'button'].includes(tagName)) return;
-    event.preventDefault(); spaceHeld = true; api.noteOn(lesson.rhythmMidiNote);
+    if (lesson?.playerMode !== 'rhythm' || event.repeat || ['input', 'select', 'button'].includes(tagName)) return;
+    const piece = event.code === 'Space' ? pieceForMidi(lesson.rhythmMidiNote) : pieceForKey(event.key);
+    if (!piece) return;
+    event.preventDefault(); heldDrumKeys.set(event.code, piece.midi); api.noteOn(piece.midi);
   });
   document.addEventListener('keyup', event => {
     const lesson = activeController && lessonsByTrackId.get(api.getCurrentTrackId())?.lesson;
-    if (event.code !== 'Space' || !spaceHeld || lesson?.playerMode !== 'rhythm') return;
-    event.preventDefault(); spaceHeld = false; api.noteOff(lesson.rhythmMidiNote);
+    const midi = heldDrumKeys.get(event.code);
+    if (midi == null || lesson?.playerMode !== 'rhythm') return;
+    event.preventDefault(); heldDrumKeys.delete(event.code); api.noteOff(midi);
   });
 }
 

@@ -3,37 +3,161 @@
   "rhythmLabel": "Shaker",
   "rhythmMidiNote": 42,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.34,
-    0.44,
-    0.76,
-    0.87,
-    1.19,
-    1.3,
-    1.62,
-    1.73,
-    2.05,
-    2.16,
-    2.48,
-    2.58,
-    2.91,
-    3.01,
-    3.33,
-    3.44,
-    3.76,
-    3.87,
-    4.19,
-    4.3,
-    4.62,
-    4.73,
-    5.05,
-    5.16,
-    5.48,
-    5.58,
-    5.91,
-    6.01,
-    6.34,
-    6.44,
-    6.76
+  "hits": [
+    {
+      "seconds": 0.34,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.44,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.76,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 0.87,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.19,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.3,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.62,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 1.73,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.05,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.16,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.48,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.58,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 2.91,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.01,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.33,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.44,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.76,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 3.87,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.19,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.3,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.62,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 4.73,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 5.05,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 5.16,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 5.48,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 5.58,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 5.91,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 6.01,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 6.34,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 6.44,
+      "midi": 42,
+      "group": "shaker"
+    },
+    {
+      "seconds": 6.76,
+      "midi": 42,
+      "group": "shaker"
+    }
   ]
 }

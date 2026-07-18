@@ -7,8 +7,8 @@
     "red-raddy/phase2": { "category": "percussion", "sourceAudio": "snare3.wav", "publishRhythm": true, "rhythmMidiNote": 38, "rhythmLabel": "Snare" },
     "silver-clukr/phase1": { "category": "percussion", "sourceAudio": "ride-cymbal.wav", "publishRhythm": true, "rhythmMidiNote": 51, "rhythmLabel": "Ride" },
     "silver-clukr/phase2": { "category": "percussion", "sourceAudio": "knock-knocn.wav", "publishRhythm": true, "rhythmMidiNote": 37, "rhythmLabel": "Knock" },
-    "fun-bot/phase1": { "category": "percussion", "sourceAudio": "amen.wav", "publishRhythm": true, "rhythmMidiNote": 40, "rhythmLabel": "Breakbeat" },
-    "fun-bot/phase2": { "category": "percussion", "sourceAudio": "amen3.wav", "publishRhythm": true, "rhythmMidiNote": 40, "rhythmLabel": "Breakbeat" },
+    "fun-bot/phase1": { "category": "percussion", "sourceAudio": "amen.wav", "publishRhythm": true, "rhythmMidiNote": 38, "rhythmLabel": "Breakbeat" },
+    "fun-bot/phase2": { "category": "percussion", "sourceAudio": "amen3.wav", "publishRhythm": true, "rhythmMidiNote": 38, "rhythmLabel": "Breakbeat" },
     "green-vineria/phase1": { "category": "percussion", "sourceAudio": "shaky-shaky.wav", "publishRhythm": true, "rhythmMidiNote": 42, "rhythmLabel": "Shaker" },
     "green-vineria/phase2": { "category": "percussion", "sourceAudio": "shakey.wav", "publishRhythm": true, "rhythmMidiNote": 42, "rhythmLabel": "Shaker" },
 

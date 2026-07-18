@@ -1,3 +1,5 @@
+import { pieceForMidi } from './drum-kit.js';
+
 export async function validateExtension({
   projectDirectory,
   extensionRoot,
@@ -52,6 +54,7 @@ export async function validateExtension({
     if (lesson.playerMode === "rhythm") {
       requireValue(typeof lesson.rhythmLabel === "string" && lesson.rhythmLabel.length > 0, `${track.id} has no rhythm label`);
       requireValue(Number.isInteger(lesson.rhythmMidiNote), `${track.id} has no rhythm MIDI note`);
+      requireValue(pieceForMidi(lesson.rhythmMidiNote), `${track.id} uses an unsupported drum note`);
     }
     requireValue(typeof lesson.loopByDefault === "boolean", `${track.id} is missing its loop default`);
     requireValue(Number.isFinite(lesson.loopDurationMs) && lesson.loopDurationMs > 0, `${track.id} has an invalid loop duration`);

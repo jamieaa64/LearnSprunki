@@ -1,40 +1,232 @@
 {
   "sourceAudio": "amen3.wav",
   "rhythmLabel": "Breakbeat",
-  "rhythmMidiNote": 40,
+  "rhythmMidiNote": 38,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.32,
-    0.43,
-    0.65,
-    0.99,
-    1.07,
-    1.29,
-    1.5,
-    1.72,
-    2.04,
-    2.15,
-    2.36,
-    2.71,
-    2.79,
-    3,
-    3.22,
-    3.35,
-    3.46,
-    3.75,
-    3.86,
-    4.07,
-    4.42,
-    4.5,
-    4.71,
-    4.93,
-    5.15,
-    5.46,
-    5.57,
-    5.79,
-    6.13,
-    6.22,
-    6.43,
-    6.65
+  "hits": [
+    {
+      "seconds": 0.32,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.366,
+      "crossingRate": 0.0732
+    },
+    {
+      "seconds": 0.43,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3542,
+      "crossingRate": 0.0505
+    },
+    {
+      "seconds": 0.65,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7053,
+      "crossingRate": 0.0221
+    },
+    {
+      "seconds": 0.99,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5511,
+      "crossingRate": 0.0432
+    },
+    {
+      "seconds": 1.07,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.6822,
+      "crossingRate": 0.0351
+    },
+    {
+      "seconds": 1.29,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3709,
+      "crossingRate": 0.0523
+    },
+    {
+      "seconds": 1.5,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7125,
+      "crossingRate": 0.0254
+    },
+    {
+      "seconds": 1.72,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.6979,
+      "crossingRate": 0.0215
+    },
+    {
+      "seconds": 2.04,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3266,
+      "crossingRate": 0.0765
+    },
+    {
+      "seconds": 2.15,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3641,
+      "crossingRate": 0.0493
+    },
+    {
+      "seconds": 2.36,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7036,
+      "crossingRate": 0.0263
+    },
+    {
+      "seconds": 2.71,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5316,
+      "crossingRate": 0.049
+    },
+    {
+      "seconds": 2.79,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.6873,
+      "crossingRate": 0.0311
+    },
+    {
+      "seconds": 3,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3765,
+      "crossingRate": 0.0514
+    },
+    {
+      "seconds": 3.22,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5423,
+      "crossingRate": 0.0348
+    },
+    {
+      "seconds": 3.35,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7484,
+      "crossingRate": 0.0206
+    },
+    {
+      "seconds": 3.46,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.774,
+      "crossingRate": 0.0154
+    },
+    {
+      "seconds": 3.75,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3675,
+      "crossingRate": 0.0726
+    },
+    {
+      "seconds": 3.86,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3552,
+      "crossingRate": 0.0502
+    },
+    {
+      "seconds": 4.07,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7044,
+      "crossingRate": 0.0284
+    },
+    {
+      "seconds": 4.42,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5414,
+      "crossingRate": 0.0453
+    },
+    {
+      "seconds": 4.5,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.6789,
+      "crossingRate": 0.0336
+    },
+    {
+      "seconds": 4.71,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.388,
+      "crossingRate": 0.0478
+    },
+    {
+      "seconds": 4.93,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7139,
+      "crossingRate": 0.0251
+    },
+    {
+      "seconds": 5.15,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7171,
+      "crossingRate": 0.0196
+    },
+    {
+      "seconds": 5.46,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3661,
+      "crossingRate": 0.0735
+    },
+    {
+      "seconds": 5.57,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.3574,
+      "crossingRate": 0.0499
+    },
+    {
+      "seconds": 5.79,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.7035,
+      "crossingRate": 0.0263
+    },
+    {
+      "seconds": 6.13,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5632,
+      "crossingRate": 0.0432
+    },
+    {
+      "seconds": 6.22,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.6708,
+      "crossingRate": 0.0284
+    },
+    {
+      "seconds": 6.43,
+      "midi": 38,
+      "group": "snare",
+      "lowRatio": 0.376,
+      "crossingRate": 0.0529
+    },
+    {
+      "seconds": 6.65,
+      "midi": 36,
+      "group": "kick",
+      "lowRatio": 0.5689,
+      "crossingRate": 0.0339
+    }
   ]
 }

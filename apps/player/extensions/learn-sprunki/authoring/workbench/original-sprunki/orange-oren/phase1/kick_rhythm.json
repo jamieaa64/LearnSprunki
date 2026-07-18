@@ -3,12 +3,36 @@
   "rhythmLabel": "Kick",
   "rhythmMidiNote": 36,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.9,
-    1.5,
-    2.4,
-    3.3,
-    3.9,
-    4.5
+  "hits": [
+    {
+      "seconds": 0.9,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 1.5,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 2.4,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.3,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 3.9,
+      "midi": 36,
+      "group": "kick"
+    },
+    {
+      "seconds": 4.5,
+      "midi": 36,
+      "group": "kick"
+    }
   ]
 }

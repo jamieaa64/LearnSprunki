@@ -3,13 +3,41 @@
   "rhythmLabel": "Ride",
   "rhythmMidiNote": 51,
   "detector": "energy-novelty-v1",
-  "onsetsSeconds": [
-    0.6,
-    1.2,
-    1.8,
-    2.4,
-    3,
-    3.6,
-    4.2
+  "hits": [
+    {
+      "seconds": 0.6,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 1.2,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 1.8,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 2.4,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 3,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 3.6,
+      "midi": 51,
+      "group": "ride"
+    },
+    {
+      "seconds": 4.2,
+      "midi": 51,
+      "group": "ride"
+    }
   ]
 }

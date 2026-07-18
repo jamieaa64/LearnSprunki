@@ -9,7 +9,7 @@
     { "id": "brass", "label": "Brass", "category": "winds", "playerVoice": "cyber" },
     { "id": "choir", "label": "Choir", "category": "voice", "playerVoice": "strings" },
     { "id": "whistle", "label": "Whistle", "category": "winds", "playerVoice": "grand" },
-    { "id": "percussion", "label": "Percussion", "category": "rhythm", "playerVoice": "arcade" },
+    { "id": "percussion", "label": "Drum Kit", "category": "rhythm", "playerVoice": "drums" },
     { "id": "sound-effect", "label": "Sound Effect", "category": "effect", "playerVoice": "arcade" }
   ]
 }

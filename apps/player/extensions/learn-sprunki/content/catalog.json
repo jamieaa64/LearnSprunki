@@ -345,7 +345,7 @@
         "instrumentId": "percussion",
         "effectId": "bright-sparks",
         "rhythmLabel": "Breakbeat",
-        "rhythmMidiNote": 40,
+        "rhythmMidiNote": 38,
         "referenceAudio": "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/audio/amen.wav",
         "theme": {
           "primary": "#8d99a8",
@@ -376,7 +376,7 @@
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
-          "rhythmMidiNote": 40,
+          "rhythmMidiNote": 38,
           "category": "percussion"
         }
       }
@@ -400,7 +400,7 @@
         "instrumentId": "percussion",
         "effectId": "bright-sparks",
         "rhythmLabel": "Breakbeat",
-        "rhythmMidiNote": 40,
+        "rhythmMidiNote": 38,
         "referenceAudio": "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/audio/amen3.wav",
         "theme": {
           "primary": "#8d99a8",
@@ -431,7 +431,7 @@
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
-          "rhythmMidiNote": 40,
+          "rhythmMidiNote": 38,
           "category": "percussion"
         }
       }

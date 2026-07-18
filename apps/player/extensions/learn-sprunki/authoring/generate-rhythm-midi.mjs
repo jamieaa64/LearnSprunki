@@ -94,15 +94,40 @@ function variableLength(value) {
   return bytes;
 }
 
-function writeMidi(onsets, midiNote) {
+function classifyBreakbeat(samples, sampleRate, onset) {
+  const start = Math.max(0, Math.round(onset * sampleRate));
+  const end = Math.min(samples.length, start + Math.round(sampleRate * 0.075));
+  const alpha = 1 - Math.exp(-2 * Math.PI * 180 / sampleRate);
+  let low = 0;
+  let lowEnergy = 0;
+  let totalEnergy = 0;
+  let crossings = 0;
+  let previous = samples[start] || 0;
+  for (let index = start; index < end; index++) {
+    const sample = samples[index];
+    low += alpha * (sample - low);
+    lowEnergy += low * low;
+    totalEnergy += sample * sample;
+    if ((sample >= 0) !== (previous >= 0)) crossings++;
+    previous = sample;
+  }
+  const count = Math.max(1, end - start);
+  const lowRatio = lowEnergy / Math.max(0.000001, totalEnergy);
+  const crossingRate = crossings / count;
+  if (lowRatio > 0.45) return { midi: 36, group: "kick", lowRatio, crossingRate };
+  if (lowRatio < 0.15 && crossingRate > 0.16) return { midi: 42, group: "hi-hat", lowRatio, crossingRate };
+  return { midi: 38, group: "snare", lowRatio, crossingRate };
+}
+
+function writeMidi(hits) {
   const ppq = 480;
   const ticksPerSecond = 960;
   const events = [];
   let previousTick = 0;
-  for (const onset of onsets) {
-    const tick = Math.max(previousTick, Math.round(onset * ticksPerSecond));
-    events.push(...variableLength(tick - previousTick), 0x99, midiNote, 104);
-    events.push(...variableLength(72), 0x89, midiNote, 0);
+  for (const hit of hits) {
+    const tick = Math.max(previousTick, Math.round(hit.onset * ticksPerSecond));
+    events.push(...variableLength(tick - previousTick), 0x99, hit.midi, 104);
+    events.push(...variableLength(72), 0x89, hit.midi, 0);
     previousTick = tick + 72;
   }
   events.push(0x00, 0xff, 0x2f, 0x00);
@@ -121,18 +146,30 @@ for (const [phaseKey, phase] of Object.entries(plan.phases)) {
   const { samples, sampleRate } = readPcm16Wav(await readFile(input));
   const onsets = detectOnsets(samples, sampleRate);
   if (!onsets.length) throw new Error(`No rhythm onsets detected for ${phaseKey}`);
+  const hits = onsets.map(onset => phase.rhythmLabel === "Breakbeat"
+    ? { onset, ...classifyBreakbeat(samples, sampleRate, onset) }
+    : { onset, midi: phase.rhythmMidiNote, group: phase.rhythmLabel.toLowerCase() });
   const outputDirectory = resolve(repositoryRoot, "apps/player/extensions/learn-sprunki/authoring/workbench/original-sprunki", characterId, phaseId);
   await mkdir(outputDirectory, { recursive: true });
   const stem = phase.sourceAudio.replace(/\.wav$/i, "");
-  await writeFile(resolve(outputDirectory, `${stem}_rhythm.mid`), writeMidi(onsets, phase.rhythmMidiNote));
+  await writeFile(resolve(outputDirectory, `${stem}_rhythm.mid`), writeMidi(hits));
   await writeFile(resolve(outputDirectory, `${stem}_rhythm.json`), `${JSON.stringify({
     sourceAudio: phase.sourceAudio,
     rhythmLabel: phase.rhythmLabel,
     rhythmMidiNote: phase.rhythmMidiNote,
     detector: "energy-novelty-v1",
-    onsetsSeconds: onsets.map(value => Number(value.toFixed(4))),
+    hits: hits.map(hit => ({
+      seconds: Number(hit.onset.toFixed(4)),
+      midi: hit.midi,
+      group: hit.group,
+      ...(hit.lowRatio == null ? {} : {
+        lowRatio: Number(hit.lowRatio.toFixed(4)),
+        crossingRate: Number(hit.crossingRate.toFixed(4)),
+      }),
+    })),
   }, null, 2)}\n`);
-  console.log(`${phaseKey}: ${onsets.length} ${phase.rhythmLabel.toLowerCase()} hits`);
+  const groups = [...new Set(hits.map(hit => hit.group))].join(", ");
+  console.log(`${phaseKey}: ${hits.length} ${phase.rhythmLabel.toLowerCase()} hits (${groups})`);
   generated++;
 }
 console.log(`Generated ${generated} rhythm MIDI drafts.`);
