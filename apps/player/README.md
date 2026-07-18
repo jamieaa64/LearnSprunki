@@ -58,7 +58,7 @@ collapse the settings panel after lesson selection; the gear button reopens it.
 
 ### Core Visualizer & Rendering Engine
 
-* **88-Key Cyber Piano Bed:** High-fidelity virtual piano with real-time key highlighting.
+* **Adaptive Cyber Piano Bed:** Auto-selects the smallest standard 25/37/49/61/73/88-key range that contains the loaded MIDI, keeping octave-aligned boundaries and larger touch targets on tablets. A manual preferred size can also be selected; the player expands it when necessary rather than hiding required notes.
 * **Bi-Directional Waterfall Animations:**
 
   * **Standard Mode:** Notes cascade downward toward the hitline.

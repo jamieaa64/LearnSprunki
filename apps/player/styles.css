@@ -807,6 +807,13 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+  .select-wrap .select-hint {
+    display: block;
+    margin-top: 7px;
+    color: rgba(255,255,255,0.48);
+    font-size: 10px;
+    line-height: 1.35;
+  }
   .select-wrap select {
     width: 100%;
     -webkit-appearance: none;

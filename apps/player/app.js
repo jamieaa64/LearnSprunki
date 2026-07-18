@@ -5,9 +5,11 @@
    --------------------------------------------------------------------- */
 
 // ---------- Constants ----------
-const FIRST_MIDI = 21;   // A0
-const LAST_MIDI  = 108;  // C8
-const NUM_KEYS   = LAST_MIDI - FIRST_MIDI + 1; // 88
+const PIANO_MIN_MIDI = 21;  // A0
+const PIANO_MAX_MIDI = 108; // C8
+let FIRST_MIDI = PIANO_MIN_MIDI;
+let LAST_MIDI  = PIANO_MAX_MIDI;
+const STANDARD_KEYBOARD_SIZES = [25, 37, 49, 61, 73, 88];
 const NOTE_NAMES    = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 // Solfège mapping — standard fixed-do system:
 //   C=Do  D=Ré  E=Mi  F=Fa  G=Sol  A=La  B=Si
@@ -170,6 +172,13 @@ const state = {
   // 20..108 = manual MIDI note number; notes >= threshold are RH, < are LH.
   handSplit: -1,
 
+  // ---- Visible keyboard range ----
+  // 'auto' picks the smallest standard keyboard that safely contains the
+  // loaded song. A number is a preferred minimum size; it is expanded when a
+  // song needs more notes so required keys are never hidden.
+  keyboardRangeMode: 'auto',
+  keyboardRangeExpanded: false,
+
   // ---- Victory flag ----
   songEnded: false,
 
@@ -227,6 +236,100 @@ const state = {
   muteRightHand: false,
 
 };
+
+// ---------- Adaptive visible keyboard ----------
+// Compact keyboards are always C-to-C, so neither edge slices through an
+// octave. The full piano keeps its conventional A0-to-C8 88-key range.
+function rangeForSize(size, requiredMin, requiredMax) {
+  if (size === 88) {
+    if (requiredMin < PIANO_MIN_MIDI || requiredMax > PIANO_MAX_MIDI) return null;
+    return { first: PIANO_MIN_MIDI, last: PIANO_MAX_MIDI, size };
+  }
+
+  const candidates = [];
+  const firstPossibleC = Math.ceil(PIANO_MIN_MIDI / 12) * 12;
+  const lastPossibleC = PIANO_MAX_MIDI - (size - 1);
+  const requiredCentre = (requiredMin + requiredMax) / 2;
+  for (let first = firstPossibleC; first <= lastPossibleC; first += 12) {
+    const last = first + size - 1;
+    if (first <= requiredMin && last >= requiredMax) {
+      candidates.push({
+        first,
+        last,
+        size,
+        centreDistance: Math.abs((first + last) / 2 - requiredCentre),
+      });
+    }
+  }
+  candidates.sort((a, b) => a.centreDistance - b.centreDistance || a.first - b.first);
+  return candidates[0] || null;
+}
+
+function centredRangeForSize(size) {
+  if (size === 88) return { first: PIANO_MIN_MIDI, last: PIANO_MAX_MIDI, size };
+  // With no song loaded, centre the compact keyboard around middle C (C4).
+  return rangeForSize(size, 60, 60);
+}
+
+function chooseKeyboardRange(notes, mode) {
+  const supportedNotes = notes
+    .map(note => Number(note.midi))
+    .filter(midi => Number.isFinite(midi) && midi >= PIANO_MIN_MIDI && midi <= PIANO_MAX_MIDI);
+
+  if (supportedNotes.length === 0) {
+    const defaultSize = mode === 'auto' ? 49 : Number(mode);
+    return centredRangeForSize(defaultSize) || centredRangeForSize(88);
+  }
+
+  const minNote = Math.min(...supportedNotes);
+  const maxNote = Math.max(...supportedNotes);
+  const paddedMin = Math.max(PIANO_MIN_MIDI, minNote - 2);
+  const paddedMax = Math.min(PIANO_MAX_MIDI, maxNote + 2);
+  const requestedSize = mode === 'auto' ? 25 : Number(mode);
+  const allowedSizes = STANDARD_KEYBOARD_SIZES.filter(size => size >= requestedSize);
+
+  // Prefer a little space outside the highest and lowest song notes. If a
+  // manually requested size can only fit the exact notes, honour it before
+  // expanding. Auto retains the breathing room by trying larger sizes first.
+  if (mode === 'auto') {
+    for (const size of allowedSizes) {
+      const range = rangeForSize(size, paddedMin, paddedMax);
+      if (range) return range;
+    }
+  } else {
+    const paddedRequested = rangeForSize(requestedSize, paddedMin, paddedMax);
+    if (paddedRequested) return paddedRequested;
+    const exactRequested = rangeForSize(requestedSize, minNote, maxNote);
+    if (exactRequested) return exactRequested;
+    for (const size of allowedSizes.slice(1)) {
+      const range = rangeForSize(size, paddedMin, paddedMax) || rangeForSize(size, minNote, maxNote);
+      if (range) return range;
+    }
+  }
+
+  return centredRangeForSize(88);
+}
+
+function updateKeyboardRangeLabel() {
+  const label = document.getElementById('keyboardRangeVal');
+  if (!label) return;
+  const prefix = state.keyboardRangeMode === 'auto'
+    ? 'Auto · '
+    : (state.keyboardRangeExpanded ? 'Expanded · ' : '');
+  label.textContent = `${prefix}${LAST_MIDI - FIRST_MIDI + 1} keys · ${noteName(FIRST_MIDI)}–${noteName(LAST_MIDI)}`;
+}
+
+function updateKeyboardRangeForNotes() {
+  const range = chooseKeyboardRange(state.notes, state.keyboardRangeMode);
+  const requestedSize = state.keyboardRangeMode === 'auto' ? null : Number(state.keyboardRangeMode);
+  state.keyboardRangeExpanded = requestedSize !== null && range.size > requestedSize;
+  const changed = range.first !== FIRST_MIDI || range.last !== LAST_MIDI;
+  FIRST_MIDI = range.first;
+  LAST_MIDI = range.last;
+  if (changed) buildLayout();
+  updateKeyboardRangeLabel();
+  return range;
+}
 
 // Look-ahead time (ms) for waterfall (how far above the hit line we render).
 // pixelsPerSecond is computed from waterfallH so that ~3 seconds of music fits.
@@ -473,7 +576,7 @@ function allHardwareNotesOff() {
       // explicit Note-Off messages across the 88-key range on channel 1 for
       // hardware that ignores CC 123 in local-keyboard mode.
       for (let ch = 0; ch < 16; ch++) out.send([0xB0 | ch, 123, 0]);
-      for (let m = FIRST_MIDI; m <= LAST_MIDI; m++) out.send([0x80, m, 0]);
+      for (let m = PIANO_MIN_MIDI; m <= PIANO_MAX_MIDI; m++) out.send([0x80, m, 0]);
     } catch (e) { /* ignore */ }
   }
 }
@@ -757,6 +860,7 @@ function loadMidiObject(midi) {
   }
 
   state.notes = notes;
+  updateKeyboardRangeForNotes();
   state.songDuration = notes.length ? Math.max(...notes.map(n => n.endMs)) + 1000 : 0;
   const lessonLoopDuration = state.activeLesson && state.activeLesson.lesson.loopDurationMs;
   if (Number.isFinite(lessonLoopDuration) && lessonLoopDuration > 0) {
@@ -989,6 +1093,7 @@ const modeFreeplayBtn = document.getElementById('modeFreeplay');
 const recordBtn = document.getElementById('recordBtn');
 const handSplitSlider = document.getElementById('handSplitSlider');
 const handSplitVal = document.getElementById('handSplitVal');
+const keyboardRangeSelect = document.getElementById('keyboardRangeSelect');
 const victoryOverlay = document.getElementById('victoryOverlay');
 const victoryTitle = document.getElementById('victoryTitle');
 const victorySub = document.getElementById('victorySub');
@@ -1092,6 +1197,15 @@ volSlider.addEventListener('input', () => {
   // we never click/pop on rapid slider drags.
   applyVolumeToInstrument(instruments[currentInstrumentName]);
 });
+if (keyboardRangeSelect) {
+  keyboardRangeSelect.addEventListener('change', () => {
+    state.keyboardRangeMode = keyboardRangeSelect.value;
+    const range = updateKeyboardRangeForNotes();
+    if (state.keyboardRangeExpanded) {
+      showToast(`This song needs ${range.size} keys, so the keyboard was expanded.`, 'ok');
+    }
+  });
+}
 
 function setMode(m) {
   const prev = state.mode;
@@ -1223,6 +1337,7 @@ function stopRecording() {
 
   // Load straight into state.notes — wipes any previously loaded song.
   state.notes = notes;
+  updateKeyboardRangeForNotes();
   // Stash a clean copy for the .mid downloader — survives mode/song switches.
   state.recordedNotes = notes.map(n => ({
     midi: n.midi, startMs: n.startMs, endMs: n.endMs,
@@ -2012,6 +2127,7 @@ function setNotation(n) {
   state.notation = n;
   if (notationEnglishBtn) notationEnglishBtn.classList.toggle('active', n === 'english');
   if (notationFrenchBtn)  notationFrenchBtn.classList.toggle('active',  n === 'french');
+  updateKeyboardRangeLabel();
   // The next animation frame redraws the piano + waterfall using
   // activeNoteTable() so labels change instantly.
 }
@@ -2786,6 +2902,7 @@ function frame(ts) {
   requestAnimationFrame(frame);
 }
 
+updateKeyboardRangeForNotes();
 resize();
 requestAnimationFrame((ts) => { state.lastFrameTs = ts; frame(ts); });
 
