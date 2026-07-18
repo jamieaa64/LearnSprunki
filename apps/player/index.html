@@ -31,11 +31,10 @@
 
   <!-- Top bar -->
   <div class="topbar">
-    <button class="brand" id="sprunkiBrowserBtn" type="button" aria-haspopup="dialog">
+    <div class="brand" aria-label="LearnSprunki">
       <span class="dot"></span>
       <span>LearnSprunki</span>
-      <span class="brand-game" id="activeGameLabel">Original</span>
-    </button>
+    </div>
     <div class="topbar-right">
       <div class="score-hud" id="scoreHud">
         <span class="lbl">Score</span>
@@ -59,6 +58,20 @@
 
   <!-- Control Panel -->
   <div class="panel" id="panel">
+    <h3>Learn Sprunki</h3>
+    <button class="sprunki-browser-card" id="sprunkiBrowserBtn" type="button" aria-haspopup="dialog">
+      <span class="sprunki-card-collage" aria-hidden="true">
+        <img class="sprunki-card-character pinki" src="./content/games/original-sprunki/characters/pink-pinki/phase1.svg" alt="" />
+        <img class="sprunki-card-character simon" src="./content/games/original-sprunki/characters/yellow-simon/phase1.svg" alt="" />
+        <img class="sprunki-card-character gray" src="./content/games/original-sprunki/characters/gray-gray/phase1.svg" alt="" />
+      </span>
+      <span class="sprunki-card-copy">
+        <strong>Sprunki</strong>
+        <span><span id="activeGameLabel">Original</span> · Choose a character</span>
+      </span>
+      <span class="sprunki-card-arrow" aria-hidden="true">›</span>
+    </button>
+
     <h3>Tracks</h3>
     <div class="tracks-wrap">
       <button class="tracks-btn" id="tracksBtn" type="button">

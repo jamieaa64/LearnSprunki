@@ -105,7 +105,7 @@
     background: rgba(20, 13, 2, 0.84);
     font-size: 10px;
     font-weight: 700;
-    cursor: pointer;
+    cursor: default;
   }
   .reference-audio-btn.playing {
     color: #1c1200;
@@ -141,16 +141,6 @@
     background: linear-gradient(135deg, var(--rh), var(--lh));
     box-shadow: 0 0 12px var(--rh-glow);
   }
-  .brand-game {
-    padding: 3px 7px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.08);
-    color: var(--text-dim);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-  }
-
   /* ---------- Game and character browser ---------- */
   .game-browser-overlay {
     position: absolute;
@@ -933,41 +923,61 @@
   }
 
 
-  /* ---------- Tracks dropdown (built-in songs menu) ---------- */
-  .sprunki-lessons { display: flex; flex-direction: column; gap: 6px; }
-  .catalogue-loading { padding: 10px 4px; color: var(--text-dim); font-size: 11px; }
-  .sprunki-lesson-card {
+  /* ---------- Sprunki and tracks menus ---------- */
+  .sprunki-browser-card {
     width: 100%;
     display: grid;
-    grid-template-columns: 46px minmax(0, 1fr) auto;
+    grid-template-columns: 82px minmax(0, 1fr) auto;
     align-items: center;
-    gap: 9px;
-    padding: 8px 9px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 214, 10, 0.24);
-    background: linear-gradient(135deg, rgba(255, 233, 0, 0.13), rgba(255, 111, 0, 0.09));
+    gap: 10px;
+    min-height: 76px;
+    overflow: hidden;
+    padding: 7px 10px 7px 6px;
+    border-radius: 14px;
+    border: 1px solid rgba(94, 224, 255, 0.36);
+    background:
+      radial-gradient(circle at 30% 15%, rgba(255, 233, 0, 0.24), transparent 42%),
+      linear-gradient(135deg, rgba(28, 207, 236, 0.25), rgba(255, 76, 188, 0.17));
     color: var(--text);
     text-align: left;
     cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .sprunki-lesson-card:hover { border-color: rgba(255, 214, 10, 0.55); }
-  .sprunki-lesson-card.active {
-    border-color: #ffd60a;
-    box-shadow: 0 0 0 1px rgba(255,214,10,0.24), 0 8px 22px rgba(255,111,0,0.2);
+  .sprunki-browser-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 233, 0, 0.7);
+    box-shadow: 0 9px 24px rgba(0, 192, 235, 0.16);
   }
-  .sprunki-lesson-card img { width: 44px; height: 44px; object-fit: contain; }
-  .sprunki-lesson-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-  .sprunki-lesson-copy strong { font-size: 12px; }
-  .sprunki-lesson-copy span { color: var(--text-dim); font-size: 10px; }
-  .sprunki-lesson-badge {
-    padding: 4px 6px;
-    border-radius: 999px;
-    background: rgba(255,111,0,0.18);
-    color: #ffd699;
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+  .sprunki-browser-card:focus-visible {
+    outline: 2px solid #ffe900;
+    outline-offset: 2px;
+  }
+  .sprunki-card-collage {
+    position: relative;
+    align-self: stretch;
+    min-height: 62px;
+  }
+  .sprunki-card-character {
+    position: absolute;
+    bottom: -7px;
+    width: 48px;
+    height: 68px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.45));
+  }
+  .sprunki-card-character.pinki { left: -13px; transform: rotate(-6deg) scale(0.92); }
+  .sprunki-card-character.simon { left: 19px; z-index: 2; transform: scale(1.08); }
+  .sprunki-card-character.gray { left: 50px; transform: rotate(6deg) scale(0.92); }
+  .sprunki-card-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .sprunki-card-copy strong {
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.2px;
+  }
+  .sprunki-card-copy > span { color: rgba(255,255,255,0.7); font-size: 9px; white-space: nowrap; }
+  .sprunki-card-arrow { color: #ffe900; font-size: 28px; line-height: 1; }
+  .sprunki-browser-card + h3 {
+    margin-top: 14px;
   }
   .tracks-wrap { position: relative; }
   .tracks-btn {
