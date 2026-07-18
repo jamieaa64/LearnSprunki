@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "effects": [
+    {
+      "id": "sun-sparks",
+      "label": "Sun Sparks",
+      "type": "note-sparks",
+      "colors": ["#ffe900", "#ff9d00", "#ff6f00"],
+      "particlesPerNote": 5,
+      "lifetimeMs": 520,
+      "speed": 0.16,
+      "size": 3.2
+    },
+    {
+      "id": "bright-sparks",
+      "label": "Bright Sparks",
+      "type": "note-sparks",
+      "colors": ["#ffffff", "#55e7ff", "#9a7cff"],
+      "particlesPerNote": 4,
+      "lifetimeMs": 460,
+      "speed": 0.14,
+      "size": 2.8
+    },
+    {
+      "id": "impact-sparks",
+      "label": "Impact Sparks",
+      "type": "note-sparks",
+      "colors": ["#ff4646", "#ff9a3d", "#fff2b2"],
+      "particlesPerNote": 6,
+      "lifetimeMs": 360,
+      "speed": 0.2,
+      "size": 3.5
+    },
+    {
+      "id": "shadow-sparks",
+      "label": "Shadow Sparks",
+      "type": "note-sparks",
+      "colors": ["#d7c8ff", "#7b5cff", "#33224f"],
+      "particlesPerNote": 4,
+      "lifetimeMs": 620,
+      "speed": 0.11,
+      "size": 3
+    }
+  ]
+}

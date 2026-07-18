@@ -1,0 +1,507 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "original-sprunki",
+  "title": "Original Sprunki",
+  "characters": [
+    {
+      "id": "orange-oren",
+      "name": "Oren",
+      "color": "#ff7a00",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/orange-oren/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "impact-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/orange-oren/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "impact-sparks"
+        }
+      ]
+    },
+    {
+      "id": "red-raddy",
+      "name": "Raddy",
+      "color": "#ed3434",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/red-raddy/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "impact-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/red-raddy/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "impact-sparks"
+        }
+      ]
+    },
+    {
+      "id": "silver-clukr",
+      "name": "Clukr",
+      "color": "#b7c1cc",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "fun-bot",
+      "name": "Fun Bot",
+      "color": "#8d99a8",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/fun-bot/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/fun-bot/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "green-vineria",
+      "name": "Vineria",
+      "color": "#35b86b",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/green-vineria/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/green-vineria/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "percussion",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "gray-gray",
+      "name": "Gray",
+      "color": "#777b82",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/gray-gray/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-bass",
+          "effectId": "shadow-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/gray-gray/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-bass",
+          "effectId": "shadow-sparks"
+        }
+      ]
+    },
+    {
+      "id": "brown-brud",
+      "name": "Brud",
+      "color": "#9b633f",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/brown-brud/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "impact-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/brown-brud/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "impact-sparks"
+        }
+      ]
+    },
+    {
+      "id": "gold-garnold",
+      "name": "Garnold",
+      "color": "#e7b928",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-lead",
+          "effectId": "sun-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-lead",
+          "effectId": "sun-sparks"
+        }
+      ]
+    },
+    {
+      "id": "lime-owakcx",
+      "name": "OWAKCX",
+      "color": "#a7e62e",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/lime-owakcx/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/lime-owakcx/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "sky-blue-sky",
+      "name": "Sky",
+      "color": "#7edcf5",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "music-box",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "music-box",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "mr-sun",
+      "name": "Mr Sun",
+      "color": "#ffe900",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/mr-sun/phase1.svg",
+          "locked": false,
+          "lessonTrackId": "mr-sun-phase1-draft",
+          "instrumentId": "grand-piano",
+          "effectId": "sun-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/mr-sun/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "grand-piano",
+          "effectId": "sun-sparks"
+        }
+      ]
+    },
+    {
+      "id": "purple-durple",
+      "name": "Durple",
+      "color": "#8b5ad8",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/purple-durple/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "brass",
+          "effectId": "shadow-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/purple-durple/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "brass",
+          "effectId": "shadow-sparks"
+        }
+      ]
+    },
+    {
+      "id": "mr-tree",
+      "name": "Mr Tree",
+      "color": "#4d9b51",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/mr-tree/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "organ",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/mr-tree/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "organ",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "yellow-simon",
+      "name": "Simon",
+      "color": "#f2dc37",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-lead",
+          "effectId": "sun-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "synth-lead",
+          "effectId": "sun-sparks"
+        }
+      ]
+    },
+    {
+      "id": "tan-tunner",
+      "name": "Tunner",
+      "color": "#c89f72",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "whistle",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "whistle",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "mr-fun-computer",
+      "name": "Mr Fun Computer",
+      "color": "#8fd9ff",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/mr-fun-computer/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/mr-fun-computer/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "white-wenda",
+      "name": "Wenda",
+      "color": "#f2f2f2",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/white-wenda/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/white-wenda/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "pink-pinki",
+      "name": "Pinki",
+      "color": "#f38cc8",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "bright-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "bright-sparks"
+        }
+      ]
+    },
+    {
+      "id": "blue-jevin",
+      "name": "Jevin",
+      "color": "#335fc5",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "shadow-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "choir",
+          "effectId": "shadow-sparks"
+        }
+      ]
+    },
+    {
+      "id": "black-mystery",
+      "name": "Black",
+      "color": "#27232d",
+      "phases": [
+        {
+          "id": "phase1",
+          "title": "Phase 1",
+          "portrait": "./content/games/original-sprunki/characters/black-mystery/phase1.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "shadow-sparks"
+        },
+        {
+          "id": "phase2",
+          "title": "Phase 2",
+          "portrait": "./content/games/original-sprunki/characters/black-mystery/phase2.svg",
+          "locked": true,
+          "lessonTrackId": null,
+          "instrumentId": "sound-effect",
+          "effectId": "shadow-sparks"
+        }
+      ]
+    }
+  ]
+}

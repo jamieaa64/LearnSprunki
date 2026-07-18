@@ -31,10 +31,11 @@
 
   <!-- Top bar -->
   <div class="topbar">
-    <div class="brand">
+    <button class="brand" id="sprunkiBrowserBtn" type="button" aria-haspopup="dialog">
       <span class="dot"></span>
-      <span>NeoKeys · LearnSprunki</span>
-    </div>
+      <span>LearnSprunki</span>
+      <span class="brand-game" id="activeGameLabel">Original</span>
+    </button>
     <div class="topbar-right">
       <div class="score-hud" id="scoreHud">
         <span class="lbl">Score</span>
@@ -58,12 +59,7 @@
 
   <!-- Control Panel -->
   <div class="panel" id="panel">
-    <h3>Sprunki Lessons</h3>
-    <div class="sprunki-lessons" id="sprunkiLessons" aria-live="polite">
-      <span class="catalogue-loading">Loading lessons…</span>
-    </div>
-
-    <h3 style="margin-top:10px;">Other Songs</h3>
+    <h3>Tracks</h3>
     <div class="tracks-wrap">
       <button class="tracks-btn" id="tracksBtn" type="button">
         <span>🎵  Demo Songs</span>
@@ -177,6 +173,49 @@
       <span class="filename" id="fileName">No file loaded</span>
     </label>
     <input type="file" id="fileInput" accept=".mid,.midi,audio/midi,audio/x-midi" />
+  </div>
+
+  <!-- Game and character browser -->
+  <div class="game-browser-overlay hidden" id="gameBrowserOverlay">
+    <section class="game-browser-modal" role="dialog" aria-modal="true" aria-labelledby="gameBrowserTitle">
+      <header class="game-browser-header">
+        <div>
+          <span class="eyebrow">LearnSprunki</span>
+          <h2 id="gameBrowserTitle">Choose a game and Sprunki</h2>
+        </div>
+        <button class="game-browser-close" id="gameBrowserClose" type="button" aria-label="Close character browser">×</button>
+      </header>
+
+      <nav class="game-picker" id="gamePicker" aria-label="Sprunki games"></nav>
+
+      <div class="game-browser-content">
+        <section class="phase-browser-section">
+          <div class="phase-browser-heading">
+            <h3>Phase 1</h3>
+            <span>Original</span>
+          </div>
+          <div class="character-grid" id="phase1Grid"></div>
+        </section>
+        <section class="phase-browser-section phase-two">
+          <div class="phase-browser-heading">
+            <h3>Phase 2</h3>
+            <span>Darker versions</span>
+          </div>
+          <div class="character-grid" id="phase2Grid"></div>
+        </section>
+      </div>
+
+      <footer class="game-browser-footer">
+        <div>
+          <strong>Sprunki infinite loop</strong>
+          <span>Repeat Sprunki lessons like the original game. This never affects ordinary tracks.</span>
+        </div>
+        <label class="switch" aria-label="Loop Sprunki lessons">
+          <input type="checkbox" id="sprunkiLoopToggle" checked />
+          <span class="slider-track"></span>
+        </label>
+      </footer>
+    </section>
   </div>
 
   <!-- End-of-song victory modal -->

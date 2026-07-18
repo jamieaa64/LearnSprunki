@@ -1,35 +1,46 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://learnsprunki.example/schemas/catalog.schema.json",
-  "title": "LearnSprunki content catalogue",
+  "title": "LearnSprunki catalogue",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "id", "title", "collections", "tracks"],
+  "required": ["schemaVersion", "id", "title", "games", "resources", "tracks"],
   "properties": {
-    "schemaVersion": { "const": "2.0.0" },
+    "schemaVersion": { "const": "3.0.0" },
     "id": { "$ref": "#/$defs/id" },
-    "title": { "$ref": "#/$defs/nonEmptyString" },
-    "collections": {
+    "title": { "$ref": "#/$defs/text" },
+    "games": {
       "type": "array",
-      "items": { "$ref": "#/$defs/collection" }
+      "items": { "$ref": "#/$defs/gameReference" }
     },
+    "resources": { "$ref": "#/$defs/resources" },
     "tracks": {
       "type": "array",
       "items": { "$ref": "#/$defs/track" }
     }
   },
   "$defs": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "asset": { "type": "string", "pattern": "^\\./content/" },
+    "gameReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "manifest"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/text" },
+        "manifest": { "$ref": "#/$defs/asset" }
+      }
     },
-    "nonEmptyString": {
-      "type": "string",
-      "minLength": 1
-    },
-    "assetPath": {
-      "type": "string",
-      "pattern": "^\\./content/"
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instruments", "effects"],
+      "properties": {
+        "instruments": { "$ref": "#/$defs/asset" },
+        "effects": { "$ref": "#/$defs/asset" }
+      }
     },
     "theme": {
       "type": "object",
@@ -48,76 +59,38 @@
       "additionalProperties": false,
       "required": ["idle", "frames", "frameDurationMs"],
       "properties": {
-        "idle": { "$ref": "#/$defs/assetPath" },
-        "frames": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/assetPath" }
-        },
+        "idle": { "$ref": "#/$defs/asset" },
+        "frames": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/asset" } },
         "frameDurationMs": { "type": "integer", "minimum": 16 }
       }
     },
-    "phase": {
+    "lesson": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "title", "lessonTrackId", "loop", "loopDurationMs", "referenceAudio", "animation"],
+      "required": ["gameId", "characterId", "phaseId", "loopByDefault", "loopDurationMs", "instrumentId", "effectId", "referenceAudio", "theme", "animation"],
       "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "title": { "$ref": "#/$defs/nonEmptyString" },
-        "lessonTrackId": { "$ref": "#/$defs/id" },
-        "loop": { "type": "boolean" },
+        "gameId": { "$ref": "#/$defs/id" },
+        "characterId": { "$ref": "#/$defs/id" },
+        "phaseId": { "$ref": "#/$defs/id" },
+        "loopByDefault": { "type": "boolean" },
         "loopDurationMs": { "type": "number", "exclusiveMinimum": 0 },
-        "referenceAudio": { "$ref": "#/$defs/assetPath" },
-        "animation": { "$ref": "#/$defs/animation" }
-      }
-    },
-    "character": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "name", "icon", "theme", "phases"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "name": { "$ref": "#/$defs/nonEmptyString" },
-        "icon": { "$ref": "#/$defs/assetPath" },
+        "instrumentId": { "$ref": "#/$defs/id" },
+        "effectId": { "$ref": "#/$defs/id" },
+        "referenceAudio": { "$ref": "#/$defs/asset" },
         "theme": { "$ref": "#/$defs/theme" },
-        "phases": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/phase" }
-        }
-      }
-    },
-    "collection": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "title", "characters"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "title": { "$ref": "#/$defs/nonEmptyString" },
-        "characters": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/character" }
-        }
+        "animation": { "$ref": "#/$defs/animation" }
       }
     },
     "transcription": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": ["engine", "engineVersion", "sourceAudio", "reviewRequired", "parameters"],
       "properties": {
         "engine": { "$ref": "#/$defs/id" },
-        "engineVersion": { "$ref": "#/$defs/nonEmptyString" },
-        "sourceAudio": { "$ref": "#/$defs/nonEmptyString" },
+        "engineVersion": { "$ref": "#/$defs/text" },
+        "sourceAudio": { "$ref": "#/$defs/text" },
         "reviewRequired": { "type": "boolean" },
-        "parameters": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["minimumFrequencyHz", "maximumFrequencyHz"],
-          "properties": {
-            "minimumFrequencyHz": { "type": "number", "exclusiveMinimum": 0 },
-            "maximumFrequencyHz": { "type": "number", "exclusiveMinimum": 0 }
-          }
-        }
+        "parameters": { "type": "object" }
       }
     },
     "track": {
@@ -126,15 +99,22 @@
       "required": ["id", "title", "filename", "midi", "kind"],
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "title": { "$ref": "#/$defs/text" },
         "subtitle": { "type": "string" },
         "filename": { "type": "string", "pattern": "\\.mid(?:i)?$" },
         "emoji": { "type": "string" },
         "midi": { "type": "string", "pattern": "^\\./content/.*\\.mid(?:i)?$" },
         "kind": { "enum": ["demo", "sprunki-lesson"] },
         "reviewStatus": { "enum": ["draft", "reviewed", "approved"] },
+        "lesson": { "$ref": "#/$defs/lesson" },
         "transcription": { "$ref": "#/$defs/transcription" }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "sprunki-lesson" } } },
+          "then": { "required": ["lesson", "reviewStatus"] }
+        }
+      ]
     }
   }
 }

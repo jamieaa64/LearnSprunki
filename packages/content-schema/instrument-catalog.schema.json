@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LearnSprunki instrument catalogue",
+  "type": "object",
+  "required": ["schemaVersion", "instruments"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "category", "playerVoice"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "category": { "type": "string" },
+          "playerVoice": { "enum": ["grand", "cyber", "arcade", "strings"] }
+        }
+      }
+    }
+  }
+}

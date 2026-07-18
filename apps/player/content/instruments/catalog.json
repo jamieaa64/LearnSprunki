@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "instruments": [
+    { "id": "grand-piano", "label": "Grand Piano", "category": "keys", "playerVoice": "grand" },
+    { "id": "music-box", "label": "Music Box", "category": "keys", "playerVoice": "grand" },
+    { "id": "organ", "label": "Organ", "category": "keys", "playerVoice": "strings" },
+    { "id": "synth-lead", "label": "Synth Lead", "category": "synth", "playerVoice": "cyber" },
+    { "id": "synth-bass", "label": "Synth Bass", "category": "bass", "playerVoice": "cyber" },
+    { "id": "brass", "label": "Brass", "category": "winds", "playerVoice": "cyber" },
+    { "id": "choir", "label": "Choir", "category": "voice", "playerVoice": "strings" },
+    { "id": "whistle", "label": "Whistle", "category": "winds", "playerVoice": "grand" },
+    { "id": "percussion", "label": "Percussion", "category": "rhythm", "playerVoice": "arcade" },
+    { "id": "sound-effect", "label": "Sound Effect", "category": "effect", "playerVoice": "arcade" }
+  ]
+}

@@ -28,11 +28,18 @@ The application is a full duplex audio tool: it captures incoming physical or wi
 
 It supports local MIDI file loading, a built-in track library, real-time note name translation, standalone session recording, and downloadable MIDI exports.
 
-The LearnSprunki fork also loads versioned character collections. Its first
-vertical slice is Mr Sun Phase 1, with a character selector, animation synced to
+The LearnSprunki fork loads game manifests separately from its ordinary track
+library. The LearnSprunki button opens a phase-grouped character browser; a
+locked tile means that character/phase does not yet have a reviewed lesson.
+Its first playable vertical slice is Mr Sun Phase 1, with animation synced to
 the lesson timeline, character-coloured notes, original-loop playback and a
-visibly labelled draft transcription. Sprunki lessons repeat seamlessly at the
-source-loop boundary instead of showing the classical-song completion modal.
+visibly labelled draft transcription. Infinite playback is a Sprunki-only
+setting and never changes the completion behaviour of ordinary MIDI tracks.
+
+Player content is separated into `content/games`, `content/tracks`,
+`content/instruments` and `content/effects`. Lessons refer to reusable
+instrument and visual-effect definitions by ID; Mr Sun currently uses the
+data-driven Sun Sparks note effect.
 
 For tablet performance, character SVGs are preloaded once and drawn through a
 fixed canvas instead of repeatedly replacing an image URL. Coarse-pointer

@@ -36,6 +36,10 @@ function noteLetter(midi) {
 // ---------- External song catalogue ----------
 let defaultSongs = Object.create(null);
 let lessonMetadataByTrackId = new Map();
+let gameDefinitions = new Map();
+let instrumentDefinitions = new Map();
+let effectDefinitions = new Map();
+let selectedGameId = null;
 
 // ---------- Canvas setup ----------
 const canvas = document.getElementById('stage');
@@ -176,6 +180,9 @@ const state = {
   // ---- Active lesson presentation ----
   activeLesson: null,
   characterFrameIndex: -1,
+  sprunkiLoopEnabled: true,
+  activeEffect: null,
+  effectParticles: [],
   theme: {
     lh: '#00d4ff',
     rh: '#ff3da6',
@@ -318,12 +325,12 @@ function applyVolumeToInstrument(inst) {
 async function initAudio() {
   if (audioReady) return;
   await Tone.start();
-  // Build the default instrument now; the other three build on first selection.
-  const grand = buildInstrument('grand');
-  currentInstrument = grand.node;
-  currentInstrumentName = 'grand';
+  // Build the selected voice. A Sprunki lesson may choose it before the first
+  // user gesture unlocks Web Audio on a tablet.
+  const selected = buildInstrument(currentInstrumentName) || buildInstrument('grand');
+  currentInstrument = selected.node;
   pianoSampler = currentInstrument;   // legacy alias
-  applyVolumeToInstrument(grand);
+  applyVolumeToInstrument(selected);
   audioReady = true;
 }
 
@@ -747,7 +754,7 @@ function loadMidiObject(midi) {
 
   state.notes = notes;
   state.songDuration = notes.length ? Math.max(...notes.map(n => n.endMs)) + 1000 : 0;
-  const lessonLoopDuration = state.activeLesson && state.activeLesson.phase.loopDurationMs;
+  const lessonLoopDuration = state.activeLesson && state.activeLesson.lesson.loopDurationMs;
   if (Number.isFinite(lessonLoopDuration) && lessonLoopDuration > 0) {
     state.songDuration = lessonLoopDuration;
   }
@@ -1584,7 +1591,14 @@ updateFullscreenButton();
 // ---------- Tracks dropdown wiring (Update 1) ----------
 const tracksBtn  = document.getElementById('tracksBtn');
 const tracksMenu = document.getElementById('tracksMenu');
-const sprunkiLessons = document.getElementById('sprunkiLessons');
+const sprunkiBrowserBtn = document.getElementById('sprunkiBrowserBtn');
+const gameBrowserOverlay = document.getElementById('gameBrowserOverlay');
+const gameBrowserClose = document.getElementById('gameBrowserClose');
+const gamePicker = document.getElementById('gamePicker');
+const phase1Grid = document.getElementById('phase1Grid');
+const phase2Grid = document.getElementById('phase2Grid');
+const sprunkiLoopToggle = document.getElementById('sprunkiLoopToggle');
+const activeGameLabel = document.getElementById('activeGameLabel');
 const characterStage = document.getElementById('characterStage');
 const characterCanvas = document.getElementById('characterCanvas');
 const characterContext = characterCanvas ? characterCanvas.getContext('2d', { alpha: true }) : null;
@@ -1597,60 +1611,100 @@ let characterLoadToken = 0;
 let characterIdleImage = null;
 let characterFrameImages = [];
 
-function renderSprunkiLessons(collections) {
-  if (!sprunkiLessons) return;
-  sprunkiLessons.replaceChildren();
-
-  for (const collection of collections) {
-    for (const character of collection.characters || []) {
-      for (const phase of character.phases || []) {
-        const track = defaultSongs[phase.lessonTrackId];
-        if (!track) continue;
-
-        const item = document.createElement('button');
-        item.className = 'sprunki-lesson-card';
-        item.type = 'button';
-        item.dataset.trackId = track.id;
-        item.setAttribute('aria-label', `${character.name}, ${phase.title}, ${track.subtitle || 'lesson'}`);
-
-        const icon = document.createElement('img');
-        icon.src = character.icon;
-        icon.alt = '';
-
-        const copy = document.createElement('span');
-        copy.className = 'sprunki-lesson-copy';
-        const name = document.createElement('strong');
-        name.textContent = character.name;
-        const phaseName = document.createElement('span');
-        phaseName.textContent = `${collection.title} · ${phase.title}`;
-        copy.append(name, phaseName);
-
-        const badge = document.createElement('span');
-        badge.className = 'sprunki-lesson-badge';
-        badge.textContent = track.reviewStatus || 'ready';
-
-        item.append(icon, copy, badge);
-        sprunkiLessons.append(item);
-      }
-    }
-  }
-
-  if (!sprunkiLessons.children.length) {
-    sprunkiLessons.textContent = 'No Sprunki lessons yet';
+function indexLessonMetadata() {
+  lessonMetadataByTrackId = new Map();
+  for (const track of Object.values(defaultSongs)) {
+    if (track.kind !== 'sprunki-lesson' || !track.lesson) continue;
+    const game = gameDefinitions.get(track.lesson.gameId);
+    const character = game && game.characters.find(item => item.id === track.lesson.characterId);
+    const phase = character && character.phases.find(item => item.id === track.lesson.phaseId);
+    if (!game || !character || !phase) continue;
+    lessonMetadataByTrackId.set(track.id, {
+      game,
+      character,
+      phase,
+      track,
+      lesson: track.lesson,
+      instrument: instrumentDefinitions.get(track.lesson.instrumentId) || null,
+      effect: effectDefinitions.get(track.lesson.effectId) || null,
+    });
   }
 }
 
-function indexLessonMetadata(collections) {
-  lessonMetadataByTrackId = new Map();
-  for (const collection of collections) {
-    for (const character of collection.characters || []) {
-      for (const phase of character.phases || []) {
-        const track = defaultSongs[phase.lessonTrackId];
-        if (!track) continue;
-        lessonMetadataByTrackId.set(track.id, { collection, character, phase, track });
-      }
+function renderGamePicker() {
+  if (!gamePicker) return;
+  gamePicker.replaceChildren();
+  for (const game of gameDefinitions.values()) {
+    const button = document.createElement('button');
+    button.className = 'game-picker-btn';
+    button.type = 'button';
+    button.dataset.gameId = game.id;
+    button.textContent = game.title;
+    button.classList.toggle('active', game.id === selectedGameId);
+    gamePicker.append(button);
+  }
+}
+
+function characterChoice(game, character, phaseId) {
+  const phase = character.phases.find(item => item.id === phaseId);
+  if (!phase) return null;
+  const track = phase.lessonTrackId ? defaultSongs[phase.lessonTrackId] : null;
+  const instrument = instrumentDefinitions.get(phase.instrumentId);
+  const locked = phase.locked || !track;
+  const item = document.createElement('button');
+  item.className = 'character-choice';
+  item.type = 'button';
+  item.disabled = locked;
+  item.style.setProperty('--character-color', character.color);
+  if (track) item.dataset.trackId = track.id;
+  item.setAttribute('aria-label', `${character.name}, ${phase.title}${locked ? ', locked' : ', lesson available'}`);
+
+  const portrait = document.createElement('img');
+  portrait.src = phase.portrait;
+  portrait.alt = '';
+  portrait.loading = 'lazy';
+  const name = document.createElement('strong');
+  name.textContent = character.name;
+  const detail = document.createElement('small');
+  detail.textContent = instrument ? instrument.label : 'Lesson';
+  item.append(portrait, name, detail);
+  if (locked) {
+    const lock = document.createElement('span');
+    lock.className = 'character-lock';
+    lock.setAttribute('aria-hidden', 'true');
+    lock.textContent = 'Locked';
+    item.append(lock);
+  }
+  return item;
+}
+
+function renderGameBrowser() {
+  const game = gameDefinitions.get(selectedGameId);
+  if (!game) return;
+  if (activeGameLabel) activeGameLabel.textContent = game.title.replace(/ Sprunki$/i, '');
+  renderGamePicker();
+  for (const [phaseId, grid] of [['phase1', phase1Grid], ['phase2', phase2Grid]]) {
+    if (!grid) continue;
+    grid.replaceChildren();
+    for (const character of game.characters || []) {
+      const choice = characterChoice(game, character, phaseId);
+      if (choice) grid.append(choice);
     }
   }
+  updateTracksMenuActive();
+}
+
+function openGameBrowser() {
+  if (!gameBrowserOverlay) return;
+  renderGameBrowser();
+  gameBrowserOverlay.classList.remove('hidden');
+  gameBrowserClose?.focus();
+}
+
+function closeGameBrowser() {
+  if (!gameBrowserOverlay) return;
+  gameBrowserOverlay.classList.add('hidden');
+  sprunkiBrowserBtn?.focus();
 }
 
 function stopReferenceAudio() {
@@ -1722,6 +1776,8 @@ function activateLessonPresentation(trackId) {
 
   const root = document.documentElement;
   if (!lesson) {
+    state.activeEffect = null;
+    state.effectParticles = [];
     state.theme = { lh: '#00d4ff', rh: '#ff3da6', background: '#06060c' };
     root.style.removeProperty('--lesson-primary');
     root.style.removeProperty('--lesson-secondary');
@@ -1739,8 +1795,10 @@ function activateLessonPresentation(trackId) {
     return;
   }
 
-  const { character, phase, track } = lesson;
-  const theme = character.theme;
+  const { character, phase, track, instrument, effect } = lesson;
+  const theme = lesson.lesson.theme;
+  state.activeEffect = effect;
+  state.effectParticles = [];
   state.theme = {
     lh: theme.leftHand,
     rh: theme.rightHand,
@@ -1757,14 +1815,20 @@ function activateLessonPresentation(trackId) {
   characterName.textContent = character.name;
   characterPhase.textContent = phase.title;
   characterStatus.textContent = track.reviewStatus === 'draft' ? 'Draft transcription' : 'Lesson ready';
-  referenceAudio.src = phase.referenceAudio;
-  prepareCharacterFrames(phase, characterLoadToken);
+  referenceAudio.src = lesson.lesson.referenceAudio;
+  referenceAudio.loop = state.sprunkiLoopEnabled;
+  if (instrument) {
+    setInstrument(instrument.playerVoice);
+    if (instrumentSelect) instrumentSelect.value = instrument.playerVoice;
+    if (instrumentVal) instrumentVal.textContent = instrument.label;
+  }
+  prepareCharacterFrames(lesson.lesson, characterLoadToken);
 }
 
 function updateCharacterAnimation() {
   const lesson = state.activeLesson;
   if (!lesson || !characterCanvas || !characterIdleImage) return;
-  const animation = lesson.phase.animation;
+  const animation = lesson.lesson.animation;
   const nextIndex = state.playing && characterFrameImages.length
     ? Math.floor(state.songTime / animation.frameDurationMs) % characterFrameImages.length
     : -1;
@@ -1810,11 +1874,25 @@ async function loadSongCatalog() {
   if (!Array.isArray(catalog.tracks)) {
     throw new Error('Song catalogue is missing its tracks list.');
   }
-  const collections = Array.isArray(catalog.collections) ? catalog.collections : [];
   defaultSongs = Object.fromEntries(catalog.tracks.map(track => [track.id, track]));
-  indexLessonMetadata(collections);
-  renderSprunkiLessons(collections);
+  const [instrumentCatalog, effectCatalog, ...games] = await Promise.all([
+    fetchJsonAsset(catalog.resources.instruments),
+    fetchJsonAsset(catalog.resources.effects),
+    ...(catalog.games || []).map(game => fetchJsonAsset(game.manifest)),
+  ]);
+  instrumentDefinitions = new Map((instrumentCatalog.instruments || []).map(item => [item.id, item]));
+  effectDefinitions = new Map((effectCatalog.effects || []).map(item => [item.id, item]));
+  gameDefinitions = new Map(games.map(game => [game.id, game]));
+  selectedGameId = catalog.games?.[0]?.id || games[0]?.id || null;
+  indexLessonMetadata();
+  renderGameBrowser();
   renderTracksMenu(catalog.tracks.filter(track => track.kind !== 'sprunki-lesson'));
+}
+
+async function fetchJsonAsset(path) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error(`Content request failed (${response.status}): ${path}`);
+  return response.json();
 }
 
 function updateTracksMenuActive() {
@@ -1823,20 +1901,45 @@ function updateTracksMenuActive() {
       it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
     });
   }
-  if (sprunkiLessons) {
-    sprunkiLessons.querySelectorAll('.sprunki-lesson-card').forEach(it => {
+  for (const grid of [phase1Grid, phase2Grid]) {
+    if (!grid) continue;
+    grid.querySelectorAll('.character-choice').forEach(it => {
       it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
     });
   }
 }
 
-if (sprunkiLessons) {
-  sprunkiLessons.addEventListener('click', async (event) => {
-    const item = event.target.closest('.sprunki-lesson-card');
-    if (!item || !sprunkiLessons.contains(item)) return;
+sprunkiBrowserBtn?.addEventListener('click', openGameBrowser);
+gameBrowserClose?.addEventListener('click', closeGameBrowser);
+gameBrowserOverlay?.addEventListener('click', event => {
+  if (event.target === gameBrowserOverlay) closeGameBrowser();
+});
+gamePicker?.addEventListener('click', event => {
+  const button = event.target.closest('[data-game-id]');
+  if (!button) return;
+  selectedGameId = button.dataset.gameId;
+  renderGameBrowser();
+});
+for (const grid of [phase1Grid, phase2Grid]) {
+  grid?.addEventListener('click', async event => {
+    const item = event.target.closest('.character-choice[data-track-id]');
+    if (!item || item.disabled) return;
+    closeGameBrowser();
     await loadDefaultSong(item.dataset.trackId);
   });
 }
+
+sprunkiLoopToggle?.addEventListener('change', () => {
+  state.sprunkiLoopEnabled = sprunkiLoopToggle.checked;
+  if (referenceAudio) referenceAudio.loop = state.sprunkiLoopEnabled;
+  showToast(state.sprunkiLoopEnabled ? 'Sprunki lessons will loop' : 'Sprunki looping is off', 'ok');
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && gameBrowserOverlay && !gameBrowserOverlay.classList.contains('hidden')) {
+    closeGameBrowser();
+  }
+});
 
 if (referenceAudioBtn && referenceAudio) {
   referenceAudioBtn.addEventListener('click', async () => {
@@ -1890,7 +1993,6 @@ loadSongCatalog().catch((err) => {
   console.error('Failed to load song catalogue:', err);
   if (tracksBtn) tracksBtn.disabled = true;
   if (tracksMenu) tracksMenu.textContent = 'Songs unavailable';
-  if (sprunkiLessons) sprunkiLessons.textContent = 'Lessons unavailable';
 });
 
 // ---------- Notation toggle wiring (Update 4) ----------
@@ -1972,6 +2074,58 @@ function shouldPauseForHand(hand) {
   return state.hand === hand;
 }
 
+function spawnLessonEffect(note) {
+  const effect = state.activeEffect;
+  if (!effect || effect.type !== 'note-sparks') return;
+  const key = getKey(note.midi);
+  if (!key) return;
+  const count = Math.max(1, Math.min(10, effect.particlesPerNote || 4));
+  const colors = effect.colors?.length ? effect.colors : [state.theme.rh];
+  for (let index = 0; index < count; index++) {
+    const angle = Math.PI * (1.08 + Math.random() * 0.84);
+    const speed = (effect.speed || 0.14) * (0.65 + Math.random() * 0.7);
+    state.effectParticles.push({
+      x: key.x + key.w * (0.25 + Math.random() * 0.5),
+      y: pianoY - 2,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 0,
+      maxLife: effect.lifetimeMs || 480,
+      color: colors[index % colors.length],
+      size: (effect.size || 3) * (0.7 + Math.random() * 0.6),
+    });
+  }
+  if (state.effectParticles.length > 220) {
+    state.effectParticles.splice(0, state.effectParticles.length - 220);
+  }
+}
+
+function updateLessonEffects(dtMs) {
+  if (!state.effectParticles.length) return;
+  for (const particle of state.effectParticles) {
+    particle.life += dtMs;
+    particle.x += particle.vx * dtMs;
+    particle.y += particle.vy * dtMs;
+    particle.vy += 0.00018 * dtMs;
+  }
+  state.effectParticles = state.effectParticles.filter(particle => particle.life < particle.maxLife);
+}
+
+function drawLessonEffects() {
+  for (const particle of state.effectParticles) {
+    const opacity = Math.max(0, 1 - particle.life / particle.maxLife);
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = particle.color;
+    ctx.shadowColor = particle.color;
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.size * (0.55 + opacity * 0.45), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
 function update(dtMs) {
   // Always age floaters so they keep animating even while paused/waiting.
   if (state.floaters.length) {
@@ -2032,6 +2186,7 @@ function update(dtMs) {
             waitSet.add(n.midi);
             // Mark as triggered so we don't re-wait on the same chord.
             n.triggered = true;
+            spawnLessonEffect(n);
             // They will be auto-released after their duration via the playback pass below
             n.released = false;
             // Their start time is "now" effectively (paused), endMs stays the same
@@ -2090,6 +2245,7 @@ function update(dtMs) {
       if (!userPlays && !handMuted) {
         playNote(n.midi, n.velocity, Math.max(0.1, n.durMs / 1000));
       }
+      spawnLessonEffect(n);
       n.triggered = true;
     }
   }
@@ -2109,7 +2265,7 @@ function update(dtMs) {
   }
 
   if (state.songDuration > 0 && state.songTime >= state.songDuration) {
-    if (state.activeLesson && state.activeLesson.phase.loop) {
+    if (state.activeLesson && state.sprunkiLoopEnabled) {
       const overflow = Math.max(0, nextTime - state.songDuration);
       state.songEnded = false;
       scrubToTime(overflow % state.songDuration);
@@ -2542,6 +2698,7 @@ function frame(ts) {
   state.lastFrameTs = ts;
 
   update(dt);
+  updateLessonEffects(dt);
   updateCharacterAnimation();
 
   clear();
@@ -2552,6 +2709,7 @@ function frame(ts) {
     drawWaterfall();
   }
   drawPiano();
+  drawLessonEffects();
   drawFloaters();
 
   // Keep the timeline slider in sync with playhead (unless user is dragging it)
