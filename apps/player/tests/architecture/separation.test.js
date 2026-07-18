@@ -6,12 +6,31 @@ import { fileURLToPath } from 'node:url';
 
 const projectDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
-test('NeoKeys core has no Sprunki-specific names or asset paths', async () => {
+async function registeredManifests() {
+  const registry = JSON.parse(await readFile(resolve(projectDirectory, 'extensions/registry.json'), 'utf8'));
+  return Promise.all(registry.extensions.map(async reference =>
+    JSON.parse(await readFile(resolve(projectDirectory, reference.manifest), 'utf8'))
+  ));
+}
+
+function extensionTerms(manifest) {
+  return [...new Set([
+    manifest.id.toLowerCase(),
+    manifest.name.toLowerCase(),
+    ...`${manifest.id} ${manifest.name}`.toLowerCase().split(/[^a-z0-9]+/).filter(term => term.length > 5),
+  ])];
+}
+
+test('NeoKeys core has no installed-extension names or asset paths', async () => {
   const coreFiles = ['app.js', 'index.html', 'styles.css', 'core/extension-host.js', 'core/keyboard-range.js'];
+  const manifests = await registeredManifests();
   for (const path of coreFiles) {
     const source = await readFile(resolve(projectDirectory, path), 'utf8');
-    assert.doesNotMatch(source, /sprunki/i, `${path} contains Sprunki-specific coupling`);
-    assert.doesNotMatch(source, /extensions\/learn-sprunki/, `${path} imports the product extension directly`);
+    for (const manifest of manifests) {
+      for (const term of extensionTerms(manifest)) {
+        assert.equal(source.toLowerCase().includes(term), false, `${path} contains extension term ${term}`);
+      }
+    }
   }
 });
 
@@ -21,8 +40,23 @@ test('core HTML exposes generic extension mount points', async () => {
   assert.match(html, /id="extensionOverlays"/);
 });
 
-test('Learn Sprunki owns its runtime, styles, manifest and content', async () => {
-  for (const path of ['extension.json', 'extension.js', 'styles.css', 'content/catalog.json', 'schema/catalog.schema.json']) {
-    await readFile(resolve(projectDirectory, 'extensions/learn-sprunki', path), 'utf8');
+test('generic documentation has no installed-extension names', async () => {
+  const repositoryRoot = resolve(projectDirectory, '../..');
+  const documentation = [
+    resolve(repositoryRoot, 'README.md'),
+    resolve(projectDirectory, 'README.md'),
+    resolve(repositoryRoot, 'docs/ARCHITECTURE.md'),
+    resolve(repositoryRoot, 'docs/EXTENSIONS.md'),
+    resolve(repositoryRoot, 'docs/TESTING.md'),
+    resolve(repositoryRoot, 'docs/UPSTREAMING.md'),
+  ];
+  const manifests = await registeredManifests();
+  for (const path of documentation) {
+    const source = (await readFile(path, 'utf8')).toLowerCase();
+    for (const manifest of manifests) {
+      for (const term of extensionTerms(manifest)) {
+        assert.equal(source.includes(term), false, `${path} contains extension term ${term}`);
+      }
+    }
   }
 });

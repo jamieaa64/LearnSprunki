@@ -1,9 +1,9 @@
 {
-  "name": "learn-sprunki-player",
+  "name": "neokeys-player",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Tablet-first Sprunki piano learner based on NeoKeys.",
+  "description": "Extensible tablet-friendly MIDI piano learner based on NeoKeys.",
   "scripts": {
     "dev": "python3 -m http.server 4173",
     "build": "node scripts/build.mjs",

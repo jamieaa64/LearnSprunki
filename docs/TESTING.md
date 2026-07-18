@@ -16,15 +16,15 @@ npm run check             # validation, all tests and production build
 
 ## Test layers
 
-- Unit tests cover standard keyboard ranges, Auto sizing, safe expansion,
+- Unit tests cover standard keyboard ranges, automatic sizing, safe expansion,
   extension manifests, API immutability and controller lifecycle.
-- Integration tests validate the three core demos, every extension catalogue,
-  all referenced MIDI/audio/image assets, game/character relationships and the
-  production bundle.
-- Architecture tests prevent Sprunki names or direct Learn Sprunki imports
-  from leaking back into NeoKeys core.
-- Browser regression checks should cover start-up, a core demo, a pitched
-  Sprunki lesson, a rhythm lesson, Auto keyboard sizing and tablet layout.
+- Integration tests validate core demos, every registered extension catalogue,
+  referenced assets and the production bundle.
+- Architecture tests ensure core source and generic documentation do not
+  acquire dependencies on installed extensions.
+- Browser regression checks should cover start-up, a core demo, at least one
+  track from each enabled extension, automatic keyboard sizing and tablet
+  layout.
 
 When fixing a bug, first add the smallest test that reproduces it at the lowest
 appropriate layer. Content failures should normally be expressed through the

@@ -1,33 +1,31 @@
 # Upstreaming to NeoKeys
 
-The refactor keeps product-specific code out of the potential upstream patch.
+The extension boundary keeps reusable player work separate from installed
+product packages.
 
 ## Core candidates
 
-Changes under these paths are designed to be useful without LearnSprunki:
+Changes under these paths are designed to stand alone:
 
 - `apps/player/app.js`, `index.html`, and `styles.css`;
-- `apps/player/core/extension-host.js` and `core/keyboard-range.js`;
-- fullscreen and tablet canvas performance work;
-- adaptive 25/37/49/61/73/88-key keyboard controls;
-- external core MIDI catalogue and local production dependency packaging;
-- `tests/unit`, the generic integration build test, and the architecture
-  boundary test.
+- `apps/player/core`;
+- fullscreen and tablet canvas-performance work;
+- adaptive standard-size keyboard controls;
+- the external core MIDI catalogue and local production dependency packaging;
+- generic unit, integration and architecture tests;
+- generic extension documentation and lifecycle support.
 
-The extension host can be proposed separately from the keyboard/fullscreen
-changes if the NeoKeys maintainer prefers smaller pull requests.
+Propose independent features as small pull requests when practical. For
+example, the extension host can be reviewed separately from adaptive keyboard
+and fullscreen changes.
 
-## Excluded product layer
+## Excluded extension layer
 
-Do not include these in a NeoKeys pull request:
+Do not include installed extension directories, their source material,
+extension-specific authoring tools or extension-specific validation assertions
+in a core NeoKeys pull request.
 
-- `apps/player/extensions/learn-sprunki`;
-- `SprunkiAssets`;
-- `tools/authoring` Sprunki generation plans;
-- LearnSprunki research and product documentation;
-- extension-specific content validation assertions.
-
-Before preparing an upstream branch, disable Learn Sprunki in
-`apps/player/extensions/registry.json`, run `npm run check`, and browser-test
-the three core demo tracks. The architecture suite should remain green and
-core should render the default `NeoKeys` branding.
+Before preparing an upstream branch, use an empty extension registry, retain
+the generic tests, run `npm run check`, and browser-test the core demo tracks.
+Core should render the default `NeoKeys` branding without any extension
+packages present.

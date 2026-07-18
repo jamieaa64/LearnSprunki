@@ -16,6 +16,10 @@ test('validates the public extension manifest contract', () => {
     () => validateExtensionManifest({ ...manifest, entry: '../outside.js' }),
     /entry must stay inside/
   );
+  assert.throws(
+    () => validateExtensionManifest({ ...manifest, bundle: ['../outside.js'] }),
+    /invalid bundle path/
+  );
 });
 
 test('freezes the API supplied to extensions', () => {

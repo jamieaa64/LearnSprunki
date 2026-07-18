@@ -13,6 +13,15 @@ export function validateExtensionManifest(manifest) {
   if (manifest.stylesheet) {
     requireExtension(manifest.stylesheet.startsWith("./extensions/"), "stylesheet must stay inside ./extensions/");
   }
+  if (manifest.validator) {
+    requireExtension(manifest.validator.startsWith("./extensions/"), "validator must stay inside ./extensions/");
+  }
+  if (manifest.bundle) {
+    requireExtension(Array.isArray(manifest.bundle), "bundle must be an array");
+    for (const path of manifest.bundle) {
+      requireExtension(typeof path === "string" && path.length > 0 && !path.startsWith("/") && !path.split("/").includes(".."), `invalid bundle path ${path}`);
+    }
+  }
   return manifest;
 }
 

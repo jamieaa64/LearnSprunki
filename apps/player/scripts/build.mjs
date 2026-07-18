@@ -1,5 +1,5 @@
 import { copyFile, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateCatalogue } from "./validate-content.mjs";
 
@@ -43,7 +43,21 @@ await writeFile(resolve(outputDirectory, "index.html"), html);
 await copyFile(resolve(projectDirectory, "styles.css"), resolve(outputDirectory, "styles.css"));
 await copyFile(resolve(projectDirectory, "app.js"), resolve(outputDirectory, "app.js"));
 await cp(resolve(projectDirectory, "core"), resolve(outputDirectory, "core"), { recursive: true });
-await cp(resolve(projectDirectory, "extensions"), resolve(outputDirectory, "extensions"), { recursive: true });
+const extensionOutput = resolve(outputDirectory, "extensions");
+await mkdir(extensionOutput, { recursive: true });
+await copyFile(resolve(projectDirectory, "extensions/registry.json"), resolve(extensionOutput, "registry.json"));
+const registry = JSON.parse(await readFile(resolve(projectDirectory, "extensions/registry.json"), "utf8"));
+for (const reference of registry.extensions) {
+  const manifestSource = resolve(projectDirectory, reference.manifest);
+  const manifest = JSON.parse(await readFile(manifestSource, "utf8"));
+  const sourceRoot = dirname(manifestSource);
+  const destinationRoot = dirname(resolve(outputDirectory, reference.manifest));
+  await mkdir(destinationRoot, { recursive: true });
+  await copyFile(manifestSource, resolve(destinationRoot, basename(manifestSource)));
+  for (const item of manifest.bundle || []) {
+    await cp(resolve(sourceRoot, item), resolve(destinationRoot, item), { recursive: true });
+  }
+}
 await cp(resolve(projectDirectory, "content"), resolve(outputDirectory, "content"), {
   recursive: true,
 });

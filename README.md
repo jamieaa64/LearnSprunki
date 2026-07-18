@@ -1,23 +1,19 @@
-# LearnSprunki
+# NeoKeys
 
-LearnSprunki is a tablet-first music-learning project built as a reusable
-NeoKeys core plus a separately packaged Learn Sprunki extension:
+This repository packages NeoKeys as a reusable, tablet-friendly music-learning
+player with independently loaded extensions.
 
-- `apps/player`: the NeoKeys-derived learner PWA and generic extension host;
-- `apps/player/extensions/learn-sprunki`: all Sprunki UI, behaviour, schemas and
-  lesson assets;
-- a future authoring workshop for producing reviewed Sprunki and non-Sprunki
-  MIDI lesson packs;
-- `Research`: product, architecture, transcription and delivery research.
+- `apps/player`: the NeoKeys web application and generic extension host;
+- `apps/player/extensions`: independently packaged optional features and
+  lesson libraries;
+- `docs`: generic architecture, extension-authoring and testing documentation.
 
-The core has no direct dependency on Learn Sprunki. Extensions are enabled by
-`apps/player/extensions/registry.json` and loaded from validated manifests. See
-[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+Extensions are enabled by `apps/player/extensions/registry.json` and loaded
+from validated manifests. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
 [`docs/EXTENSIONS.md`](docs/EXTENSIONS.md), and
-[`docs/TESTING.md`](docs/TESTING.md). The intended upstream patch boundary is
-listed in [`docs/UPSTREAMING.md`](docs/UPSTREAMING.md).
+[`docs/TESTING.md`](docs/TESTING.md).
 
-## Player
+## Run the player
 
 ```bash
 cd apps/player
@@ -40,22 +36,11 @@ The player is derived from
 
 ## Vercel
 
-Import `jamieaa64/LearnSprunki` and configure:
+Import the repository and configure:
 
 - Root Directory: `apps/player`
 - Framework Preset: Other
 - Build Command: `npm run build`
 - Output Directory: `dist`
 
-The app-level `vercel.json` also records the build/output settings.
-
-## Project status
-
-The current player is an attributed, locally packaged NeoKeys baseline with
-tablet fullscreen controls, adaptive keyboards and a generic extension
-lifecycle. LearnSprunki branding and product behaviour are applied by the
-separate extension at runtime.
-
-Original Sprunki currently contains 30 generated draft lessons: 20 pitched
-Basic Pitch transcriptions and 10 rhythm-pad lessons. Drafts must be reviewed
-before promotion to approved lessons.
+The app-level `vercel.json` also records the build and output settings.

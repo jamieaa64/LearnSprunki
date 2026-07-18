@@ -24,12 +24,24 @@ extensions/my-lessons/
   "version": "1.0.0",
   "entry": "./extensions/my-lessons/extension.js",
   "stylesheet": "./extensions/my-lessons/styles.css",
-  "catalog": "./extensions/my-lessons/content/catalog.json"
+  "catalog": "./extensions/my-lessons/content/catalog.json",
+  "validator": "./extensions/my-lessons/validate.mjs",
+  "bundle": ["extension.js", "styles.css", "content"]
 }
 ```
 
 All entry, stylesheet and manifest paths must remain under `./extensions/`.
 Content paths should remain inside the extension package as well.
+
+`stylesheet`, `catalog`, and `validator` are optional. A validator module is
+used by `npm run validate:content`, not by the browser. It exports
+`validateExtension(context)` and keeps domain-specific content rules inside the
+extension rather than adding them to the core validator.
+
+`bundle` is an allowlist of extension-relative runtime files and directories
+for the production build. Keep authoring tools, research and source material
+out of this list so they remain available in the repository without being
+published with the web application.
 
 Enable it in `extensions/registry.json`:
 

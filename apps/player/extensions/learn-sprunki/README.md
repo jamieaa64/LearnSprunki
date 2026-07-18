@@ -11,11 +11,26 @@ It owns:
 - the character chooser and active-character presentation;
 - reference-loop playback, Sprunki-only infinite looping and rhythm-pad input;
 - lesson themes, instruments and note-particle effects;
-- the Sprunki content schemas.
+- the Sprunki content schemas and validator;
+- product research, source assets and authoring tools.
 
-Run `node tools/authoring/build-original-game.mjs` from the repository
-root after changing the Original Sprunki authoring plan or source assets. Then
-run `npm run check` in `apps/player`.
+## Package layout
+
+```text
+learn-sprunki/
+├── extension.json, extension.js, styles.css
+├── validate.mjs             Product-specific content validation
+├── content/                 Runtime manifests and published lesson assets
+├── schema/                  Product content schemas
+├── source-assets/           Original input assets
+├── authoring/               Transcription and generation tools
+└── docs/research/           Product and technical research
+```
+
+Run
+`node apps/player/extensions/learn-sprunki/authoring/build-original-game.mjs`
+from the repository root after changing the authoring plan or source assets.
+Then run `npm run check` in `apps/player`.
 
 See [`../../../../docs/EXTENSIONS.md`](../../../../docs/EXTENSIONS.md) for the generic
 extension contract.

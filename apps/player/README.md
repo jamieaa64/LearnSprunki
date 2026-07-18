@@ -1,6 +1,6 @@
 # NeoKeys 🎹
 
-> LearnSprunki tablet baseline, derived from NeoKeys commit
+> Modular tablet baseline, derived from NeoKeys commit
 > `50235a332ddcffb0a3567f48a77d8c6b6d70f07e`. NeoKeys remains credited to
 > ArtinSHF under CC BY-NC 4.0. This branch pins its browser dependencies locally
 > and adds explicit fullscreen controls, separated source files, and an external
@@ -28,29 +28,14 @@ The application is a full duplex audio tool: it captures incoming physical or wi
 
 It supports local MIDI file loading, a built-in track library, real-time note name translation, standalone session recording, and downloadable MIDI exports.
 
-The Learn Sprunki extension loads game manifests separately from the core track
-library. Its button opens a phase-grouped character browser; a
-locked tile means that character/phase does not yet have a reviewed lesson.
-Its first playable vertical slice is Mr Sun Phase 1, with animation synced to
-the lesson timeline, character-coloured notes, original-loop playback and a
-visibly labelled draft transcription. Infinite playback is a Sprunki-only
-setting and never changes the completion behaviour of ordinary MIDI tracks.
+Optional extensions load their own manifests, tracks, controls, overlays,
+styles and media separately from the core track library. Extensions can also
+provide custom input surfaces, rendering, looping and animation through the
+documented track-controller lifecycle.
 
-Extension content is separated into `extensions/learn-sprunki/content/games`,
-`tracks`, `instruments` and `effects`. Lessons refer to reusable
-instrument and visual-effect definitions by ID; Mr Sun currently uses the
-data-driven Sun Sparks note effect.
-
-Original Sprunki currently includes 20 Basic Pitch piano/vocal drafts and 10
-single-lane percussion drafts. Percussion lessons replace the piano with a
-large labelled rhythm pad that works with touch or the space bar. All generated
-lessons remain explicitly marked as drafts until they are reviewed against the
-source loop.
-
-For tablet performance, character SVGs are preloaded once and drawn through a
-fixed canvas instead of repeatedly replacing an image URL. Coarse-pointer
-devices use a 1.5× canvas pixel-ratio cap, disable large live backdrop blurs and
-collapse the settings panel after lesson selection; the gear button reopens it.
+For tablet performance, coarse-pointer devices use a reduced canvas pixel-ratio
+cap and avoid expensive backdrop effects. The launch overlay and transport both
+offer fullscreen controls so the interface can remain focused during play.
 
 ---
 
@@ -130,14 +115,13 @@ http://127.0.0.1:4173/index.html
 ```
 
 The launch overlay and transport both provide a fullscreen control for tablet
-play. Browser fullscreen must be entered from a user tap. Touch is the primary
-LearnSprunki input. The inherited Web MIDI implementation remains in the
-codebase for future optional keyboard support, but startup no longer requests
-hardware access or waits on MIDI permission.
+play. Browser fullscreen must be entered from a user tap. Touch input works
+without MIDI hardware. The inherited Web MIDI implementation remains available,
+but startup no longer requests hardware access or waits on MIDI permission.
 
-## Deploying from the LearnSprunki monorepo
+## Deploying from a monorepo
 
-When importing `jamieaa64/LearnSprunki` into Vercel, use:
+When importing a repository into Vercel, use:
 
 - Root Directory: `apps/player`
 - Framework Preset: Other
@@ -182,7 +166,7 @@ apps/player/
 │   └── midi/               # Core demo MIDI files
 ├── extensions/
 │   ├── registry.json       # Enabled extension packages
-│   └── learn-sprunki/      # Sprunki runtime, styles, schemas and assets
+│   └── <extension-id>/     # Extension runtime, styles, schemas and assets
 ├── tests/                  # Unit, integration and architecture suites
 └── scripts/                # Validation and static Vercel build
 ```

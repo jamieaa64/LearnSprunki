@@ -58,7 +58,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/orange-oren/sounds/phase1/kick.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/orange-oren/sounds/phase1/kick.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -109,7 +109,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/orange-oren/sounds/phase2/kick3.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/orange-oren/sounds/phase2/kick3.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -160,7 +160,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/red-raddy/sounds/phase1/snare.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/red-raddy/sounds/phase1/snare.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -212,7 +212,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/red-raddy/sounds/phase2/snare3.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/red-raddy/sounds/phase2/snare3.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -266,7 +266,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/silver-clukr/sounds/phase1/ride-cymbal.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/silver-clukr/sounds/phase1/ride-cymbal.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -317,7 +317,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/silver-clukr/sounds/phase2/knock-knocn.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/silver-clukr/sounds/phase2/knock-knocn.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -372,7 +372,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/fun-bot/sounds/phase1/amen.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/fun-bot/sounds/phase1/amen.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -427,7 +427,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/fun-bot/sounds/phase2/amen3.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/fun-bot/sounds/phase2/amen3.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -482,7 +482,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/green-vineria/sounds/phase1/shaky-shaky.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/green-vineria/sounds/phase1/shaky-shaky.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -533,7 +533,7 @@
       "transcription": {
         "engine": "energy-onset-detector",
         "engineVersion": "1.0.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/green-vineria/sounds/phase2/shakey.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/green-vineria/sounds/phase2/shakey.wav",
         "reviewRequired": true,
         "parameters": {
           "detector": "energy-novelty-v1",
@@ -589,7 +589,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/gray-gray/sounds/phase1/bass1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/gray-gray/sounds/phase1/bass1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 35,
@@ -642,7 +642,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/gray-gray/sounds/phase2/bass3.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/gray-gray/sounds/phase2/bass3.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 35,
@@ -692,7 +692,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/gold-garnold/sounds/phase1/arpeg.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/gold-garnold/sounds/phase1/arpeg.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 60,
@@ -745,7 +745,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/gold-garnold/sounds/phase2/slow-arpeg.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/gold-garnold/sounds/phase2/slow-arpeg.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 60,
@@ -796,7 +796,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/sky-blue-sky/sounds/phase1/music-box1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/sky-blue-sky/sounds/phase1/music-box1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 100,
@@ -849,7 +849,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/sky-blue-sky/sounds/phase2/music1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/sky-blue-sky/sounds/phase2/music1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 80,
@@ -900,7 +900,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase1/piano1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/mr-sun/sounds/phase1/piano1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 80,
@@ -951,7 +951,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase2/piano1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/mr-sun/sounds/phase2/piano1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 60,
@@ -1011,7 +1011,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/purple-durple/sounds/phase1/tromp1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/purple-durple/sounds/phase1/tromp1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 55,
@@ -1068,7 +1068,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/purple-durple/sounds/phase2/horns1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/purple-durple/sounds/phase2/horns1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 55,
@@ -1121,7 +1121,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/mr-tree/sounds/phase1/organ1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/mr-tree/sounds/phase1/organ1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 45,
@@ -1165,7 +1165,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/mr-tree/sounds/phase2/slow-organ1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/mr-tree/sounds/phase2/slow-organ1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 45,
@@ -1215,7 +1215,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/yellow-simon/sounds/phase1/square1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/yellow-simon/sounds/phase1/square1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 65,
@@ -1264,7 +1264,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/yellow-simon/sounds/phase2/square1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/yellow-simon/sounds/phase2/square1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 65,
@@ -1320,7 +1320,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/tan-tunner/sounds/phase1/whistle1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/tan-tunner/sounds/phase1/whistle1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 180,
@@ -1377,7 +1377,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/tan-tunner/sounds/phase2/whistle3.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/tan-tunner/sounds/phase2/whistle3.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 180,
@@ -1429,7 +1429,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/pink-pinki/sounds/phase1/femchoir1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/pink-pinki/sounds/phase1/femchoir1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 100,
@@ -1484,7 +1484,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/pink-pinki/sounds/phase2/choir1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/pink-pinki/sounds/phase2/choir1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 80,
@@ -1538,7 +1538,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/blue-jevin/sounds/phase1/choir1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/blue-jevin/sounds/phase1/choir1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 65,
@@ -1588,7 +1588,7 @@
       "transcription": {
         "engine": "spotify-basic-pitch",
         "engineVersion": "0.3.0",
-        "sourceAudio": "SprunkiAssets/sprunkis/blue-jevin/sounds/phase2/choir1.wav",
+        "sourceAudio": "apps/player/extensions/learn-sprunki/source-assets/sprunkis/blue-jevin/sounds/phase2/choir1.wav",
         "reviewRequired": true,
         "parameters": {
           "minimumFrequencyHz": 65,

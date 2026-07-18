@@ -17,9 +17,18 @@ test('the production build contains core and registered extension entrypoints', 
     'dist/core/extension-host.js',
     'dist/core/keyboard-range.js',
     'dist/extensions/registry.json',
-    'dist/extensions/learn-sprunki/extension.js',
-    'dist/extensions/learn-sprunki/content/catalog.json',
   ]) await access(resolve(projectDirectory, path));
+
+  const registry = JSON.parse(await readFile(resolve(projectDirectory, 'extensions/registry.json'), 'utf8'));
+  for (const reference of registry.extensions) {
+    const manifest = JSON.parse(await readFile(resolve(projectDirectory, reference.manifest), 'utf8'));
+    for (const asset of [reference.manifest, manifest.entry, manifest.catalog].filter(Boolean)) {
+      await access(resolve(projectDirectory, 'dist', asset));
+    }
+    for (const item of manifest.bundle || []) {
+      await access(resolve(projectDirectory, 'dist', dirname(reference.manifest), item));
+    }
+  }
 
   const html = await readFile(resolve(projectDirectory, 'dist/index.html'), 'utf8');
   assert.doesNotMatch(html, /node_modules/);
