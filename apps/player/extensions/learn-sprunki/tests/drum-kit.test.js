@@ -10,11 +10,12 @@ const { Midi } = midiPackage;
 const extensionRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('the visual kit exposes distinct General MIDI percussion pieces', () => {
-  assert.equal(DRUM_PIECES.length, 8);
+  assert.equal(DRUM_PIECES.length, 11);
   assert.equal(new Set(DRUM_PIECES.map(piece => piece.midi)).size, DRUM_PIECES.length);
   assert.equal(pieceForMidi(36).id, 'kick');
   assert.equal(pieceForMidi(40).id, 'snare');
-  assert.equal(pieceForMidi(46).id, 'hi-hat');
+  assert.equal(pieceForMidi(46).id, 'open-hi-hat');
+  assert.equal(pieceForMidi(44).id, 'pedal-hi-hat');
   assert.equal(canonicalDrumMidi(35), 36);
 });
 

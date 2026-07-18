@@ -245,40 +245,69 @@ function litDrumInfo(lit, piece) {
 
 function drawDrumKit(lesson, lit, context) {
   const { ctx, width, pianoY, pianoH, theme, roundRect, hexToRgba } = context;
-  ctx.fillStyle = '#090a12';
+  ctx.fillStyle = '#101114';
   ctx.fillRect(0, pianoY, width, pianoH);
   const layout = drumKitLayout(width, pianoY, pianoH);
   for (const piece of layout) {
     const litInfo = litDrumInfo(lit, piece);
     const isFocus = piece.aliases.includes(lesson.rhythmMidiNote);
-    const color = litInfo?.color || (isFocus ? theme.rh : '#72809a');
+    const color = litInfo?.color || (isFocus ? theme.rh : '#686b75');
     const cx = piece.x + piece.w / 2;
     const cy = piece.y + piece.h / 2;
     const gradient = ctx.createRadialGradient(cx, cy - piece.h * 0.2, 2, cx, cy, Math.max(piece.w, piece.h) * 0.62);
-    gradient.addColorStop(0, hexToRgba(color, litInfo ? 0.98 : (isFocus ? 0.52 : 0.3)));
-    gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.42 : 0.09));
+    gradient.addColorStop(0, hexToRgba(color, litInfo ? 1 : (isFocus ? 0.9 : 0.56)));
+    gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.58 : (isFocus ? 0.48 : 0.22)));
     ctx.save();
     ctx.fillStyle = gradient;
     ctx.strokeStyle = hexToRgba(color, isFocus ? 0.95 : 0.62);
-    ctx.lineWidth = isFocus ? 3 : 1.5;
+    ctx.lineWidth = isFocus ? 2.5 : 1.25;
     ctx.shadowColor = litInfo ? color : 'transparent';
     ctx.shadowBlur = litInfo ? 24 : 0;
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, piece.w / 2, piece.h / 2, 0, 0, Math.PI * 2);
-    ctx.fill(); ctx.stroke();
-    if (piece.shape === 'drum' || piece.shape === 'kick') {
+    if (piece.shape === 'pedal') {
+      roundRect(ctx, piece.x, piece.y, piece.w, piece.h, Math.min(7, piece.w / 2));
+      ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = hexToRgba(color, 0.42);
+      ctx.beginPath();
+      ctx.moveTo(cx, piece.y + 4); ctx.lineTo(cx, piece.y + piece.h - 4);
+      ctx.stroke();
+    } else {
+      ctx.beginPath();
+      ctx.arc(cx, cy, piece.w / 2, 0, Math.PI * 2);
+      ctx.fill(); ctx.stroke();
+    }
+    if (piece.shape === 'drum') {
       ctx.strokeStyle = hexToRgba(color, 0.32);
       ctx.beginPath();
-      ctx.ellipse(cx, cy + piece.h * 0.08, piece.w * 0.43, piece.h * 0.34, 0, 0, Math.PI * 2);
+      ctx.arc(cx, cy, piece.w * 0.39, 0, Math.PI * 2);
       ctx.stroke();
     }
+    if (piece.shape === 'cymbal' || piece.shape === 'hi-hat') {
+      ctx.fillStyle = '#17181c';
+      ctx.beginPath(); ctx.arc(cx, cy, Math.max(3, piece.w * 0.1), 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = hexToRgba(color, 0.32);
+      ctx.beginPath(); ctx.arc(cx, cy, piece.w * 0.33, 0, Math.PI * 2); ctx.stroke();
+      if (piece.shape === 'hi-hat') {
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(piece.x + 3, cy); ctx.lineTo(piece.x + piece.w - 3, cy);
+        ctx.moveTo(cx, piece.y + 3); ctx.lineTo(cx, piece.y + piece.h - 3);
+        ctx.stroke();
+      }
+    }
     ctx.shadowBlur = 0;
-    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.font = `800 ${Math.max(8, Math.min(13, piece.w * 0.1))}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
-    ctx.fillText(piece.shortLabel, cx, cy - 3);
-    ctx.fillStyle = 'rgba(255,255,255,0.58)';
-    ctx.font = '700 8px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-    ctx.fillText(piece.key, cx, cy + 11);
+    ctx.fillStyle = litInfo || isFocus ? '#fff' : 'rgba(255,255,255,0.8)';
+    ctx.textBaseline = 'middle';
+    ctx.font = '800 8px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    let labelX = cx;
+    let labelY = cy;
+    if (piece.labelSide === 'left') { ctx.textAlign = 'right'; labelX = piece.x - 6; }
+    else if (piece.labelSide === 'right') { ctx.textAlign = 'left'; labelX = piece.x + piece.w + 6; }
+    else { ctx.textAlign = 'center'; labelY = Math.min(pianoY + pianoH - 5, piece.y + piece.h + 7); }
+    ctx.fillText(piece.label.toUpperCase(), labelX, labelY);
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.textAlign = 'center';
+    ctx.font = '700 7px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillText(piece.key, cx, cy + (piece.shape === 'pedal' ? 0 : 9));
     ctx.restore();
   }
 }
@@ -307,12 +336,17 @@ function createController(metadata) {
     loadLabel: track.reviewStatus === 'draft'
       ? (lesson.playerMode === 'rhythm' ? ' · draft rhythm lesson' : ' · draft transcription') : '',
     hidesKeyboardGuides: lesson.playerMode === 'rhythm',
+    inputSurfaceHeight({ height, defaultHeight }) {
+      if (lesson.playerMode !== 'rhythm') return defaultHeight;
+      return Math.max(defaultHeight, Math.min(250, height * 0.3));
+    },
     getKey(midi, context) {
       if (lesson.playerMode === 'rhythm') {
         const piece = pieceForMidi(midi);
         if (!piece) return null;
         const layoutPiece = drumKitLayout(context.width, context.pianoY, context.pianoH).find(item => item.id === piece.id);
-        return { midi, isBlack: false, x: layoutPiece.x, w: layoutPiece.w };
+        const laneWidth = Math.max(34, layoutPiece.w);
+        return { midi, isBlack: false, x: layoutPiece.x + (layoutPiece.w - laneWidth) / 2, w: laneWidth };
       }
       return null;
     },

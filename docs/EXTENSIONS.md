@@ -109,6 +109,9 @@ All hooks are optional:
 - `loadLabel`: suffix used by the loaded-track toast;
 - `collapsePanelOnTablet`: request the tablet panel behaviour;
 - `hidesKeyboardGuides`: hide normal black-key waterfall bands;
+- `inputSurfaceHeight(viewport)`: request a custom surface height; the viewport
+  includes `width`, `height`, `isLandscape` and `defaultHeight`, and core clamps
+  the result to preserve room for falling notes;
 - `getKey(midi, context)`: provide custom falling-note geometry;
 - `hitTest(x, y, context)`: map pointer input to a MIDI note;
 - `drawInputSurface(litNotes, context)`: replace the normal piano surface;

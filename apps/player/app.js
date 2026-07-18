@@ -118,9 +118,18 @@ function resize() {
 
   // Piano takes a chunk of bottom. Landscape: 22% (min 110, max 180). Portrait: 18%.
   const isLandscape = W > H;
-  pianoH = isLandscape
+  const defaultInputSurfaceHeight = isLandscape
     ? Math.max(110, Math.min(180, H * 0.22))
     : Math.max(90, Math.min(140, H * 0.18));
+  const requestedInputSurfaceHeight = activeTrackController?.inputSurfaceHeight?.({
+    width: W,
+    height: H,
+    isLandscape,
+    defaultHeight: defaultInputSurfaceHeight,
+  });
+  pianoH = Number.isFinite(requestedInputSurfaceHeight)
+    ? Math.max(90, Math.min(H * 0.45, requestedInputSurfaceHeight))
+    : defaultInputSurfaceHeight;
   pianoY = H - pianoH;
   waterfallH = pianoY;
 
@@ -1756,6 +1765,7 @@ function activateExtensionTrack(track) {
     if (instrumentVal) instrumentVal.textContent = extensionInstrumentRestore.label;
     extensionInstrumentRestore = null;
   }
+  resize();
 }
 
 function extensionRenderContext() {
