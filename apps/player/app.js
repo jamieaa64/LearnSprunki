@@ -1,15 +1,19 @@
 'use strict';
 
+import {
+  PIANO_MIN_MIDI,
+  PIANO_MAX_MIDI,
+  chooseKeyboardRange,
+} from './core/keyboard-range.js';
+import { ExtensionHost, loadExtensionRegistry } from './core/extension-host.js';
+
 /* =====================================================================
    NeoKeys — single-file Synthesia clone
    --------------------------------------------------------------------- */
 
 // ---------- Constants ----------
-const PIANO_MIN_MIDI = 21;  // A0
-const PIANO_MAX_MIDI = 108; // C8
 let FIRST_MIDI = PIANO_MIN_MIDI;
 let LAST_MIDI  = PIANO_MAX_MIDI;
-const STANDARD_KEYBOARD_SIZES = [25, 37, 49, 61, 73, 88];
 const NOTE_NAMES    = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 // Solfège mapping — standard fixed-do system:
 //   C=Do  D=Ré  E=Mi  F=Fa  G=Sol  A=La  B=Si
@@ -37,11 +41,8 @@ function noteLetter(midi) {
 
 // ---------- External song catalogue ----------
 let defaultSongs = Object.create(null);
-let lessonMetadataByTrackId = new Map();
-let gameDefinitions = new Map();
-let instrumentDefinitions = new Map();
-let effectDefinitions = new Map();
-let selectedGameId = null;
+let activeTrackController = null;
+let extensionHost = null;
 
 // ---------- Canvas setup ----------
 const canvas = document.getElementById('stage');
@@ -98,10 +99,8 @@ function buildLayout() {
 }
 
 function getKey(midi) {
-  const rhythm = state?.activeLesson?.lesson;
-  if (rhythm?.playerMode === 'rhythm' && midi === rhythm.rhythmMidiNote) {
-    return { midi, isBlack: false, x: W * 0.2, w: W * 0.6 };
-  }
+  const extensionKey = activeTrackController?.getKey?.(midi, extensionRenderContext());
+  if (extensionKey) return extensionKey;
   for (let i = 0; i < keyLayout.length; i++) if (keyLayout[i].midi === midi) return keyLayout[i];
   return null;
 }
@@ -125,6 +124,7 @@ function resize() {
   waterfallH = pianoY;
 
   buildLayout();
+  activeTrackController?.resize?.(extensionRenderContext());
 }
 window.addEventListener('resize', resize);
 window.addEventListener('orientationchange', () => setTimeout(resize, 200));
@@ -190,12 +190,7 @@ const state = {
   currentTrackId: null,
   currentTrackTitle: '',
 
-  // ---- Active lesson presentation ----
-  activeLesson: null,
-  characterFrameIndex: -1,
-  sprunkiLoopEnabled: true,
-  activeEffect: null,
-  effectParticles: [],
+  // ---- Theme (extensions may temporarily override this) ----
   theme: {
     lh: '#00d4ff',
     rh: '#ff3da6',
@@ -236,79 +231,6 @@ const state = {
   muteRightHand: false,
 
 };
-
-// ---------- Adaptive visible keyboard ----------
-// Compact keyboards are always C-to-C, so neither edge slices through an
-// octave. The full piano keeps its conventional A0-to-C8 88-key range.
-function rangeForSize(size, requiredMin, requiredMax) {
-  if (size === 88) {
-    if (requiredMin < PIANO_MIN_MIDI || requiredMax > PIANO_MAX_MIDI) return null;
-    return { first: PIANO_MIN_MIDI, last: PIANO_MAX_MIDI, size };
-  }
-
-  const candidates = [];
-  const firstPossibleC = Math.ceil(PIANO_MIN_MIDI / 12) * 12;
-  const lastPossibleC = PIANO_MAX_MIDI - (size - 1);
-  const requiredCentre = (requiredMin + requiredMax) / 2;
-  for (let first = firstPossibleC; first <= lastPossibleC; first += 12) {
-    const last = first + size - 1;
-    if (first <= requiredMin && last >= requiredMax) {
-      candidates.push({
-        first,
-        last,
-        size,
-        centreDistance: Math.abs((first + last) / 2 - requiredCentre),
-      });
-    }
-  }
-  candidates.sort((a, b) => a.centreDistance - b.centreDistance || a.first - b.first);
-  return candidates[0] || null;
-}
-
-function centredRangeForSize(size) {
-  if (size === 88) return { first: PIANO_MIN_MIDI, last: PIANO_MAX_MIDI, size };
-  // With no song loaded, centre the compact keyboard around middle C (C4).
-  return rangeForSize(size, 60, 60);
-}
-
-function chooseKeyboardRange(notes, mode) {
-  const supportedNotes = notes
-    .map(note => Number(note.midi))
-    .filter(midi => Number.isFinite(midi) && midi >= PIANO_MIN_MIDI && midi <= PIANO_MAX_MIDI);
-
-  if (supportedNotes.length === 0) {
-    const defaultSize = mode === 'auto' ? 49 : Number(mode);
-    return centredRangeForSize(defaultSize) || centredRangeForSize(88);
-  }
-
-  const minNote = Math.min(...supportedNotes);
-  const maxNote = Math.max(...supportedNotes);
-  const paddedMin = Math.max(PIANO_MIN_MIDI, minNote - 2);
-  const paddedMax = Math.min(PIANO_MAX_MIDI, maxNote + 2);
-  const requestedSize = mode === 'auto' ? 25 : Number(mode);
-  const allowedSizes = STANDARD_KEYBOARD_SIZES.filter(size => size >= requestedSize);
-
-  // Prefer a little space outside the highest and lowest song notes. If a
-  // manually requested size can only fit the exact notes, honour it before
-  // expanding. Auto retains the breathing room by trying larger sizes first.
-  if (mode === 'auto') {
-    for (const size of allowedSizes) {
-      const range = rangeForSize(size, paddedMin, paddedMax);
-      if (range) return range;
-    }
-  } else {
-    const paddedRequested = rangeForSize(requestedSize, paddedMin, paddedMax);
-    if (paddedRequested) return paddedRequested;
-    const exactRequested = rangeForSize(requestedSize, minNote, maxNote);
-    if (exactRequested) return exactRequested;
-    for (const size of allowedSizes.slice(1)) {
-      const range = rangeForSize(size, paddedMin, paddedMax) || rangeForSize(size, minNote, maxNote);
-      if (range) return range;
-    }
-  }
-
-  return centredRangeForSize(88);
-}
 
 function updateKeyboardRangeLabel() {
   const label = document.getElementById('keyboardRangeVal');
@@ -432,7 +354,7 @@ function applyVolumeToInstrument(inst) {
 async function initAudio() {
   if (audioReady) return;
   await Tone.start();
-  // Build the selected voice. A Sprunki lesson may choose it before the first
+  // Build the selected voice. An extension may choose it before the first
   // user gesture unlocks Web Audio on a tablet.
   const selected = buildInstrument(currentInstrumentName) || buildInstrument('grand');
   currentInstrument = selected.node;
@@ -779,7 +701,7 @@ fileInput.addEventListener('change', async (e) => {
     const midi = new Midi(buf);
     state.currentTrackId    = 'upload';
     state.currentTrackTitle = f.name;
-    activateLessonPresentation(null);
+    activateExtensionTrack(null);
     loadMidiObject(midi);
     updateTracksMenuActive();
     updateDownloadButtonVisibility();
@@ -862,9 +784,9 @@ function loadMidiObject(midi) {
   state.notes = notes;
   updateKeyboardRangeForNotes();
   state.songDuration = notes.length ? Math.max(...notes.map(n => n.endMs)) + 1000 : 0;
-  const lessonLoopDuration = state.activeLesson && state.activeLesson.lesson.loopDurationMs;
-  if (Number.isFinite(lessonLoopDuration) && lessonLoopDuration > 0) {
-    state.songDuration = lessonLoopDuration;
+  const extensionDuration = activeTrackController?.songDurationMs;
+  if (Number.isFinite(extensionDuration) && extensionDuration > 0) {
+    state.songDuration = extensionDuration;
   }
   state.songTime = 0;
   state.waiting = false;
@@ -904,18 +826,16 @@ async function loadDefaultSong(trackId) {
     const midi = new Midi(buf);
     state.currentTrackId    = trackId;
     state.currentTrackTitle = song.title;
-    activateLessonPresentation(trackId);
+    activateExtensionTrack(song);
     loadMidiObject(midi);
     fileNameEl.textContent = song.title;
     updateTracksMenuActive();
     updateDownloadButtonVisibility();
-    const draftLabel = song.reviewStatus === 'draft'
-      ? (song.lesson?.playerMode === 'rhythm' ? ' · draft rhythm lesson' : ' · draft transcription')
-      : '';
-    showToast(song.emoji + '  Loaded: ' + song.title + draftLabel, 'ok');
+    const extensionLabel = activeTrackController?.loadLabel || '';
+    showToast(song.emoji + '  Loaded: ' + song.title + extensionLabel, 'ok');
     const tabletLayout = window.innerWidth <= 1180 ||
       (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
-    if (state.activeLesson && tabletLayout && panel) panel.classList.add('collapsed');
+    if (activeTrackController?.collapsePanelOnTablet && tabletLayout && panel) panel.classList.add('collapsed');
   } catch (err) {
     console.error('Failed to load built-in song:', err);
     showToast('Failed to load track: ' + err.message, 'err');
@@ -1355,7 +1275,7 @@ function stopRecording() {
   fileNameEl.textContent = 'My Recording';
   state.currentTrackId    = 'recording';
   state.currentTrackTitle = 'My Recording';
-  activateLessonPresentation(null);
+  activateExtensionTrack(null);
   updateTracksMenuActive();
   updateDownloadButtonVisibility();
   // Per spec (Update 2): always transition to Normal Mode after Stop Recording
@@ -1712,257 +1632,8 @@ updateFullscreenButton();
 // ---------- Tracks dropdown wiring (Update 1) ----------
 const tracksBtn  = document.getElementById('tracksBtn');
 const tracksMenu = document.getElementById('tracksMenu');
-const sprunkiBrowserBtn = document.getElementById('sprunkiBrowserBtn');
-const gameBrowserOverlay = document.getElementById('gameBrowserOverlay');
-const gameBrowserClose = document.getElementById('gameBrowserClose');
-const gamePicker = document.getElementById('gamePicker');
-const phase1Grid = document.getElementById('phase1Grid');
-const phase2Grid = document.getElementById('phase2Grid');
-const sprunkiLoopToggle = document.getElementById('sprunkiLoopToggle');
-const activeGameLabel = document.getElementById('activeGameLabel');
-const characterStage = document.getElementById('characterStage');
-const characterCanvas = document.getElementById('characterCanvas');
-const characterContext = characterCanvas ? characterCanvas.getContext('2d', { alpha: true }) : null;
-const characterName = document.getElementById('characterName');
-const characterPhase = document.getElementById('characterPhase');
-const characterStatus = document.getElementById('characterStatus');
-const referenceAudio = document.getElementById('referenceAudio');
-const referenceAudioBtn = document.getElementById('referenceAudioBtn');
-let characterLoadToken = 0;
-let characterIdleImage = null;
-let characterFrameImages = [];
-
-function indexLessonMetadata() {
-  lessonMetadataByTrackId = new Map();
-  for (const track of Object.values(defaultSongs)) {
-    if (track.kind !== 'sprunki-lesson' || !track.lesson) continue;
-    const game = gameDefinitions.get(track.lesson.gameId);
-    const character = game && game.characters.find(item => item.id === track.lesson.characterId);
-    const phase = character && character.phases.find(item => item.id === track.lesson.phaseId);
-    if (!game || !character || !phase) continue;
-    lessonMetadataByTrackId.set(track.id, {
-      game,
-      character,
-      phase,
-      track,
-      lesson: track.lesson,
-      instrument: instrumentDefinitions.get(track.lesson.instrumentId) || null,
-      effect: effectDefinitions.get(track.lesson.effectId) || null,
-    });
-  }
-}
-
-function renderGamePicker() {
-  if (!gamePicker) return;
-  gamePicker.replaceChildren();
-  for (const game of gameDefinitions.values()) {
-    const button = document.createElement('button');
-    button.className = 'game-picker-btn';
-    button.type = 'button';
-    button.dataset.gameId = game.id;
-    button.textContent = game.title;
-    button.classList.toggle('active', game.id === selectedGameId);
-    gamePicker.append(button);
-  }
-}
-
-function characterChoice(game, character, phaseId) {
-  const phase = character.phases.find(item => item.id === phaseId);
-  if (!phase) return null;
-  const track = phase.lessonTrackId ? defaultSongs[phase.lessonTrackId] : null;
-  const instrument = instrumentDefinitions.get(phase.instrumentId);
-  const locked = phase.locked || !track;
-  const item = document.createElement('button');
-  item.className = 'character-choice';
-  item.type = 'button';
-  item.disabled = locked;
-  item.style.setProperty('--character-color', character.color);
-  if (track) item.dataset.trackId = track.id;
-  item.setAttribute('aria-label', `${character.name}, ${phase.title}${locked ? ', locked' : ', lesson available'}`);
-
-  const portrait = document.createElement('img');
-  portrait.src = phase.portrait;
-  portrait.alt = '';
-  portrait.loading = 'lazy';
-  const name = document.createElement('strong');
-  name.textContent = character.name;
-  const detail = document.createElement('small');
-  detail.textContent = phase.playerMode === 'rhythm'
-    ? `Rhythm · ${phase.rhythmLabel}`
-    : (instrument ? instrument.label : 'Lesson');
-  item.append(portrait, name, detail);
-  if (locked) {
-    const lock = document.createElement('span');
-    lock.className = 'character-lock';
-    lock.setAttribute('aria-hidden', 'true');
-    lock.textContent = 'Locked';
-    item.append(lock);
-  }
-  return item;
-}
-
-function renderGameBrowser() {
-  const game = gameDefinitions.get(selectedGameId);
-  if (!game) return;
-  if (activeGameLabel) activeGameLabel.textContent = game.title.replace(/ Sprunki$/i, '');
-  renderGamePicker();
-  for (const [phaseId, grid] of [['phase1', phase1Grid], ['phase2', phase2Grid]]) {
-    if (!grid) continue;
-    grid.replaceChildren();
-    for (const character of game.characters || []) {
-      const choice = characterChoice(game, character, phaseId);
-      if (choice) grid.append(choice);
-    }
-  }
-  updateTracksMenuActive();
-}
-
-function openGameBrowser() {
-  if (!gameBrowserOverlay) return;
-  renderGameBrowser();
-  gameBrowserOverlay.classList.remove('hidden');
-  gameBrowserClose?.focus();
-}
-
-function closeGameBrowser() {
-  if (!gameBrowserOverlay) return;
-  gameBrowserOverlay.classList.add('hidden');
-  sprunkiBrowserBtn?.focus();
-}
-
-function stopReferenceAudio() {
-  if (!referenceAudio) return;
-  referenceAudio.pause();
-  referenceAudio.currentTime = 0;
-}
-
-function preloadCharacterImage(url) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.decoding = 'async';
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error(`Character frame failed to load: ${url}`));
-    image.src = url;
-  });
-}
-
-async function prepareCharacterFrames(phase, loadToken) {
-  try {
-    const images = await Promise.all([
-      preloadCharacterImage(phase.animation.idle),
-      ...(phase.animation.frames || []).map(preloadCharacterImage),
-    ]);
-    if (loadToken !== characterLoadToken) return;
-    characterIdleImage = images[0];
-    characterFrameImages = images.slice(1);
-    state.characterFrameIndex = -2;
-    updateCharacterAnimation();
-  } catch (err) {
-    console.warn('Character animation could not be prepared:', err);
-  }
-}
-
-function drawCharacterImage(image) {
-  if (!characterCanvas || !characterContext || !image) return;
-  const cssWidth = Math.max(1, characterCanvas.clientWidth);
-  const cssHeight = Math.max(1, characterCanvas.clientHeight);
-  const dpr = preferredCanvasDpr();
-  const pixelWidth = Math.round(cssWidth * dpr);
-  const pixelHeight = Math.round(cssHeight * dpr);
-  if (characterCanvas.width !== pixelWidth || characterCanvas.height !== pixelHeight) {
-    characterCanvas.width = pixelWidth;
-    characterCanvas.height = pixelHeight;
-  }
-
-  characterContext.setTransform(dpr, 0, 0, dpr, 0, 0);
-  characterContext.clearRect(0, 0, cssWidth, cssHeight);
-  const sourceWidth = image.naturalWidth || cssWidth;
-  const sourceHeight = image.naturalHeight || cssHeight;
-  const scale = Math.min(cssWidth / sourceWidth, cssHeight / sourceHeight);
-  const drawWidth = sourceWidth * scale;
-  const drawHeight = sourceHeight * scale;
-  characterContext.drawImage(
-    image,
-    (cssWidth - drawWidth) / 2,
-    cssHeight - drawHeight,
-    drawWidth,
-    drawHeight
-  );
-}
-
-function activateLessonPresentation(trackId) {
-  stopReferenceAudio();
-  characterLoadToken++;
-  const lesson = lessonMetadataByTrackId.get(trackId) || null;
-  state.activeLesson = lesson;
-  state.characterFrameIndex = -1;
-
-  const root = document.documentElement;
-  if (!lesson) {
-    state.activeEffect = null;
-    state.effectParticles = [];
-    state.theme = { lh: '#00d4ff', rh: '#ff3da6', background: '#06060c' };
-    root.style.removeProperty('--lesson-primary');
-    root.style.removeProperty('--lesson-secondary');
-    root.style.removeProperty('--accent');
-    root.style.removeProperty('--lh');
-    root.style.removeProperty('--rh');
-    if (characterStage) characterStage.classList.add('hidden');
-    characterIdleImage = null;
-    characterFrameImages = [];
-    if (characterCanvas && characterContext) {
-      characterContext.clearRect(0, 0, characterCanvas.width, characterCanvas.height);
-      characterCanvas.setAttribute('aria-label', '');
-    }
-    if (referenceAudio) referenceAudio.removeAttribute('src');
-    return;
-  }
-
-  const { character, phase, track, instrument, effect } = lesson;
-  const theme = lesson.lesson.theme;
-  state.activeEffect = effect;
-  state.effectParticles = [];
-  state.theme = {
-    lh: theme.leftHand,
-    rh: theme.rightHand,
-    background: theme.background,
-  };
-  root.style.setProperty('--lesson-primary', theme.primary);
-  root.style.setProperty('--lesson-secondary', theme.secondary);
-  root.style.setProperty('--accent', theme.secondary);
-  root.style.setProperty('--lh', theme.leftHand);
-  root.style.setProperty('--rh', theme.rightHand);
-
-  characterStage.classList.remove('hidden');
-  characterCanvas.setAttribute('aria-label', `${character.name}, ${phase.title}`);
-  characterName.textContent = character.name;
-  characterPhase.textContent = phase.title;
-  characterStatus.textContent = track.reviewStatus === 'draft'
-    ? (lesson.lesson.playerMode === 'rhythm' ? 'Draft rhythm lesson' : 'Draft transcription')
-    : 'Lesson ready';
-  referenceAudio.src = lesson.lesson.referenceAudio;
-  referenceAudio.loop = state.sprunkiLoopEnabled;
-  if (instrument) {
-    setInstrument(instrument.playerVoice);
-    if (instrumentSelect) instrumentSelect.value = instrument.playerVoice;
-    if (instrumentVal) instrumentVal.textContent = instrument.label;
-  }
-  prepareCharacterFrames(lesson.lesson, characterLoadToken);
-}
-
-function updateCharacterAnimation() {
-  const lesson = state.activeLesson;
-  if (!lesson || !characterCanvas || !characterIdleImage) return;
-  const animation = lesson.lesson.animation;
-  const nextIndex = state.playing && characterFrameImages.length
-    ? Math.floor(state.songTime / animation.frameDurationMs) % characterFrameImages.length
-    : -1;
-  if (nextIndex === state.characterFrameIndex) return;
-  state.characterFrameIndex = nextIndex;
-  drawCharacterImage(nextIndex < 0 ? characterIdleImage : characterFrameImages[nextIndex]);
-}
-
-window.addEventListener('resize', () => { state.characterFrameIndex = -2; });
+const extensionControls = document.getElementById('extensionControls');
+const extensionOverlays = document.getElementById('extensionOverlays');
 
 function renderTracksMenu(tracks) {
   if (!tracksMenu) return;
@@ -2000,18 +1671,7 @@ async function loadSongCatalog() {
     throw new Error('Song catalogue is missing its tracks list.');
   }
   defaultSongs = Object.fromEntries(catalog.tracks.map(track => [track.id, track]));
-  const [instrumentCatalog, effectCatalog, ...games] = await Promise.all([
-    fetchJsonAsset(catalog.resources.instruments),
-    fetchJsonAsset(catalog.resources.effects),
-    ...(catalog.games || []).map(game => fetchJsonAsset(game.manifest)),
-  ]);
-  instrumentDefinitions = new Map((instrumentCatalog.instruments || []).map(item => [item.id, item]));
-  effectDefinitions = new Map((effectCatalog.effects || []).map(item => [item.id, item]));
-  gameDefinitions = new Map(games.map(game => [game.id, game]));
-  selectedGameId = catalog.games?.[0]?.id || games[0]?.id || null;
-  indexLessonMetadata();
-  renderGameBrowser();
-  renderTracksMenu(catalog.tracks.filter(track => track.kind !== 'sprunki-lesson'));
+  renderTracksMenu(catalog.tracks);
 }
 
 async function fetchJsonAsset(path) {
@@ -2020,75 +1680,119 @@ async function fetchJsonAsset(path) {
   return response.json();
 }
 
+function resetExtensionTheme() {
+  state.theme = { lh: '#00d4ff', rh: '#ff3da6', background: '#06060c' };
+  const root = document.documentElement;
+  for (const property of ['--lesson-primary', '--lesson-secondary', '--accent', '--lh', '--rh']) {
+    root.style.removeProperty(property);
+  }
+}
+
+function setExtensionTheme(theme) {
+  state.theme = {
+    lh: theme.leftHand,
+    rh: theme.rightHand,
+    background: theme.background,
+  };
+  const root = document.documentElement;
+  root.style.setProperty('--lesson-primary', theme.primary);
+  root.style.setProperty('--lesson-secondary', theme.secondary);
+  root.style.setProperty('--accent', theme.secondary);
+  root.style.setProperty('--lh', theme.leftHand);
+  root.style.setProperty('--rh', theme.rightHand);
+}
+
+function activateExtensionTrack(track) {
+  resetExtensionTheme();
+  activeTrackController = extensionHost?.activateTrack(track) || null;
+}
+
+function extensionRenderContext() {
+  return {
+    canvas,
+    ctx,
+    width: W,
+    height: H,
+    pianoY,
+    pianoH,
+    waterfallH,
+    theme: state.theme,
+    songTime: state.songTime,
+    playing: state.playing,
+    getKey,
+    roundRect,
+    hexToRgba,
+  };
+}
+
+function createExtensionApi() {
+  return {
+    slots: {
+      app: document.getElementById('app'),
+      controls: extensionControls,
+      overlays: extensionOverlays,
+    },
+    fetchJson: fetchJsonAsset,
+    registerTracks(tracks) {
+      for (const track of tracks) {
+        if (!track?.id || defaultSongs[track.id]) throw new Error(`Duplicate or missing extension track id: ${track?.id}`);
+        defaultSongs[track.id] = track;
+      }
+    },
+    loadTrack: loadDefaultSong,
+    getTrack: trackId => defaultSongs[trackId] || null,
+    getCurrentTrackId: () => state.currentTrackId,
+    getPlaybackState: () => ({ songTime: state.songTime, playing: state.playing }),
+    setTheme: setExtensionTheme,
+    setInstrument(voice, label) {
+      setInstrument(voice);
+      if (instrumentSelect) instrumentSelect.value = voice;
+      if (instrumentVal) instrumentVal.textContent = label || labelForInstrument(voice);
+    },
+    setBrand({ label, startTitle, startDescription }) {
+      if (label) document.title = label;
+      const brand = document.getElementById('brandLabel');
+      if (brand && label) brand.textContent = label;
+      const brandContainer = brand?.closest('.brand');
+      if (brandContainer && label) brandContainer.setAttribute('aria-label', label);
+      const title = document.getElementById('startTitle');
+      const description = document.getElementById('startDescription');
+      if (title && startTitle) title.textContent = startTitle;
+      if (description && startDescription) description.textContent = startDescription;
+    },
+    showToast,
+    setPlaying,
+    preferredCanvasDpr,
+    async noteOn(midi, velocity = 0.9) {
+      await initAudio();
+      handleUserNoteOn(midi, velocity, false);
+    },
+    noteOff(midi) {
+      handleUserNoteOff(midi, false);
+    },
+  };
+}
+
+async function initializeContent() {
+  try {
+    await loadSongCatalog();
+    extensionHost = new ExtensionHost(createExtensionApi());
+    await loadExtensionRegistry('./extensions/registry.json', extensionHost);
+  } catch (err) {
+    console.error('Failed to initialize player content:', err);
+    if (tracksBtn) tracksBtn.disabled = true;
+    if (tracksMenu) tracksMenu.textContent = 'Songs unavailable';
+    showToast('Some player content could not be loaded', 'err');
+  }
+}
+
 function updateTracksMenuActive() {
   if (tracksMenu) {
     tracksMenu.querySelectorAll('.track-item').forEach(it => {
       it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
     });
   }
-  for (const grid of [phase1Grid, phase2Grid]) {
-    if (!grid) continue;
-    grid.querySelectorAll('.character-choice').forEach(it => {
-      it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
-    });
-  }
-}
-
-sprunkiBrowserBtn?.addEventListener('click', openGameBrowser);
-gameBrowserClose?.addEventListener('click', closeGameBrowser);
-gameBrowserOverlay?.addEventListener('click', event => {
-  if (event.target === gameBrowserOverlay) closeGameBrowser();
-});
-gamePicker?.addEventListener('click', event => {
-  const button = event.target.closest('[data-game-id]');
-  if (!button) return;
-  selectedGameId = button.dataset.gameId;
-  renderGameBrowser();
-});
-for (const grid of [phase1Grid, phase2Grid]) {
-  grid?.addEventListener('click', async event => {
-    const item = event.target.closest('.character-choice[data-track-id]');
-    if (!item || item.disabled) return;
-    closeGameBrowser();
-    await loadDefaultSong(item.dataset.trackId);
-  });
-}
-
-sprunkiLoopToggle?.addEventListener('change', () => {
-  state.sprunkiLoopEnabled = sprunkiLoopToggle.checked;
-  if (referenceAudio) referenceAudio.loop = state.sprunkiLoopEnabled;
-  showToast(state.sprunkiLoopEnabled ? 'Sprunki lessons will loop' : 'Sprunki looping is off', 'ok');
-});
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && gameBrowserOverlay && !gameBrowserOverlay.classList.contains('hidden')) {
-    closeGameBrowser();
-  }
-});
-
-if (referenceAudioBtn && referenceAudio) {
-  referenceAudioBtn.addEventListener('click', async () => {
-    if (referenceAudio.paused) {
-      setPlaying(false);
-      try {
-        await referenceAudio.play();
-      } catch (err) {
-        console.warn('Reference audio was blocked by the browser:', err);
-        showToast('The original loop could not be played', 'err');
-      }
-    } else {
-      referenceAudio.pause();
-      referenceAudio.currentTime = 0;
-    }
-  });
-  referenceAudio.addEventListener('play', () => {
-    referenceAudioBtn.classList.add('playing');
-    referenceAudioBtn.textContent = '■ Stop original loop';
-  });
-  referenceAudio.addEventListener('pause', () => {
-    referenceAudioBtn.classList.remove('playing');
-    referenceAudioBtn.textContent = '▶ Hear original loop';
-  });
+  extensionHost?.notifyTrackChanged(state.currentTrackId);
 }
 
 if (tracksBtn && tracksMenu) {
@@ -2113,12 +1817,6 @@ if (tracksBtn && tracksMenu) {
     await loadDefaultSong(id);
   });
 }
-
-loadSongCatalog().catch((err) => {
-  console.error('Failed to load song catalogue:', err);
-  if (tracksBtn) tracksBtn.disabled = true;
-  if (tracksMenu) tracksMenu.textContent = 'Songs unavailable';
-});
 
 // ---------- Notation toggle wiring (Update 4) ----------
 const notationEnglishBtn = document.getElementById('notationEnglish');
@@ -2162,8 +1860,8 @@ const touchActive = new Map(); // touchId -> midi
 
 function midiAtPoint(x, y) {
   if (y < pianoY) return null;
-  const rhythm = state.activeLesson?.lesson;
-  if (rhythm?.playerMode === 'rhythm') return rhythm.rhythmMidiNote;
+  const extensionMidi = activeTrackController?.hitTest?.(x, y, extensionRenderContext());
+  if (extensionMidi !== undefined) return extensionMidi;
   // Check black first (drawn on top)
   for (const k of keyLayout) if (k.isBlack) {
     if (x >= k.x && x <= k.x + k.w && y <= pianoY + blackKeyH) return k.midi;
@@ -2192,23 +1890,6 @@ canvas.addEventListener('pointercancel', (e) => {
   if (m != null) { handleUserNoteOff(m, false); touchActive.delete(e.pointerId); }
 });
 
-let rhythmSpaceHeld = false;
-document.addEventListener('keydown', event => {
-  const rhythm = state.activeLesson?.lesson;
-  const tagName = event.target?.tagName?.toLowerCase();
-  if (event.code !== 'Space' || rhythm?.playerMode !== 'rhythm' || event.repeat || ['input', 'select', 'button'].includes(tagName)) return;
-  event.preventDefault();
-  rhythmSpaceHeld = true;
-  initAudio().then(() => handleUserNoteOn(rhythm.rhythmMidiNote, 0.9, false));
-});
-document.addEventListener('keyup', event => {
-  const rhythm = state.activeLesson?.lesson;
-  if (event.code !== 'Space' || !rhythmSpaceHeld || rhythm?.playerMode !== 'rhythm') return;
-  event.preventDefault();
-  rhythmSpaceHeld = false;
-  handleUserNoteOff(rhythm.rhythmMidiNote, false);
-});
-
 // ---------- Game Loop ----------
 const WAIT_LEAD_MS = 50;        // pause this many ms before hit
 const WAIT_GROUP_MS = 30;       // notes within this window count as one chord
@@ -2217,58 +1898,6 @@ function shouldPauseForHand(hand) {
   if (state.mode !== 'practice') return false;
   if (state.hand === 'both') return true;
   return state.hand === hand;
-}
-
-function spawnLessonEffect(note) {
-  const effect = state.activeEffect;
-  if (!effect || effect.type !== 'note-sparks') return;
-  const key = getKey(note.midi);
-  if (!key) return;
-  const count = Math.max(1, Math.min(10, effect.particlesPerNote || 4));
-  const colors = effect.colors?.length ? effect.colors : [state.theme.rh];
-  for (let index = 0; index < count; index++) {
-    const angle = Math.PI * (1.08 + Math.random() * 0.84);
-    const speed = (effect.speed || 0.14) * (0.65 + Math.random() * 0.7);
-    state.effectParticles.push({
-      x: key.x + key.w * (0.25 + Math.random() * 0.5),
-      y: pianoY - 2,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      life: 0,
-      maxLife: effect.lifetimeMs || 480,
-      color: colors[index % colors.length],
-      size: (effect.size || 3) * (0.7 + Math.random() * 0.6),
-    });
-  }
-  if (state.effectParticles.length > 220) {
-    state.effectParticles.splice(0, state.effectParticles.length - 220);
-  }
-}
-
-function updateLessonEffects(dtMs) {
-  if (!state.effectParticles.length) return;
-  for (const particle of state.effectParticles) {
-    particle.life += dtMs;
-    particle.x += particle.vx * dtMs;
-    particle.y += particle.vy * dtMs;
-    particle.vy += 0.00018 * dtMs;
-  }
-  state.effectParticles = state.effectParticles.filter(particle => particle.life < particle.maxLife);
-}
-
-function drawLessonEffects() {
-  for (const particle of state.effectParticles) {
-    const opacity = Math.max(0, 1 - particle.life / particle.maxLife);
-    ctx.save();
-    ctx.globalAlpha = opacity;
-    ctx.fillStyle = particle.color;
-    ctx.shadowColor = particle.color;
-    ctx.shadowBlur = 8;
-    ctx.beginPath();
-    ctx.arc(particle.x, particle.y, particle.size * (0.55 + opacity * 0.45), 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
 }
 
 function update(dtMs) {
@@ -2331,7 +1960,7 @@ function update(dtMs) {
             waitSet.add(n.midi);
             // Mark as triggered so we don't re-wait on the same chord.
             n.triggered = true;
-            spawnLessonEffect(n);
+            activeTrackController?.noteTriggered?.(n, extensionRenderContext());
             // They will be auto-released after their duration via the playback pass below
             n.released = false;
             // Their start time is "now" effectively (paused), endMs stays the same
@@ -2390,7 +2019,7 @@ function update(dtMs) {
       if (!userPlays && !handMuted) {
         playNote(n.midi, n.velocity, Math.max(0.1, n.durMs / 1000));
       }
-      spawnLessonEffect(n);
+      activeTrackController?.noteTriggered?.(n, extensionRenderContext());
       n.triggered = true;
     }
   }
@@ -2410,7 +2039,7 @@ function update(dtMs) {
   }
 
   if (state.songDuration > 0 && state.songTime >= state.songDuration) {
-    if (state.activeLesson && state.sprunkiLoopEnabled) {
+    if (activeTrackController?.shouldLoop?.()) {
       const overflow = Math.max(0, nextTime - state.songDuration);
       state.songEnded = false;
       scrubToTime(overflow % state.songDuration);
@@ -2536,7 +2165,7 @@ function drawWaterfall() {
   const t1 = state.songTime + LOOKAHEAD_MS;
 
   // Draw shaded background bands behind black keys for visual alignment
-  if (state.activeLesson?.lesson?.playerMode !== 'rhythm') {
+  if (!activeTrackController?.hidesKeyboardGuides) {
     ctx.fillStyle = 'rgba(255,255,255,0.015)';
     for (const k of keyLayout) {
       if (k.isBlack) {
@@ -2689,11 +2318,7 @@ function drawPiano() {
     lit.set(m, { color: '#36e07f', source: 'user' });
   }
 
-  const rhythm = state.activeLesson?.lesson;
-  if (rhythm?.playerMode === 'rhythm') {
-    drawRhythmPad(rhythm, lit.get(rhythm.rhythmMidiNote));
-    return;
-  }
+  if (activeTrackController?.drawInputSurface?.(lit, extensionRenderContext())) return;
 
   // White keys
   for (const k of keyLayout) {
@@ -2823,37 +2448,6 @@ function drawPiano() {
   ctx.fillRect(0, pianoY - 12, W, 12);
 }
 
-function drawRhythmPad(rhythm, litInfo) {
-  ctx.fillStyle = '#090a12';
-  ctx.fillRect(0, pianoY, W, pianoH);
-  const x = W * 0.2;
-  const width = W * 0.6;
-  const y = pianoY + 12;
-  const height = Math.max(58, pianoH - 24);
-  const color = litInfo?.color || state.theme.rh;
-  const gradient = ctx.createLinearGradient(0, y, 0, y + height);
-  gradient.addColorStop(0, hexToRgba(color, litInfo ? 0.95 : 0.42));
-  gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.48 : 0.12));
-  ctx.fillStyle = gradient;
-  ctx.shadowColor = litInfo ? color : 'transparent';
-  ctx.shadowBlur = litInfo ? 22 : 0;
-  roundRect(ctx, x, y, width, height, 18);
-  ctx.fill();
-  ctx.shadowBlur = 0;
-  ctx.strokeStyle = hexToRgba(color, 0.8);
-  ctx.lineWidth = 2;
-  roundRect(ctx, x, y, width, height, 18);
-  ctx.stroke();
-  ctx.fillStyle = '#fff';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.font = '800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  ctx.fillText(rhythm.rhythmLabel.toUpperCase(), W / 2, y + height / 2 - 8);
-  ctx.fillStyle = 'rgba(255,255,255,0.68)';
-  ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  ctx.fillText('TAP THE PAD · OR PRESS SPACE', W / 2, y + height / 2 + 17);
-}
-
 function roundRect(ctx, x, y, w, h, r) {
   if (w < 2*r) r = w/2;
   if (h < 2*r) r = h/2;
@@ -2882,8 +2476,7 @@ function frame(ts) {
   state.lastFrameTs = ts;
 
   update(dt);
-  updateLessonEffects(dt);
-  updateCharacterAnimation();
+  activeTrackController?.frame?.(dt, extensionRenderContext());
 
   clear();
   if (state.mode === 'freeplay') {
@@ -2893,7 +2486,7 @@ function frame(ts) {
     drawWaterfall();
   }
   drawPiano();
-  drawLessonEffects();
+  activeTrackController?.drawOverlay?.(extensionRenderContext());
   drawFloaters();
 
   // Keep the timeline slider in sync with playhead (unless user is dragging it)
@@ -2904,6 +2497,7 @@ function frame(ts) {
 
 updateKeyboardRangeForNotes();
 resize();
+initializeContent();
 requestAnimationFrame((ts) => { state.lastFrameTs = ts; frame(ts); });
 
 // Some browsers (mobile Chrome) may suspend audio until user gesture.

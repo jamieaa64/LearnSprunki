@@ -22,7 +22,7 @@
     "lime-owakcx/phase2": { "category": "effect", "sourceAudio": "better-windup.wav" },
     "sky-blue-sky/phase1": { "category": "pitched-polyphonic", "sourceAudio": "music-box1.wav", "publishDraft": true, "minimumFrequencyHz": 100, "maximumFrequencyHz": 3000 },
     "sky-blue-sky/phase2": { "category": "pitched-polyphonic", "sourceAudio": "music1.wav", "publishDraft": true, "minimumFrequencyHz": 80, "maximumFrequencyHz": 3000 },
-    "mr-sun/phase1": { "category": "pitched-polyphonic", "sourceAudio": "piano1.wav", "publishDraft": true, "minimumFrequencyHz": 80, "maximumFrequencyHz": 2200, "existingMidi": "apps/player/content/tracks/mr-sun-phase1/lesson/mr-sun-phase1-basic-pitch-draft.mid" },
+    "mr-sun/phase1": { "category": "pitched-polyphonic", "sourceAudio": "piano1.wav", "publishDraft": true, "minimumFrequencyHz": 80, "maximumFrequencyHz": 2200, "existingMidi": "apps/player/extensions/learn-sprunki/content/tracks/mr-sun-phase1/lesson/mr-sun-phase1-basic-pitch-draft.mid" },
     "mr-sun/phase2": { "category": "pitched-polyphonic", "sourceAudio": "piano1.wav", "publishDraft": true, "minimumFrequencyHz": 60, "maximumFrequencyHz": 2200 },
     "purple-durple/phase1": { "category": "pitched-polyphonic", "sourceAudio": "tromp1.wav", "publishDraft": true, "minimumFrequencyHz": 55, "maximumFrequencyHz": 1600 },
     "purple-durple/phase2": { "category": "pitched-polyphonic", "sourceAudio": "horns1.wav", "publishDraft": true, "minimumFrequencyHz": 55, "maximumFrequencyHz": 1600 },

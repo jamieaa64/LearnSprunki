@@ -1,13 +1,21 @@
 # LearnSprunki
 
-LearnSprunki is a tablet-first music-learning project built around two separate
-applications and one shared content format:
+LearnSprunki is a tablet-first music-learning project built as a reusable
+NeoKeys core plus a separately packaged Learn Sprunki extension:
 
-- `apps/player`: the NeoKeys-derived learner PWA;
+- `apps/player`: the NeoKeys-derived learner PWA and generic extension host;
+- `apps/player/extensions/learn-sprunki`: all Sprunki UI, behaviour, schemas and
+  lesson assets;
 - a future authoring workshop for producing reviewed Sprunki and non-Sprunki
   MIDI lesson packs;
-- `packages/content-schema`: the shared, versioned song catalogue contract;
 - `Research`: product, architecture, transcription and delivery research.
+
+The core has no direct dependency on Learn Sprunki. Extensions are enabled by
+`apps/player/extensions/registry.json` and loaded from validated manifests. See
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+[`docs/EXTENSIONS.md`](docs/EXTENSIONS.md), and
+[`docs/TESTING.md`](docs/TESTING.md). The intended upstream patch boundary is
+listed in [`docs/UPSTREAMING.md`](docs/UPSTREAMING.md).
 
 ## Player
 
@@ -18,6 +26,12 @@ npm run dev
 ```
 
 Open `http://127.0.0.1:4173`.
+
+Run the complete automated check before committing player changes:
+
+```bash
+npm run check
+```
 
 The player is derived from
 [ArtinSHF/NeoKeys](https://github.com/ArtinSHF/NeoKeys) commit
@@ -38,12 +52,10 @@ The app-level `vercel.json` also records the build/output settings.
 ## Project status
 
 The current player is an attributed, locally packaged NeoKeys baseline with
-LearnSprunki branding and tablet fullscreen controls. Its source is split into
-HTML, CSS and JavaScript, and its song menu is generated from an external JSON
-catalogue containing paths to ordinary MIDI files.
+tablet fullscreen controls, adaptive keyboards and a generic extension
+lifecycle. LearnSprunki branding and product behaviour are applied by the
+separate extension at runtime.
 
-The first end-to-end Sprunki lesson is Original Sprunki / Mr Sun / Phase 1. It
-includes the real animated SVG frames, the original WAV reference loop, a
-yellow-orange lesson theme, and an explicitly labelled Basic Pitch draft MIDI.
-The lesson loops at the source WAV boundary like the original game. The draft
-must be reviewed before it is promoted to an approved lesson.
+Original Sprunki currently contains 30 generated draft lessons: 20 pitched
+Basic Pitch transcriptions and 10 rhythm-pad lessons. Drafts must be reviewed
+before promotion to approved lessons.

@@ -11,7 +11,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/orange-oren/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/orange-oren/phase1.svg",
           "locked": false,
           "lessonTrackId": "orange-oren-phase1-draft",
           "instrumentId": "percussion",
@@ -23,7 +23,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/orange-oren/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/orange-oren/phase2.svg",
           "locked": false,
           "lessonTrackId": "orange-oren-phase2-draft",
           "instrumentId": "percussion",
@@ -42,7 +42,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/red-raddy/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/red-raddy/phase1.svg",
           "locked": false,
           "lessonTrackId": "red-raddy-phase1-draft",
           "instrumentId": "percussion",
@@ -54,7 +54,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/red-raddy/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/red-raddy/phase2.svg",
           "locked": false,
           "lessonTrackId": "red-raddy-phase2-draft",
           "instrumentId": "percussion",
@@ -73,7 +73,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/silver-clukr/phase1.svg",
           "locked": false,
           "lessonTrackId": "silver-clukr-phase1-draft",
           "instrumentId": "percussion",
@@ -85,7 +85,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/silver-clukr/phase2.svg",
           "locked": false,
           "lessonTrackId": "silver-clukr-phase2-draft",
           "instrumentId": "percussion",
@@ -104,7 +104,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/fun-bot/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/fun-bot/phase1.svg",
           "locked": false,
           "lessonTrackId": "fun-bot-phase1-draft",
           "instrumentId": "percussion",
@@ -116,7 +116,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/fun-bot/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/fun-bot/phase2.svg",
           "locked": false,
           "lessonTrackId": "fun-bot-phase2-draft",
           "instrumentId": "percussion",
@@ -135,7 +135,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/green-vineria/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/green-vineria/phase1.svg",
           "locked": false,
           "lessonTrackId": "green-vineria-phase1-draft",
           "instrumentId": "percussion",
@@ -147,7 +147,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/green-vineria/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/green-vineria/phase2.svg",
           "locked": false,
           "lessonTrackId": "green-vineria-phase2-draft",
           "instrumentId": "percussion",
@@ -166,7 +166,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/gray-gray/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/gray-gray/phase1.svg",
           "locked": false,
           "lessonTrackId": "gray-gray-phase1-draft",
           "instrumentId": "synth-bass",
@@ -177,7 +177,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/gray-gray/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/gray-gray/phase2.svg",
           "locked": false,
           "lessonTrackId": "gray-gray-phase2-draft",
           "instrumentId": "synth-bass",
@@ -195,7 +195,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/brown-brud/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/brown-brud/phase1.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -206,7 +206,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/brown-brud/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/brown-brud/phase2.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -224,7 +224,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/gold-garnold/phase1.svg",
           "locked": false,
           "lessonTrackId": "gold-garnold-phase1-draft",
           "instrumentId": "synth-lead",
@@ -235,7 +235,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/gold-garnold/phase2.svg",
           "locked": false,
           "lessonTrackId": "gold-garnold-phase2-draft",
           "instrumentId": "synth-lead",
@@ -253,7 +253,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/lime-owakcx/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/lime-owakcx/phase1.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -264,7 +264,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/lime-owakcx/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/lime-owakcx/phase2.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -282,7 +282,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/sky-blue-sky/phase1.svg",
           "locked": false,
           "lessonTrackId": "sky-blue-sky-phase1-draft",
           "instrumentId": "music-box",
@@ -293,7 +293,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/sky-blue-sky/phase2.svg",
           "locked": false,
           "lessonTrackId": "sky-blue-sky-phase2-draft",
           "instrumentId": "music-box",
@@ -311,7 +311,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/mr-sun/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-sun/phase1.svg",
           "locked": false,
           "lessonTrackId": "mr-sun-phase1-draft",
           "instrumentId": "grand-piano",
@@ -322,7 +322,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/mr-sun/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-sun/phase2.svg",
           "locked": false,
           "lessonTrackId": "mr-sun-phase2-draft",
           "instrumentId": "grand-piano",
@@ -340,7 +340,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/purple-durple/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/purple-durple/phase1.svg",
           "locked": false,
           "lessonTrackId": "purple-durple-phase1-draft",
           "instrumentId": "brass",
@@ -351,7 +351,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/purple-durple/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/purple-durple/phase2.svg",
           "locked": false,
           "lessonTrackId": "purple-durple-phase2-draft",
           "instrumentId": "brass",
@@ -369,7 +369,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/mr-tree/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-tree/phase1.svg",
           "locked": false,
           "lessonTrackId": "mr-tree-phase1-draft",
           "instrumentId": "organ",
@@ -380,7 +380,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/mr-tree/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-tree/phase2.svg",
           "locked": false,
           "lessonTrackId": "mr-tree-phase2-draft",
           "instrumentId": "organ",
@@ -398,7 +398,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/yellow-simon/phase1.svg",
           "locked": false,
           "lessonTrackId": "yellow-simon-phase1-draft",
           "instrumentId": "synth-lead",
@@ -409,7 +409,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/yellow-simon/phase2.svg",
           "locked": false,
           "lessonTrackId": "yellow-simon-phase2-draft",
           "instrumentId": "synth-lead",
@@ -427,7 +427,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/tan-tunner/phase1.svg",
           "locked": false,
           "lessonTrackId": "tan-tunner-phase1-draft",
           "instrumentId": "whistle",
@@ -438,7 +438,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/tan-tunner/phase2.svg",
           "locked": false,
           "lessonTrackId": "tan-tunner-phase2-draft",
           "instrumentId": "whistle",
@@ -456,7 +456,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/mr-fun-computer/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-fun-computer/phase1.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -467,7 +467,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/mr-fun-computer/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/mr-fun-computer/phase2.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -485,7 +485,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/white-wenda/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/white-wenda/phase1.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "choir",
@@ -496,7 +496,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/white-wenda/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/white-wenda/phase2.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "choir",
@@ -514,7 +514,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/pink-pinki/phase1.svg",
           "locked": false,
           "lessonTrackId": "pink-pinki-phase1-draft",
           "instrumentId": "choir",
@@ -525,7 +525,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/pink-pinki/phase2.svg",
           "locked": false,
           "lessonTrackId": "pink-pinki-phase2-draft",
           "instrumentId": "choir",
@@ -543,7 +543,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/blue-jevin/phase1.svg",
           "locked": false,
           "lessonTrackId": "blue-jevin-phase1-draft",
           "instrumentId": "choir",
@@ -554,7 +554,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/blue-jevin/phase2.svg",
           "locked": false,
           "lessonTrackId": "blue-jevin-phase2-draft",
           "instrumentId": "choir",
@@ -572,7 +572,7 @@
         {
           "id": "phase1",
           "title": "Phase 1",
-          "portrait": "./content/games/original-sprunki/characters/black-mystery/phase1.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/black-mystery/phase1.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
@@ -583,7 +583,7 @@
         {
           "id": "phase2",
           "title": "Phase 2",
-          "portrait": "./content/games/original-sprunki/characters/black-mystery/phase2.svg",
+          "portrait": "./extensions/learn-sprunki/content/games/original-sprunki/characters/black-mystery/phase2.svg",
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",

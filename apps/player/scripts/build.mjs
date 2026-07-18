@@ -42,9 +42,11 @@ if (html.includes("./node_modules/")) {
 await writeFile(resolve(outputDirectory, "index.html"), html);
 await copyFile(resolve(projectDirectory, "styles.css"), resolve(outputDirectory, "styles.css"));
 await copyFile(resolve(projectDirectory, "app.js"), resolve(outputDirectory, "app.js"));
+await cp(resolve(projectDirectory, "core"), resolve(outputDirectory, "core"), { recursive: true });
+await cp(resolve(projectDirectory, "extensions"), resolve(outputDirectory, "extensions"), { recursive: true });
 await cp(resolve(projectDirectory, "content"), resolve(outputDirectory, "content"), {
   recursive: true,
 });
 await copyFile(resolve(projectDirectory, "LICENSE"), resolve(outputDirectory, "LICENSE"));
 
-console.log("Built LearnSprunki Player in dist/ with local dependencies and song catalogue.");
+console.log("Built NeoKeys with registered extensions and local dependencies.");

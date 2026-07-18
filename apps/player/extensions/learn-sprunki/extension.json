@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "learn-sprunki",
+  "name": "Learn Sprunki",
+  "version": "0.1.0",
+  "entry": "./extensions/learn-sprunki/extension.js",
+  "stylesheet": "./extensions/learn-sprunki/styles.css",
+  "catalog": "./extensions/learn-sprunki/content/catalog.json",
+  "description": "Animated Sprunki character lessons, rhythm pads, looping and themed note effects."
+}

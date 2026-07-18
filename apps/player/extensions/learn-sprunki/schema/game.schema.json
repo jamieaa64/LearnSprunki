@@ -27,7 +27,7 @@
               "properties": {
                 "id": { "type": "string" },
                 "title": { "type": "string" },
-                "portrait": { "type": "string", "pattern": "^\\./content/" },
+                "portrait": { "type": "string", "pattern": "^\\./extensions/learn-sprunki/content/" },
                 "locked": { "type": "boolean" },
                 "lessonTrackId": { "type": ["string", "null"] },
                 "instrumentId": { "type": "string" },

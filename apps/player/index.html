@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <meta name="theme-color" content="#0a0a0f" />
-<title>NeoKeys · LearnSprunki</title>
+<title>NeoKeys</title>
 <!-- Tone.js (for piano sound synthesis) -->
 <script src="./node_modules/tone/build/Tone.js"></script>
 <!-- @tonejs/midi (MIDI file parser) -->
@@ -17,23 +17,11 @@
 <div id="app">
   <canvas id="stage"></canvas>
 
-  <section class="character-stage hidden" id="characterStage" aria-live="polite">
-    <div class="character-glow"></div>
-    <div class="character-status" id="characterStatus">Draft lesson</div>
-    <canvas class="character-image" id="characterCanvas" role="img" aria-label=""></canvas>
-    <div class="character-details">
-      <strong id="characterName">Mr Sun</strong>
-      <span id="characterPhase">Phase 1</span>
-    </div>
-    <button class="reference-audio-btn" id="referenceAudioBtn" type="button">▶ Hear original loop</button>
-    <audio id="referenceAudio" preload="metadata" loop></audio>
-  </section>
-
   <!-- Top bar -->
   <div class="topbar">
-    <div class="brand" aria-label="NeoKeys - Learn Sprunki">
+    <div class="brand" aria-label="NeoKeys">
       <span class="dot"></span>
-      <span>NeoKeys - Learn Sprunki</span>
+      <span id="brandLabel">NeoKeys</span>
     </div>
     <div class="topbar-right">
       <div class="score-hud" id="scoreHud">
@@ -58,19 +46,7 @@
 
   <!-- Control Panel -->
   <div class="panel" id="panel">
-    <h3>Learn Sprunki</h3>
-    <button class="sprunki-browser-card" id="sprunkiBrowserBtn" type="button" aria-haspopup="dialog">
-      <span class="sprunki-card-collage" aria-hidden="true">
-        <img class="sprunki-card-character pinki" src="./content/games/original-sprunki/characters/pink-pinki/phase1.svg" alt="" />
-        <img class="sprunki-card-character simon" src="./content/games/original-sprunki/characters/yellow-simon/phase1.svg" alt="" />
-        <img class="sprunki-card-character gray" src="./content/games/original-sprunki/characters/gray-gray/phase1.svg" alt="" />
-      </span>
-      <span class="sprunki-card-copy">
-        <strong>Sprunki</strong>
-        <span><span id="activeGameLabel">Original</span> · Choose a character</span>
-      </span>
-      <span class="sprunki-card-arrow" aria-hidden="true">›</span>
-    </button>
+    <div id="extensionControls"></div>
 
     <h3>Tracks</h3>
     <div class="tracks-wrap">
@@ -203,48 +179,7 @@
     <input type="file" id="fileInput" accept=".mid,.midi,audio/midi,audio/x-midi" />
   </div>
 
-  <!-- Game and character browser -->
-  <div class="game-browser-overlay hidden" id="gameBrowserOverlay">
-    <section class="game-browser-modal" role="dialog" aria-modal="true" aria-labelledby="gameBrowserTitle">
-      <header class="game-browser-header">
-        <div>
-          <span class="eyebrow">LearnSprunki</span>
-          <h2 id="gameBrowserTitle">Choose a game and Sprunki</h2>
-        </div>
-        <button class="game-browser-close" id="gameBrowserClose" type="button" aria-label="Close character browser">×</button>
-      </header>
-
-      <nav class="game-picker" id="gamePicker" aria-label="Sprunki games"></nav>
-
-      <div class="game-browser-content">
-        <section class="phase-browser-section">
-          <div class="phase-browser-heading">
-            <h3>Phase 1</h3>
-            <span>Original</span>
-          </div>
-          <div class="character-grid" id="phase1Grid"></div>
-        </section>
-        <section class="phase-browser-section phase-two">
-          <div class="phase-browser-heading">
-            <h3>Phase 2</h3>
-            <span>Darker versions</span>
-          </div>
-          <div class="character-grid" id="phase2Grid"></div>
-        </section>
-      </div>
-
-      <footer class="game-browser-footer">
-        <div>
-          <strong>Sprunki infinite loop</strong>
-          <span>Repeat Sprunki lessons like the original game. This never affects ordinary tracks.</span>
-        </div>
-        <label class="switch" aria-label="Loop Sprunki lessons">
-          <input type="checkbox" id="sprunkiLoopToggle" checked />
-          <span class="slider-track"></span>
-        </label>
-      </footer>
-    </section>
-  </div>
+  <div id="extensionOverlays"></div>
 
   <!-- End-of-song victory modal -->
   <div class="victory-overlay hidden" id="victoryOverlay">
@@ -262,8 +197,8 @@
 
   <!-- Start overlay -->
   <div class="start-overlay" id="startOverlay">
-    <h1>☀️ LearnSprunki Piano</h1>
-    <p>Learn real Sprunki parts with animated characters and falling piano notes. Tap below to start.</p>
+    <h1 id="startTitle">🎹 NeoKeys</h1>
+    <p id="startDescription">Play and practise MIDI songs with falling piano notes. Tap below to start.</p>
     <div class="start-actions">
       <button class="start-btn" id="startBtn">Tap to Start</button>
       <button class="start-btn secondary" id="startFullscreenBtn" type="button">Start Fullscreen</button>
@@ -272,6 +207,6 @@
   </div>
 </div>
 
-<script src="./app.js"></script>
+<script type="module" src="./app.js"></script>
 </body>
 </html>

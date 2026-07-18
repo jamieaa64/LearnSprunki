@@ -1,7 +1,7 @@
 {
   "status": "draft",
   "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase1/piano1.wav",
-  "candidateMidi": "apps/player/content/tracks/mr-sun-phase1/lesson/mr-sun-phase1-basic-pitch-draft.mid",
+  "candidateMidi": "apps/player/extensions/learn-sprunki/content/tracks/mr-sun-phase1/lesson/mr-sun-phase1-basic-pitch-draft.mid",
   "noteEvents": "tools/authoring/workbench/original-sprunki/mr-sun/phase1/piano1_basic_pitch.csv",
   "engine": "spotify-basic-pitch",
   "engineVersion": "0.3.0",

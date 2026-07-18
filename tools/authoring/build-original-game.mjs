@@ -6,7 +6,8 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(scriptDirectory, "../..");
 const sourceRoot = resolve(repositoryRoot, "SprunkiAssets/sprunkis");
 const playerRoot = resolve(repositoryRoot, "apps/player");
-const outputRoot = resolve(playerRoot, "content/games/original-sprunki");
+const extensionRoot = resolve(playerRoot, "extensions/learn-sprunki");
+const outputRoot = resolve(extensionRoot, "content/games/original-sprunki");
 const plan = JSON.parse(await readFile(resolve(scriptDirectory, "original-sprunki-plan.json"), "utf8"));
 
 const characters = [
@@ -75,7 +76,7 @@ async function copyUnlessSame(source, destination) {
 }
 
 function publicAsset(...parts) {
-  return `./content/${parts.join("/")}`;
+  return `./extensions/learn-sprunki/content/${parts.join("/")}`;
 }
 
 const manifestCharacters = [];
@@ -116,7 +117,7 @@ for (const [id, name, color, instrumentId, effectId, emoji] of characters) {
     if (!isPlayable) continue;
 
     const trackDirectoryName = `${id}-${phaseId}`;
-    const trackDirectory = resolve(playerRoot, "content/tracks", trackDirectoryName);
+    const trackDirectory = resolve(extensionRoot, "content/tracks", trackDirectoryName);
     const audioSource = resolve(sourceRoot, id, "sounds", phaseId, phasePlan.sourceAudio);
     const audioDestination = resolve(trackDirectory, "audio", phasePlan.sourceAudio);
     await copyUnlessSame(audioSource, audioDestination);
@@ -222,12 +223,9 @@ const manifest = {
 };
 await writeFile(resolve(outputRoot, "game.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 
-const cataloguePath = resolve(playerRoot, "content/catalog.json");
+const cataloguePath = resolve(extensionRoot, "content/catalog.json");
 const catalogue = JSON.parse(await readFile(cataloguePath, "utf8"));
-catalogue.tracks = [
-  ...lessonTracks,
-  ...catalogue.tracks.filter(track => track.kind !== "sprunki-lesson"),
-];
+catalogue.tracks = lessonTracks;
 await writeFile(cataloguePath, `${JSON.stringify(catalogue, null, 2)}\n`);
 
 console.log(

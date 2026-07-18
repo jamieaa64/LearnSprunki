@@ -1,4 +1,4 @@
-# LearnSprunki content schema
+# Learn Sprunki extension content schema
 
 `catalog.schema.json` defines the shared contract between the player and the
 song-authoring tools. Version 3 separates ordinary tracks from Sprunki games

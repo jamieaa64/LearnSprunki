@@ -1,0 +1,1601 @@
+{
+  "schemaVersion": "3.0.0",
+  "id": "learn-sprunki-catalogue",
+  "title": "LearnSprunki Lessons",
+  "games": [
+    {
+      "id": "original-sprunki",
+      "title": "Original Sprunki",
+      "manifest": "./extensions/learn-sprunki/content/games/original-sprunki/game.json"
+    }
+  ],
+  "resources": {
+    "instruments": "./extensions/learn-sprunki/content/instruments/catalog.json",
+    "effects": "./extensions/learn-sprunki/content/effects/catalog.json"
+  },
+  "tracks": [
+    {
+      "id": "orange-oren-phase1-draft",
+      "title": "Oren — Phase 1",
+      "subtitle": "Draft rhythm lesson · Kick",
+      "filename": "orange-oren-phase1-draft-rhythm.mid",
+      "emoji": "🥁",
+      "midi": "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/lesson/orange-oren-phase1-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "orange-oren",
+        "phaseId": "phase1",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 4968.753,
+        "instrumentId": "percussion",
+        "effectId": "impact-sparks",
+        "rhythmLabel": "Kick",
+        "rhythmMidiNote": 36,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/audio/kick.wav",
+        "theme": {
+          "primary": "#ff7a00",
+          "secondary": "#ffa24d",
+          "leftHand": "#ff8a1f",
+          "rightHand": "#ffa24d",
+          "background": "#1f0f00"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase1/animation/anim6.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/orange-oren/sounds/phase1/kick.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 36,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "orange-oren-phase2-draft",
+      "title": "Oren — Phase 2",
+      "subtitle": "Draft rhythm lesson · Kick",
+      "filename": "orange-oren-phase2-draft-rhythm.mid",
+      "emoji": "🥁",
+      "midi": "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/lesson/orange-oren-phase2-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "orange-oren",
+        "phaseId": "phase2",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 9245.533,
+        "instrumentId": "percussion",
+        "effectId": "impact-sparks",
+        "rhythmLabel": "Kick",
+        "rhythmMidiNote": 36,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/audio/kick3.wav",
+        "theme": {
+          "primary": "#ff7a00",
+          "secondary": "#ffa24d",
+          "leftHand": "#ff8a1f",
+          "rightHand": "#ffa24d",
+          "background": "#1f0f00"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/orange-oren-phase2/animation/anim4.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/orange-oren/sounds/phase2/kick3.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 36,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "red-raddy-phase1-draft",
+      "title": "Raddy — Phase 1",
+      "subtitle": "Draft rhythm lesson · Snare",
+      "filename": "red-raddy-phase1-draft-rhythm.mid",
+      "emoji": "🥁",
+      "midi": "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/lesson/red-raddy-phase1-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "red-raddy",
+        "phaseId": "phase1",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 5175.011,
+        "instrumentId": "percussion",
+        "effectId": "impact-sparks",
+        "rhythmLabel": "Snare",
+        "rhythmMidiNote": 38,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/audio/snare.wav",
+        "theme": {
+          "primary": "#ed3434",
+          "secondary": "#f27171",
+          "leftHand": "#ef4c4c",
+          "rightHand": "#f27171",
+          "background": "#1c0606"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase1/animation/anim4.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/red-raddy/sounds/phase1/snare.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 38,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "red-raddy-phase2-draft",
+      "title": "Raddy — Phase 2",
+      "subtitle": "Draft rhythm lesson · Snare",
+      "filename": "red-raddy-phase2-draft-rhythm.mid",
+      "emoji": "🥁",
+      "midi": "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/lesson/red-raddy-phase2-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "red-raddy",
+        "phaseId": "phase2",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 11540.181,
+        "instrumentId": "percussion",
+        "effectId": "impact-sparks",
+        "rhythmLabel": "Snare",
+        "rhythmMidiNote": 38,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/audio/snare3.wav",
+        "theme": {
+          "primary": "#ed3434",
+          "secondary": "#f27171",
+          "leftHand": "#ef4c4c",
+          "rightHand": "#f27171",
+          "background": "#1c0606"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/red-raddy-phase2/animation/anim5.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/red-raddy/sounds/phase2/snare3.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 38,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "silver-clukr-phase1-draft",
+      "title": "Clukr — Phase 1",
+      "subtitle": "Draft rhythm lesson · Ride",
+      "filename": "silver-clukr-phase1-draft-rhythm.mid",
+      "emoji": "🔔",
+      "midi": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/lesson/silver-clukr-phase1-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "silver-clukr",
+        "phaseId": "phase1",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 5106.25,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Ride",
+        "rhythmMidiNote": 51,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/audio/ride-cymbal.wav",
+        "theme": {
+          "primary": "#b7c1cc",
+          "secondary": "#cdd4db",
+          "leftHand": "#c0c8d2",
+          "rightHand": "#cdd4db",
+          "background": "#161718"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase1/animation/anim7.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/silver-clukr/sounds/phase1/ride-cymbal.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 51,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "silver-clukr-phase2-draft",
+      "title": "Clukr — Phase 2",
+      "subtitle": "Draft rhythm lesson · Knock",
+      "filename": "silver-clukr-phase2-draft-rhythm.mid",
+      "emoji": "🔔",
+      "midi": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/lesson/silver-clukr-phase2-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "silver-clukr",
+        "phaseId": "phase2",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 8602.667,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Knock",
+        "rhythmMidiNote": 37,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/audio/knock-knocn.wav",
+        "theme": {
+          "primary": "#b7c1cc",
+          "secondary": "#cdd4db",
+          "leftHand": "#c0c8d2",
+          "rightHand": "#cdd4db",
+          "background": "#161718"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/silver-clukr-phase2/animation/anim4.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/silver-clukr/sounds/phase2/knock-knocn.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 37,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "fun-bot-phase1-draft",
+      "title": "Fun Bot — Phase 1",
+      "subtitle": "Draft rhythm lesson · Breakbeat",
+      "filename": "fun-bot-phase1-draft-rhythm.mid",
+      "emoji": "🤖",
+      "midi": "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/lesson/fun-bot-phase1-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "fun-bot",
+        "phaseId": "phase1",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 4806.25,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Breakbeat",
+        "rhythmMidiNote": 40,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/audio/amen.wav",
+        "theme": {
+          "primary": "#8d99a8",
+          "secondary": "#afb8c2",
+          "leftHand": "#9ba5b2",
+          "rightHand": "#afb8c2",
+          "background": "#111214"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase1/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/fun-bot/sounds/phase1/amen.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 40,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "fun-bot-phase2-draft",
+      "title": "Fun Bot — Phase 2",
+      "subtitle": "Draft rhythm lesson · Breakbeat",
+      "filename": "fun-bot-phase2-draft-rhythm.mid",
+      "emoji": "🤖",
+      "midi": "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/lesson/fun-bot-phase2-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "fun-bot",
+        "phaseId": "phase2",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 6888.39,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Breakbeat",
+        "rhythmMidiNote": 40,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/audio/amen3.wav",
+        "theme": {
+          "primary": "#8d99a8",
+          "secondary": "#afb8c2",
+          "leftHand": "#9ba5b2",
+          "rightHand": "#afb8c2",
+          "background": "#111214"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/fun-bot-phase2/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/fun-bot/sounds/phase2/amen3.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 40,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "green-vineria-phase1-draft",
+      "title": "Vineria — Phase 1",
+      "subtitle": "Draft rhythm lesson · Shaker",
+      "filename": "green-vineria-phase1-draft-rhythm.mid",
+      "emoji": "🌿",
+      "midi": "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/lesson/green-vineria-phase1-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "green-vineria",
+        "phaseId": "phase1",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 5043.741,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Shaker",
+        "rhythmMidiNote": 42,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/audio/shaky-shaky.wav",
+        "theme": {
+          "primary": "#35b86b",
+          "secondary": "#72cd97",
+          "leftHand": "#4dc17d",
+          "rightHand": "#72cd97",
+          "background": "#06160d"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase1/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/green-vineria/sounds/phase1/shaky-shaky.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 42,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "green-vineria-phase2-draft",
+      "title": "Vineria — Phase 2",
+      "subtitle": "Draft rhythm lesson · Shaker",
+      "filename": "green-vineria-phase2-draft-rhythm.mid",
+      "emoji": "🌿",
+      "midi": "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/lesson/green-vineria-phase2-draft-rhythm.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "green-vineria",
+        "phaseId": "phase2",
+        "playerMode": "rhythm",
+        "loopByDefault": true,
+        "loopDurationMs": 7151.791,
+        "instrumentId": "percussion",
+        "effectId": "bright-sparks",
+        "rhythmLabel": "Shaker",
+        "rhythmMidiNote": 42,
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/audio/shakey.wav",
+        "theme": {
+          "primary": "#35b86b",
+          "secondary": "#72cd97",
+          "leftHand": "#4dc17d",
+          "rightHand": "#72cd97",
+          "background": "#06160d"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/green-vineria-phase2/animation/anim4.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "energy-onset-detector",
+        "engineVersion": "1.0.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/green-vineria/sounds/phase2/shakey.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "detector": "energy-novelty-v1",
+          "rhythmMidiNote": 42,
+          "category": "percussion"
+        }
+      }
+    },
+    {
+      "id": "gray-gray-phase1-draft",
+      "title": "Gray — Phase 1",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "gray-gray-phase1-draft-basic-pitch.mid",
+      "emoji": "🎸",
+      "midi": "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/lesson/gray-gray-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "gray-gray",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 4818.753,
+        "instrumentId": "synth-bass",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/audio/bass1.wav",
+        "theme": {
+          "primary": "#777b82",
+          "secondary": "#a0a3a8",
+          "leftHand": "#878b91",
+          "rightHand": "#a0a3a8",
+          "background": "#0e0f10"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim10.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase1/animation/anim11.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/gray-gray/sounds/phase1/bass1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 35,
+          "maximumFrequencyHz": 500,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "gray-gray-phase2-draft",
+      "title": "Gray — Phase 2",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "gray-gray-phase2-draft-basic-pitch.mid",
+      "emoji": "🎸",
+      "midi": "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/lesson/gray-gray-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "gray-gray",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 7183.039,
+        "instrumentId": "synth-bass",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/audio/bass3.wav",
+        "theme": {
+          "primary": "#777b82",
+          "secondary": "#a0a3a8",
+          "leftHand": "#878b91",
+          "rightHand": "#a0a3a8",
+          "background": "#0e0f10"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/gray-gray-phase2/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/gray-gray/sounds/phase2/bass3.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 35,
+          "maximumFrequencyHz": 500,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "gold-garnold-phase1-draft",
+      "title": "Garnold — Phase 1",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "gold-garnold-phase1-draft-basic-pitch.mid",
+      "emoji": "✨",
+      "midi": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/lesson/gold-garnold-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "gold-garnold",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 4812.479,
+        "instrumentId": "synth-lead",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/audio/arpeg.wav",
+        "theme": {
+          "primary": "#e7b928",
+          "secondary": "#eece69",
+          "leftHand": "#eac142",
+          "rightHand": "#eece69",
+          "background": "#1c1605"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase1/animation/anim5.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/gold-garnold/sounds/phase1/arpeg.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 60,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "gold-garnold-phase2-draft",
+      "title": "Garnold — Phase 2",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "gold-garnold-phase2-draft-basic-pitch.mid",
+      "emoji": "✨",
+      "midi": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/lesson/gold-garnold-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "gold-garnold",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 9276.78,
+        "instrumentId": "synth-lead",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/audio/slow-arpeg.wav",
+        "theme": {
+          "primary": "#e7b928",
+          "secondary": "#eece69",
+          "leftHand": "#eac142",
+          "rightHand": "#eece69",
+          "background": "#1c1605"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/gold-garnold-phase2/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/gold-garnold/sounds/phase2/slow-arpeg.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 60,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "sky-blue-sky-phase1-draft",
+      "title": "Sky — Phase 1",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "sky-blue-sky-phase1-draft-basic-pitch.mid",
+      "emoji": "🧸",
+      "midi": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/lesson/sky-blue-sky-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "sky-blue-sky",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 6143.741,
+        "instrumentId": "music-box",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/audio/music-box1.wav",
+        "theme": {
+          "primary": "#7edcf5",
+          "secondary": "#a5e7f8",
+          "leftHand": "#8de0f6",
+          "rightHand": "#a5e7f8",
+          "background": "#0f1a1d"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase1/animation/anim6.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/sky-blue-sky/sounds/phase1/music-box1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 100,
+          "maximumFrequencyHz": 3000,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "sky-blue-sky-phase2-draft",
+      "title": "Sky — Phase 2",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "sky-blue-sky-phase2-draft-basic-pitch.mid",
+      "emoji": "🧸",
+      "midi": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/lesson/sky-blue-sky-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "sky-blue-sky",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 8031.247,
+        "instrumentId": "music-box",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/audio/music1.wav",
+        "theme": {
+          "primary": "#7edcf5",
+          "secondary": "#a5e7f8",
+          "leftHand": "#8de0f6",
+          "rightHand": "#a5e7f8",
+          "background": "#0f1a1d"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/sky-blue-sky-phase2/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/sky-blue-sky/sounds/phase2/music1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 80,
+          "maximumFrequencyHz": 3000,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "mr-sun-phase1-draft",
+      "title": "Mr Sun — Phase 1",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "mr-sun-phase1-draft-basic-pitch.mid",
+      "emoji": "☀️",
+      "midi": "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/lesson/mr-sun-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "mr-sun",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 5868.753,
+        "instrumentId": "grand-piano",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/audio/piano1.wav",
+        "theme": {
+          "primary": "#ffe900",
+          "secondary": "#fff04d",
+          "leftHand": "#ffec1f",
+          "rightHand": "#fff04d",
+          "background": "#1f1c00"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase1/animation/anim6.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase1/piano1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 80,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "mr-sun-phase2-draft",
+      "title": "Mr Sun — Phase 2",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "mr-sun-phase2-draft-basic-pitch.mid",
+      "emoji": "☀️",
+      "midi": "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/lesson/mr-sun-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "mr-sun",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 10687.506,
+        "instrumentId": "grand-piano",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/audio/piano1.wav",
+        "theme": {
+          "primary": "#ffe900",
+          "secondary": "#fff04d",
+          "leftHand": "#ffec1f",
+          "rightHand": "#fff04d",
+          "background": "#1f1c00"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-sun-phase2/animation/anim6.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase2/piano1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 60,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "purple-durple-phase1-draft",
+      "title": "Durple — Phase 1",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "purple-durple-phase1-draft-basic-pitch.mid",
+      "emoji": "🎺",
+      "midi": "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/lesson/purple-durple-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "purple-durple",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 4818.75,
+        "instrumentId": "brass",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/audio/tromp1.wav",
+        "theme": {
+          "primary": "#8b5ad8",
+          "secondary": "#ae8ce4",
+          "leftHand": "#996edd",
+          "rightHand": "#ae8ce4",
+          "background": "#110b1a"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim10.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim11.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim12.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim13.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim14.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase1/animation/anim15.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/purple-durple/sounds/phase1/tromp1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 55,
+          "maximumFrequencyHz": 1600,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "purple-durple-phase2-draft",
+      "title": "Durple — Phase 2",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "purple-durple-phase2-draft-basic-pitch.mid",
+      "emoji": "🎺",
+      "midi": "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/lesson/purple-durple-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "purple-durple",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 12044.646,
+        "instrumentId": "brass",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/audio/horns1.wav",
+        "theme": {
+          "primary": "#8b5ad8",
+          "secondary": "#ae8ce4",
+          "leftHand": "#996edd",
+          "rightHand": "#ae8ce4",
+          "background": "#110b1a"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim10.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim11.svg",
+            "./extensions/learn-sprunki/content/tracks/purple-durple-phase2/animation/anim12.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/purple-durple/sounds/phase2/horns1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 55,
+          "maximumFrequencyHz": 1600,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "mr-tree-phase1-draft",
+      "title": "Mr Tree — Phase 1",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "mr-tree-phase1-draft-basic-pitch.mid",
+      "emoji": "🌳",
+      "midi": "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/lesson/mr-tree-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "mr-tree",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 5275.011,
+        "instrumentId": "organ",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/audio/organ1.wav",
+        "theme": {
+          "primary": "#4d9b51",
+          "secondary": "#82b985",
+          "leftHand": "#62a766",
+          "rightHand": "#82b985",
+          "background": "#09130a"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/mr-tree-phase1/animation/anim8.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/mr-tree/sounds/phase1/organ1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 45,
+          "maximumFrequencyHz": 1800,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "mr-tree-phase2-draft",
+      "title": "Mr Tree — Phase 2",
+      "subtitle": "Draft transcription · Chords and melody",
+      "filename": "mr-tree-phase2-draft-basic-pitch.mid",
+      "emoji": "🌳",
+      "midi": "./extensions/learn-sprunki/content/tracks/mr-tree-phase2/lesson/mr-tree-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "mr-tree",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 9008.917,
+        "instrumentId": "organ",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/mr-tree-phase2/audio/slow-organ1.wav",
+        "theme": {
+          "primary": "#4d9b51",
+          "secondary": "#82b985",
+          "leftHand": "#62a766",
+          "rightHand": "#82b985",
+          "background": "#09130a"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/mr-tree-phase2/animation/idle.svg",
+          "frames": [],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/mr-tree/sounds/phase2/slow-organ1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 45,
+          "maximumFrequencyHz": 1800,
+          "category": "pitched-polyphonic"
+        }
+      }
+    },
+    {
+      "id": "yellow-simon-phase1-draft",
+      "title": "Simon — Phase 1",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "yellow-simon-phase1-draft-basic-pitch.mid",
+      "emoji": "⚡",
+      "midi": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/lesson/yellow-simon-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "yellow-simon",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 4818.75,
+        "instrumentId": "synth-lead",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/audio/square1.wav",
+        "theme": {
+          "primary": "#f2dc37",
+          "secondary": "#f6e773",
+          "leftHand": "#f4e04f",
+          "rightHand": "#f6e773",
+          "background": "#1d1a07"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase1/animation/anim5.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/yellow-simon/sounds/phase1/square1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 65,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "yellow-simon-phase2-draft",
+      "title": "Simon — Phase 2",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "yellow-simon-phase2-draft-basic-pitch.mid",
+      "emoji": "⚡",
+      "midi": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/lesson/yellow-simon-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "yellow-simon",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 6875,
+        "instrumentId": "synth-lead",
+        "effectId": "sun-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/audio/square1.wav",
+        "theme": {
+          "primary": "#f2dc37",
+          "secondary": "#f6e773",
+          "leftHand": "#f4e04f",
+          "rightHand": "#f6e773",
+          "background": "#1d1a07"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/yellow-simon-phase2/animation/anim4.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/yellow-simon/sounds/phase2/square1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 65,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "tan-tunner-phase1-draft",
+      "title": "Tunner — Phase 1",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "tan-tunner-phase1-draft-basic-pitch.mid",
+      "emoji": "🤠",
+      "midi": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/lesson/tan-tunner-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "tan-tunner",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 4926.104,
+        "instrumentId": "whistle",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/audio/whistle1.wav",
+        "theme": {
+          "primary": "#c89f72",
+          "secondary": "#d9bc9c",
+          "leftHand": "#cfab83",
+          "rightHand": "#d9bc9c",
+          "background": "#18130e"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim10.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase1/animation/anim11.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/tan-tunner/sounds/phase1/whistle1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 180,
+          "maximumFrequencyHz": 3500,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "tan-tunner-phase2-draft",
+      "title": "Tunner — Phase 2",
+      "subtitle": "Draft transcription · Melody",
+      "filename": "tan-tunner-phase2-draft-basic-pitch.mid",
+      "emoji": "🤠",
+      "midi": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/lesson/tan-tunner-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "tan-tunner",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 8915.17,
+        "instrumentId": "whistle",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/audio/whistle3.wav",
+        "theme": {
+          "primary": "#c89f72",
+          "secondary": "#d9bc9c",
+          "leftHand": "#cfab83",
+          "rightHand": "#d9bc9c",
+          "background": "#18130e"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim1.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim10.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim11.svg",
+            "./extensions/learn-sprunki/content/tracks/tan-tunner-phase2/animation/anim12.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/tan-tunner/sounds/phase2/whistle3.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 180,
+          "maximumFrequencyHz": 3500,
+          "category": "pitched-monophonic"
+        }
+      }
+    },
+    {
+      "id": "pink-pinki-phase1-draft",
+      "title": "Pinki — Phase 1",
+      "subtitle": "Draft transcription · Vocal draft",
+      "filename": "pink-pinki-phase1-draft-basic-pitch.mid",
+      "emoji": "🎀",
+      "midi": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/lesson/pink-pinki-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "pink-pinki",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 9675.011,
+        "instrumentId": "choir",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/audio/femchoir1.wav",
+        "theme": {
+          "primary": "#f38cc8",
+          "secondary": "#f7afd9",
+          "leftHand": "#f49acf",
+          "rightHand": "#f7afd9",
+          "background": "#1d1118"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase1/animation/anim7.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/pink-pinki/sounds/phase1/femchoir1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 100,
+          "maximumFrequencyHz": 2400,
+          "category": "pitched-vocal"
+        }
+      }
+    },
+    {
+      "id": "pink-pinki-phase2-draft",
+      "title": "Pinki — Phase 2",
+      "subtitle": "Draft transcription · Vocal draft",
+      "filename": "pink-pinki-phase2-draft-basic-pitch.mid",
+      "emoji": "🎀",
+      "midi": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/lesson/pink-pinki-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "pink-pinki",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 9241.066,
+        "instrumentId": "choir",
+        "effectId": "bright-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/audio/choir1.wav",
+        "theme": {
+          "primary": "#f38cc8",
+          "secondary": "#f7afd9",
+          "leftHand": "#f49acf",
+          "rightHand": "#f7afd9",
+          "background": "#1d1118"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim9.svg",
+            "./extensions/learn-sprunki/content/tracks/pink-pinki-phase2/animation/anim10.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/pink-pinki/sounds/phase2/choir1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 80,
+          "maximumFrequencyHz": 2200,
+          "category": "pitched-vocal"
+        }
+      }
+    },
+    {
+      "id": "blue-jevin-phase1-draft",
+      "title": "Jevin — Phase 1",
+      "subtitle": "Draft transcription · Vocal draft",
+      "filename": "blue-jevin-phase1-draft-basic-pitch.mid",
+      "emoji": "🧙",
+      "midi": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/lesson/blue-jevin-phase1-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "blue-jevin",
+        "phaseId": "phase1",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 8493.729,
+        "instrumentId": "choir",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/audio/choir1.wav",
+        "theme": {
+          "primary": "#335fc5",
+          "secondary": "#708fd6",
+          "leftHand": "#4b72cc",
+          "rightHand": "#708fd6",
+          "background": "#060b18"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim5.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim6.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim7.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim8.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase1/animation/anim9.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/blue-jevin/sounds/phase1/choir1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 65,
+          "maximumFrequencyHz": 1800,
+          "category": "pitched-vocal"
+        }
+      }
+    },
+    {
+      "id": "blue-jevin-phase2-draft",
+      "title": "Jevin — Phase 2",
+      "subtitle": "Draft transcription · Vocal draft",
+      "filename": "blue-jevin-phase2-draft-basic-pitch.mid",
+      "emoji": "🧙",
+      "midi": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/lesson/blue-jevin-phase2-draft-basic-pitch.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "lesson": {
+        "gameId": "original-sprunki",
+        "characterId": "blue-jevin",
+        "phaseId": "phase2",
+        "playerMode": "piano",
+        "loopByDefault": true,
+        "loopDurationMs": 9418.753,
+        "instrumentId": "choir",
+        "effectId": "shadow-sparks",
+        "referenceAudio": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/audio/choir1.wav",
+        "theme": {
+          "primary": "#335fc5",
+          "secondary": "#708fd6",
+          "leftHand": "#4b72cc",
+          "rightHand": "#708fd6",
+          "background": "#060b18"
+        },
+        "animation": {
+          "idle": "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/idle.svg",
+          "frames": [
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/anim.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/anim2.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/anim3.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/anim4.svg",
+            "./extensions/learn-sprunki/content/tracks/blue-jevin-phase2/animation/anim5.svg"
+          ],
+          "frameDurationMs": 116
+        }
+      },
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/blue-jevin/sounds/phase2/choir1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 65,
+          "maximumFrequencyHz": 1800,
+          "category": "pitched-vocal"
+        }
+      }
+    }
+  ]
+}

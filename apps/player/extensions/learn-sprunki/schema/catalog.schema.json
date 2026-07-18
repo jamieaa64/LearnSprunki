@@ -22,7 +22,7 @@
   "$defs": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "text": { "type": "string", "minLength": 1 },
-    "asset": { "type": "string", "pattern": "^\\./content/" },
+    "asset": { "type": "string", "pattern": "^\\./extensions/learn-sprunki/content/" },
     "gameReference": {
       "type": "object",
       "additionalProperties": false,
@@ -106,7 +106,7 @@
         "subtitle": { "type": "string" },
         "filename": { "type": "string", "pattern": "\\.mid(?:i)?$" },
         "emoji": { "type": "string" },
-        "midi": { "type": "string", "pattern": "^\\./content/.*\\.mid(?:i)?$" },
+        "midi": { "type": "string", "pattern": "^\\./extensions/learn-sprunki/content/.*\\.mid(?:i)?$" },
         "kind": { "enum": ["demo", "sprunki-lesson"] },
         "reviewStatus": { "enum": ["draft", "reviewed", "approved"] },
         "lesson": { "$ref": "#/$defs/lesson" },

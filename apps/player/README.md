@@ -28,16 +28,16 @@ The application is a full duplex audio tool: it captures incoming physical or wi
 
 It supports local MIDI file loading, a built-in track library, real-time note name translation, standalone session recording, and downloadable MIDI exports.
 
-The LearnSprunki fork loads game manifests separately from its ordinary track
-library. The LearnSprunki button opens a phase-grouped character browser; a
+The Learn Sprunki extension loads game manifests separately from the core track
+library. Its button opens a phase-grouped character browser; a
 locked tile means that character/phase does not yet have a reviewed lesson.
 Its first playable vertical slice is Mr Sun Phase 1, with animation synced to
 the lesson timeline, character-coloured notes, original-loop playback and a
 visibly labelled draft transcription. Infinite playback is a Sprunki-only
 setting and never changes the completion behaviour of ordinary MIDI tracks.
 
-Player content is separated into `content/games`, `content/tracks`,
-`content/instruments` and `content/effects`. Lessons refer to reusable
+Extension content is separated into `extensions/learn-sprunki/content/games`,
+`tracks`, `instruments` and `effects`. Lessons refer to reusable
 instrument and visual-effect definitions by ID; Mr Sun currently uses the
 data-driven Sun Sparks note effect.
 
@@ -145,12 +145,13 @@ When importing `jamieaa64/LearnSprunki` into Vercel, use:
 - Output Directory: `dist`
 
 The included `vercel.json` records the build and output settings. The production
-build copies the three pinned browser libraries into `dist/vendor` and the song
-catalogue into `dist/content`, so the deployed player does not expose or depend
-on `node_modules` URLs.
+build copies the three pinned browser libraries into `dist/vendor`, the NeoKeys
+core into `dist/core`, and registered extension packages into `dist/extensions`,
+so the deployed player does not expose or depend on `node_modules` URLs.
 
-Run `npm run validate:content` to check catalogue references and required assets
-before building. `npm run build` performs the same validation automatically.
+Run `npm run check` to validate catalogues/assets, execute unit, integration and
+architecture tests, and produce the deployment build. Extension authoring is
+documented in [`../../docs/EXTENSIONS.md`](../../docs/EXTENSIONS.md).
 
 ---
 
@@ -175,10 +176,15 @@ apps/player/
 ├── index.html              # Page structure
 ├── styles.css              # Player presentation
 ├── app.js                  # Piano, playback and interaction logic
+├── core/                   # Reusable extension host and pure core modules
 ├── content/
-│   ├── catalog.json        # Data-driven song menu
-│   └── midi/               # Playable MIDI files
-└── scripts/build.mjs       # Static Vercel build
+│   ├── catalog.json        # Core demo-song catalogue
+│   └── midi/               # Core demo MIDI files
+├── extensions/
+│   ├── registry.json       # Enabled extension packages
+│   └── learn-sprunki/      # Sprunki runtime, styles, schemas and assets
+├── tests/                  # Unit, integration and architecture suites
+└── scripts/                # Validation and static Vercel build
 ```
 
 ---
