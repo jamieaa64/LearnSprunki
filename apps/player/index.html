@@ -17,6 +17,18 @@
 <div id="app">
   <canvas id="stage"></canvas>
 
+  <section class="character-stage hidden" id="characterStage" aria-live="polite">
+    <div class="character-glow"></div>
+    <div class="character-status" id="characterStatus">Draft lesson</div>
+    <img class="character-image" id="characterImage" alt="" />
+    <div class="character-details">
+      <strong id="characterName">Mr Sun</strong>
+      <span id="characterPhase">Phase 1</span>
+    </div>
+    <button class="reference-audio-btn" id="referenceAudioBtn" type="button">▶ Hear original loop</button>
+    <audio id="referenceAudio" preload="metadata" loop></audio>
+  </section>
+
   <!-- Top bar -->
   <div class="topbar">
     <div class="brand">
@@ -46,10 +58,15 @@
 
   <!-- Control Panel -->
   <div class="panel" id="panel">
-    <h3>Tracks</h3>
+    <h3>Sprunki Lessons</h3>
+    <div class="sprunki-lessons" id="sprunkiLessons" aria-live="polite">
+      <span class="catalogue-loading">Loading lessons…</span>
+    </div>
+
+    <h3 style="margin-top:10px;">Other Songs</h3>
     <div class="tracks-wrap">
       <button class="tracks-btn" id="tracksBtn" type="button">
-        <span>🎵  Built-in Songs</span>
+        <span>🎵  Demo Songs</span>
         <span class="chev">▾</span>
       </button>
       <div class="tracks-menu" id="tracksMenu" aria-live="polite"></div>
@@ -178,8 +195,8 @@
 
   <!-- Start overlay -->
   <div class="start-overlay" id="startOverlay">
-    <h1>🎹 NeoKeys · LearnSprunki</h1>
-    <p>A tablet-first Sprunki music learner built from NeoKeys. Tap below to enable audio and start.</p>
+    <h1>☀️ LearnSprunki Piano</h1>
+    <p>Learn real Sprunki parts with animated characters and falling piano notes. Tap below to start.</p>
     <div class="start-actions">
       <button class="start-btn" id="startBtn">Tap to Start</button>
       <button class="start-btn secondary" id="startFullscreenBtn" type="button">Start Fullscreen</button>

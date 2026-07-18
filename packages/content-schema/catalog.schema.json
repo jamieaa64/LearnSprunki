@@ -1,26 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://learnsprunki.example/schemas/catalog.schema.json",
-  "title": "LearnSprunki song catalogue",
+  "title": "LearnSprunki content catalogue",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "id", "title", "tracks"],
+  "required": ["schemaVersion", "id", "title", "collections", "tracks"],
   "properties": {
-    "schemaVersion": {
-      "const": "1.0.0"
-    },
-    "id": {
-      "$ref": "#/$defs/id"
-    },
-    "title": {
-      "type": "string",
-      "minLength": 1
+    "schemaVersion": { "const": "2.0.0" },
+    "id": { "$ref": "#/$defs/id" },
+    "title": { "$ref": "#/$defs/nonEmptyString" },
+    "collections": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/collection" }
     },
     "tracks": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/track"
-      }
+      "items": { "$ref": "#/$defs/track" }
     }
   },
   "$defs": {
@@ -28,32 +23,115 @@
       "type": "string",
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetPath": {
+      "type": "string",
+      "pattern": "^\\./content/"
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "secondary", "leftHand", "rightHand", "background"],
+      "properties": {
+        "primary": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "secondary": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "leftHand": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "rightHand": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "background": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+      }
+    },
+    "animation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["idle", "frames", "frameDurationMs"],
+      "properties": {
+        "idle": { "$ref": "#/$defs/assetPath" },
+        "frames": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/assetPath" }
+        },
+        "frameDurationMs": { "type": "integer", "minimum": 16 }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "lessonTrackId", "referenceAudio", "animation"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "lessonTrackId": { "$ref": "#/$defs/id" },
+        "referenceAudio": { "$ref": "#/$defs/assetPath" },
+        "animation": { "$ref": "#/$defs/animation" }
+      }
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "icon", "theme", "phases"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "icon": { "$ref": "#/$defs/assetPath" },
+        "theme": { "$ref": "#/$defs/theme" },
+        "phases": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/phase" }
+        }
+      }
+    },
+    "collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "characters"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "characters": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/character" }
+        }
+      }
+    },
+    "transcription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "engineVersion", "sourceAudio", "reviewRequired", "parameters"],
+      "properties": {
+        "engine": { "$ref": "#/$defs/id" },
+        "engineVersion": { "$ref": "#/$defs/nonEmptyString" },
+        "sourceAudio": { "$ref": "#/$defs/nonEmptyString" },
+        "reviewRequired": { "type": "boolean" },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minimumFrequencyHz", "maximumFrequencyHz"],
+          "properties": {
+            "minimumFrequencyHz": { "type": "number", "exclusiveMinimum": 0 },
+            "maximumFrequencyHz": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      }
+    },
     "track": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "title", "filename", "midi"],
+      "required": ["id", "title", "filename", "midi", "kind"],
       "properties": {
-        "id": {
-          "$ref": "#/$defs/id"
-        },
-        "title": {
-          "type": "string",
-          "minLength": 1
-        },
-        "subtitle": {
-          "type": "string"
-        },
-        "filename": {
-          "type": "string",
-          "pattern": "\\.mid(?:i)?$"
-        },
-        "emoji": {
-          "type": "string"
-        },
-        "midi": {
-          "type": "string",
-          "pattern": "\\.mid(?:i)?$"
-        }
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "subtitle": { "type": "string" },
+        "filename": { "type": "string", "pattern": "\\.mid(?:i)?$" },
+        "emoji": { "type": "string" },
+        "midi": { "type": "string", "pattern": "^\\./content/.*\\.mid(?:i)?$" },
+        "kind": { "enum": ["demo", "sprunki-lesson"] },
+        "reviewStatus": { "enum": ["draft", "reviewed", "approved"] },
+        "transcription": { "$ref": "#/$defs/transcription" }
       }
     }
   }

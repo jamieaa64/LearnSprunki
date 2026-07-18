@@ -35,6 +35,7 @@ function noteLetter(midi) {
 
 // ---------- External song catalogue ----------
 let defaultSongs = Object.create(null);
+let lessonMetadataByTrackId = new Map();
 
 // ---------- Canvas setup ----------
 const canvas = document.getElementById('stage');
@@ -167,6 +168,15 @@ const state = {
   // Catalogue track id | 'upload' | 'recording' | null
   currentTrackId: null,
   currentTrackTitle: '',
+
+  // ---- Active lesson presentation ----
+  activeLesson: null,
+  characterFrameIndex: -1,
+  theme: {
+    lh: '#00d4ff',
+    rh: '#ff3da6',
+    background: '#06060c',
+  },
 
   // ---- Last successful recording (kept around so the user can re-download
   //      even after they switch songs — but the button only shows while
@@ -651,6 +661,7 @@ fileInput.addEventListener('change', async (e) => {
     const midi = new Midi(buf);
     state.currentTrackId    = 'upload';
     state.currentTrackTitle = f.name;
+    activateLessonPresentation(null);
     loadMidiObject(midi);
     updateTracksMenuActive();
     updateDownloadButtonVisibility();
@@ -770,11 +781,13 @@ async function loadDefaultSong(trackId) {
     const midi = new Midi(buf);
     state.currentTrackId    = trackId;
     state.currentTrackTitle = song.title;
+    activateLessonPresentation(trackId);
     loadMidiObject(midi);
     fileNameEl.textContent = song.title;
     updateTracksMenuActive();
     updateDownloadButtonVisibility();
-    showToast(song.emoji + '  Loaded: ' + song.title, 'ok');
+    const draftLabel = song.reviewStatus === 'draft' ? ' · draft transcription' : '';
+    showToast(song.emoji + '  Loaded: ' + song.title + draftLabel, 'ok');
   } catch (err) {
     console.error('Failed to load built-in song:', err);
     showToast('Failed to load track: ' + err.message, 'err');
@@ -1203,6 +1216,7 @@ function stopRecording() {
   fileNameEl.textContent = 'My Recording';
   state.currentTrackId    = 'recording';
   state.currentTrackTitle = 'My Recording';
+  activateLessonPresentation(null);
   updateTracksMenuActive();
   updateDownloadButtonVisibility();
   // Per spec (Update 2): always transition to Normal Mode after Stop Recording
@@ -1559,6 +1573,131 @@ updateFullscreenButton();
 // ---------- Tracks dropdown wiring (Update 1) ----------
 const tracksBtn  = document.getElementById('tracksBtn');
 const tracksMenu = document.getElementById('tracksMenu');
+const sprunkiLessons = document.getElementById('sprunkiLessons');
+const characterStage = document.getElementById('characterStage');
+const characterImage = document.getElementById('characterImage');
+const characterName = document.getElementById('characterName');
+const characterPhase = document.getElementById('characterPhase');
+const characterStatus = document.getElementById('characterStatus');
+const referenceAudio = document.getElementById('referenceAudio');
+const referenceAudioBtn = document.getElementById('referenceAudioBtn');
+
+function renderSprunkiLessons(collections) {
+  if (!sprunkiLessons) return;
+  sprunkiLessons.replaceChildren();
+
+  for (const collection of collections) {
+    for (const character of collection.characters || []) {
+      for (const phase of character.phases || []) {
+        const track = defaultSongs[phase.lessonTrackId];
+        if (!track) continue;
+
+        const item = document.createElement('button');
+        item.className = 'sprunki-lesson-card';
+        item.type = 'button';
+        item.dataset.trackId = track.id;
+        item.setAttribute('aria-label', `${character.name}, ${phase.title}, ${track.subtitle || 'lesson'}`);
+
+        const icon = document.createElement('img');
+        icon.src = character.icon;
+        icon.alt = '';
+
+        const copy = document.createElement('span');
+        copy.className = 'sprunki-lesson-copy';
+        const name = document.createElement('strong');
+        name.textContent = character.name;
+        const phaseName = document.createElement('span');
+        phaseName.textContent = `${collection.title} · ${phase.title}`;
+        copy.append(name, phaseName);
+
+        const badge = document.createElement('span');
+        badge.className = 'sprunki-lesson-badge';
+        badge.textContent = track.reviewStatus || 'ready';
+
+        item.append(icon, copy, badge);
+        sprunkiLessons.append(item);
+      }
+    }
+  }
+
+  if (!sprunkiLessons.children.length) {
+    sprunkiLessons.textContent = 'No Sprunki lessons yet';
+  }
+}
+
+function indexLessonMetadata(collections) {
+  lessonMetadataByTrackId = new Map();
+  for (const collection of collections) {
+    for (const character of collection.characters || []) {
+      for (const phase of character.phases || []) {
+        const track = defaultSongs[phase.lessonTrackId];
+        if (!track) continue;
+        lessonMetadataByTrackId.set(track.id, { collection, character, phase, track });
+      }
+    }
+  }
+}
+
+function stopReferenceAudio() {
+  if (!referenceAudio) return;
+  referenceAudio.pause();
+  referenceAudio.currentTime = 0;
+}
+
+function activateLessonPresentation(trackId) {
+  stopReferenceAudio();
+  const lesson = lessonMetadataByTrackId.get(trackId) || null;
+  state.activeLesson = lesson;
+  state.characterFrameIndex = -1;
+
+  const root = document.documentElement;
+  if (!lesson) {
+    state.theme = { lh: '#00d4ff', rh: '#ff3da6', background: '#06060c' };
+    root.style.removeProperty('--lesson-primary');
+    root.style.removeProperty('--lesson-secondary');
+    root.style.removeProperty('--accent');
+    root.style.removeProperty('--lh');
+    root.style.removeProperty('--rh');
+    if (characterStage) characterStage.classList.add('hidden');
+    if (characterImage) characterImage.removeAttribute('src');
+    if (referenceAudio) referenceAudio.removeAttribute('src');
+    return;
+  }
+
+  const { character, phase, track } = lesson;
+  const theme = character.theme;
+  state.theme = {
+    lh: theme.leftHand,
+    rh: theme.rightHand,
+    background: theme.background,
+  };
+  root.style.setProperty('--lesson-primary', theme.primary);
+  root.style.setProperty('--lesson-secondary', theme.secondary);
+  root.style.setProperty('--accent', theme.secondary);
+  root.style.setProperty('--lh', theme.leftHand);
+  root.style.setProperty('--rh', theme.rightHand);
+
+  characterStage.classList.remove('hidden');
+  characterImage.src = phase.animation.idle;
+  characterImage.alt = `${character.name}, ${phase.title}`;
+  characterName.textContent = character.name;
+  characterPhase.textContent = phase.title;
+  characterStatus.textContent = track.reviewStatus === 'draft' ? 'Draft transcription' : 'Lesson ready';
+  referenceAudio.src = phase.referenceAudio;
+}
+
+function updateCharacterAnimation() {
+  const lesson = state.activeLesson;
+  if (!lesson || !characterImage) return;
+  const animation = lesson.phase.animation;
+  const frames = animation.frames || [];
+  const nextIndex = state.playing && frames.length
+    ? Math.floor(state.songTime / animation.frameDurationMs) % frames.length
+    : -1;
+  if (nextIndex === state.characterFrameIndex) return;
+  state.characterFrameIndex = nextIndex;
+  characterImage.src = nextIndex < 0 ? animation.idle : frames[nextIndex];
+}
 
 function renderTracksMenu(tracks) {
   if (!tracksMenu) return;
@@ -1595,14 +1734,56 @@ async function loadSongCatalog() {
   if (!Array.isArray(catalog.tracks)) {
     throw new Error('Song catalogue is missing its tracks list.');
   }
+  const collections = Array.isArray(catalog.collections) ? catalog.collections : [];
   defaultSongs = Object.fromEntries(catalog.tracks.map(track => [track.id, track]));
-  renderTracksMenu(catalog.tracks);
+  indexLessonMetadata(collections);
+  renderSprunkiLessons(collections);
+  renderTracksMenu(catalog.tracks.filter(track => track.kind !== 'sprunki-lesson'));
 }
 
 function updateTracksMenuActive() {
-  if (!tracksMenu) return;
-  tracksMenu.querySelectorAll('.track-item').forEach(it => {
-    it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
+  if (tracksMenu) {
+    tracksMenu.querySelectorAll('.track-item').forEach(it => {
+      it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
+    });
+  }
+  if (sprunkiLessons) {
+    sprunkiLessons.querySelectorAll('.sprunki-lesson-card').forEach(it => {
+      it.classList.toggle('active', it.dataset.trackId === state.currentTrackId);
+    });
+  }
+}
+
+if (sprunkiLessons) {
+  sprunkiLessons.addEventListener('click', async (event) => {
+    const item = event.target.closest('.sprunki-lesson-card');
+    if (!item || !sprunkiLessons.contains(item)) return;
+    await loadDefaultSong(item.dataset.trackId);
+  });
+}
+
+if (referenceAudioBtn && referenceAudio) {
+  referenceAudioBtn.addEventListener('click', async () => {
+    if (referenceAudio.paused) {
+      setPlaying(false);
+      try {
+        await referenceAudio.play();
+      } catch (err) {
+        console.warn('Reference audio was blocked by the browser:', err);
+        showToast('The original loop could not be played', 'err');
+      }
+    } else {
+      referenceAudio.pause();
+      referenceAudio.currentTime = 0;
+    }
+  });
+  referenceAudio.addEventListener('play', () => {
+    referenceAudioBtn.classList.add('playing');
+    referenceAudioBtn.textContent = '■ Stop original loop';
+  });
+  referenceAudio.addEventListener('pause', () => {
+    referenceAudioBtn.classList.remove('playing');
+    referenceAudioBtn.textContent = '▶ Hear original loop';
   });
 }
 
@@ -1633,6 +1814,7 @@ loadSongCatalog().catch((err) => {
   console.error('Failed to load song catalogue:', err);
   if (tracksBtn) tracksBtn.disabled = true;
   if (tracksMenu) tracksMenu.textContent = 'Songs unavailable';
+  if (sprunkiLessons) sprunkiLessons.textContent = 'Lessons unavailable';
 });
 
 // ---------- Notation toggle wiring (Update 4) ----------
@@ -1865,7 +2047,7 @@ function update(dtMs) {
 // ---------- Rendering ----------
 function clear() {
   // Gradient bg drawn via CSS, but we still need to clear canvas
-  ctx.fillStyle = '#06060c';
+  ctx.fillStyle = state.theme.background;
   ctx.fillRect(0, 0, W, H);
 
   // Subtle grid lines in waterfall area for readability
@@ -1908,7 +2090,7 @@ function drawFreeplayBlocks() {
     const y = yTop;
     const h = Math.max(3, yBottom - yTop);
 
-    const base = b.hand === 'lh' ? '#00d4ff' : '#ff3da6';
+    const base = b.hand === 'lh' ? state.theme.lh : state.theme.rh;
     const glow = b.hand === 'lh' ? 'rgba(0,212,255,' : 'rgba(255,61,166,';
 
     // Gradient: bright (recent) at the bottom, fading at the top as it floats away.
@@ -2001,7 +2183,7 @@ function drawWaterfall() {
     const isWaiting = state.waiting && state.waitingFor.has(n.midi);
 
     // Color by hand
-    const base = n.hand === 'lh' ? '#00d4ff' : '#ff3da6';
+    const base = n.hand === 'lh' ? state.theme.lh : state.theme.rh;
     const glow = n.hand === 'lh' ? 'rgba(0,212,255,' : 'rgba(255,61,166,';
 
     // Body
@@ -2108,7 +2290,7 @@ function drawPiano() {
   // Active notes from playback timeline
   for (const n of state.notes) {
     if (n.startMs <= state.songTime && state.songTime <= n.endMs) {
-      lit.set(n.midi, { color: n.hand === 'lh' ? '#00d4ff' : '#ff3da6', source: 'play' });
+      lit.set(n.midi, { color: n.hand === 'lh' ? state.theme.lh : state.theme.rh, source: 'play' });
     }
   }
   // Waiting notes — special highlight
@@ -2278,6 +2460,7 @@ function frame(ts) {
   state.lastFrameTs = ts;
 
   update(dt);
+  updateCharacterAnimation();
 
   clear();
   if (state.mode === 'freeplay') {

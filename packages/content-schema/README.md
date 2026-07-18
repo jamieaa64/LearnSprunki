@@ -1,11 +1,10 @@
 # LearnSprunki content schema
 
-`catalog.schema.json` defines the first shared contract between the player and
-the future song-authoring tools. A catalogue contains lightweight display
-metadata and paths to ordinary MIDI files; the player does not embed MIDI data
-inside its JavaScript.
+`catalog.schema.json` defines the shared contract between the player and the
+song-authoring tools. Version 2 adds collections, characters, phases, animation,
+reference audio, colour themes and transcription provenance, based on the first
+real content pack: Original Sprunki / Mr Sun / Phase 1.
 
-The initial schema deliberately covers playable tracks only. Character,
-animation, phase, source-audio, attribution, and transcription metadata will be
-added when the first Sprunki pack is assembled, based on real extracted assets
-rather than assumptions.
+Playable MIDI remains a separate file. Generated transcriptions carry an
+explicit review status so the player can distinguish a machine-produced draft
+from a human-approved lesson.

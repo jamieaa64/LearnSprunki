@@ -41,3 +41,8 @@ The current player is an attributed, locally packaged NeoKeys baseline with
 LearnSprunki branding and tablet fullscreen controls. Its source is split into
 HTML, CSS and JavaScript, and its song menu is generated from an external JSON
 catalogue containing paths to ordinary MIDI files.
+
+The first end-to-end Sprunki lesson is Original Sprunki / Mr Sun / Phase 1. It
+includes the real animated SVG frames, the original WAV reference loop, a
+yellow-orange lesson theme, and an explicitly labelled Basic Pitch draft MIDI.
+The draft must be reviewed before it is promoted to an approved lesson.

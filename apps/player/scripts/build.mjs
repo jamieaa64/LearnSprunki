@@ -1,6 +1,7 @@
 import { copyFile, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateCatalogue } from "./validate-content.mjs";
 
 const projectDirectory = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = resolve(projectDirectory, "dist");
@@ -20,6 +21,8 @@ const vendorFiles = [
     output: "vendor/midiwriter.js",
   },
 ];
+
+await validateCatalogue(projectDirectory);
 
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(vendorDirectory, { recursive: true });

@@ -1,15 +1,76 @@
 {
-  "schemaVersion": "1.0.0",
-  "id": "neokeys-demo-songs",
-  "title": "Built-in Songs",
+  "schemaVersion": "2.0.0",
+  "id": "learn-sprunki-catalogue",
+  "title": "LearnSprunki Lessons",
+  "collections": [
+    {
+      "id": "original-sprunki",
+      "title": "Original Sprunki",
+      "characters": [
+        {
+          "id": "mr-sun",
+          "name": "Mr Sun",
+          "icon": "./content/packs/original-sprunki/mr-sun/shared/icon.svg",
+          "theme": {
+            "primary": "#ffe900",
+            "secondary": "#ff6f00",
+            "leftHand": "#ff8a00",
+            "rightHand": "#ffd60a",
+            "background": "#100b02"
+          },
+          "phases": [
+            {
+              "id": "phase1",
+              "title": "Phase 1",
+              "lessonTrackId": "mr-sun-phase1-draft",
+              "referenceAudio": "./content/packs/original-sprunki/mr-sun/phase1/audio/piano1.wav",
+              "animation": {
+                "idle": "./content/packs/original-sprunki/mr-sun/phase1/animation/idle.svg",
+                "frames": [
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim.svg",
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim2.svg",
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim3.svg",
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim4.svg",
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim5.svg",
+                  "./content/packs/original-sprunki/mr-sun/phase1/animation/anim6.svg"
+                ],
+                "frameDurationMs": 116
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "tracks": [
+    {
+      "id": "mr-sun-phase1-draft",
+      "title": "Mr Sun — Phase 1",
+      "subtitle": "Draft transcription",
+      "filename": "mr-sun-phase1-basic-pitch-draft.mid",
+      "emoji": "☀️",
+      "midi": "./content/packs/original-sprunki/mr-sun/phase1/lesson/mr-sun-phase1-basic-pitch-draft.mid",
+      "kind": "sprunki-lesson",
+      "reviewStatus": "draft",
+      "transcription": {
+        "engine": "spotify-basic-pitch",
+        "engineVersion": "0.3.0",
+        "sourceAudio": "SprunkiAssets/sprunkis/mr-sun/sounds/phase1/piano1.wav",
+        "reviewRequired": true,
+        "parameters": {
+          "minimumFrequencyHz": 80,
+          "maximumFrequencyHz": 2200
+        }
+      }
+    },
     {
       "id": "moonlight",
       "title": "Beethoven — Moonlight Sonata",
       "subtitle": "Op. 27",
       "filename": "Beethoven-Moonlight-Sonata.mid",
       "emoji": "🌙",
-      "midi": "./content/midi/moonlight.mid"
+      "midi": "./content/midi/moonlight.mid",
+      "kind": "demo"
     },
     {
       "id": "furelise",
@@ -17,7 +78,8 @@
       "subtitle": "Bagatelle",
       "filename": "Fur-Elise.mid",
       "emoji": "🌹",
-      "midi": "./content/midi/furelise.mid"
+      "midi": "./content/midi/furelise.mid",
+      "kind": "demo"
     },
     {
       "id": "clairdelune",
@@ -25,7 +87,8 @@
       "subtitle": "Debussy",
       "filename": "Debussy-Clair-de-Lune.mid",
       "emoji": "✨",
-      "midi": "./content/midi/clairdelune.mid"
+      "midi": "./content/midi/clairdelune.mid",
+      "kind": "demo"
     }
   ]
 }

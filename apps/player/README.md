@@ -28,6 +28,11 @@ The application is a full duplex audio tool: it captures incoming physical or wi
 
 It supports local MIDI file loading, a built-in track library, real-time note name translation, standalone session recording, and downloadable MIDI exports.
 
+The LearnSprunki fork also loads versioned character collections. Its first
+vertical slice is Mr Sun Phase 1, with a character selector, animation synced to
+the lesson timeline, character-coloured notes, original-loop playback and a
+visibly labelled draft transcription.
+
 ---
 
 ## 🚀 Features
@@ -124,6 +129,9 @@ The included `vercel.json` records the build and output settings. The production
 build copies the three pinned browser libraries into `dist/vendor` and the song
 catalogue into `dist/content`, so the deployed player does not expose or depend
 on `node_modules` URLs.
+
+Run `npm run validate:content` to check catalogue references and required assets
+before building. `npm run build` performs the same validation automatically.
 
 ---
 

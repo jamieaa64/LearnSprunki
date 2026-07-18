@@ -17,6 +17,8 @@
     --black-key-edge: #000;
     --hit-line: #ffffff;
     --good: #36e07f;
+    --lesson-primary: #7c5cff;
+    --lesson-secondary: #ff3da6;
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -38,6 +40,80 @@
     width: 100%; height: 100%;
     display: block;
     background: linear-gradient(180deg, #07070c 0%, #0a0a18 50%, #050509 100%);
+  }
+
+  /* ---------- Active Sprunki character ---------- */
+  .character-stage {
+    position: absolute;
+    top: 68px;
+    right: clamp(14px, 4vw, 54px);
+    width: clamp(150px, 19vw, 230px);
+    min-height: 250px;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: none;
+    filter: drop-shadow(0 14px 24px rgba(0,0,0,0.45));
+  }
+  .character-stage.hidden { display: none; }
+  .character-glow {
+    position: absolute;
+    inset: 15% -8% 8%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--lesson-primary) 34%, transparent), transparent 68%);
+    filter: blur(8px);
+  }
+  .character-image {
+    width: 100%;
+    height: min(35vh, 270px);
+    object-fit: contain;
+    object-position: center bottom;
+  }
+  .character-status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: rgba(17, 12, 3, 0.82);
+    border: 1px solid color-mix(in srgb, var(--lesson-secondary) 60%, white 10%);
+    color: #ffe6b2;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+  .character-details {
+    margin-top: -4px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 12px;
+    background: rgba(10, 8, 5, 0.78);
+    border: 1px solid color-mix(in srgb, var(--lesson-primary) 45%, transparent);
+    backdrop-filter: blur(12px);
+  }
+  .character-details strong { color: var(--lesson-primary); font-size: 15px; }
+  .character-details span { color: var(--text-dim); font-size: 10px; }
+  .reference-audio-btn {
+    pointer-events: auto;
+    margin-top: 7px;
+    border: 1px solid color-mix(in srgb, var(--lesson-secondary) 55%, transparent);
+    border-radius: 999px;
+    padding: 7px 11px;
+    color: #fff7df;
+    background: rgba(20, 13, 2, 0.84);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .reference-audio-btn.playing {
+    color: #1c1200;
+    background: linear-gradient(135deg, var(--lesson-primary), var(--lesson-secondary));
   }
 
   /* ---------- Top bar ---------- */
@@ -695,6 +771,41 @@
 
 
   /* ---------- Tracks dropdown (built-in songs menu) ---------- */
+  .sprunki-lessons { display: flex; flex-direction: column; gap: 6px; }
+  .catalogue-loading { padding: 10px 4px; color: var(--text-dim); font-size: 11px; }
+  .sprunki-lesson-card {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 9px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 214, 10, 0.24);
+    background: linear-gradient(135deg, rgba(255, 233, 0, 0.13), rgba(255, 111, 0, 0.09));
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+  }
+  .sprunki-lesson-card:hover { border-color: rgba(255, 214, 10, 0.55); }
+  .sprunki-lesson-card.active {
+    border-color: #ffd60a;
+    box-shadow: 0 0 0 1px rgba(255,214,10,0.24), 0 8px 22px rgba(255,111,0,0.2);
+  }
+  .sprunki-lesson-card img { width: 44px; height: 44px; object-fit: contain; }
+  .sprunki-lesson-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .sprunki-lesson-copy strong { font-size: 12px; }
+  .sprunki-lesson-copy span { color: var(--text-dim); font-size: 10px; }
+  .sprunki-lesson-badge {
+    padding: 4px 6px;
+    border-radius: 999px;
+    background: rgba(255,111,0,0.18);
+    color: #ffd699;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
   .tracks-wrap { position: relative; }
   .tracks-btn {
     display: block;
@@ -855,5 +966,9 @@
     .tbtn { width: 34px; height: 34px; }
     .victory-card { padding: 22px 18px 16px; }
     .victory-card h2 { font-size: 19px; }
+    .character-stage { top: 56px; right: 10px; width: 138px; min-height: 190px; }
+    .character-image { height: min(28vh, 175px); }
+    .character-details { padding: 5px 8px; }
+    .character-details strong { font-size: 12px; }
+    .reference-audio-btn { padding: 6px 9px; font-size: 9px; }
   }
-
