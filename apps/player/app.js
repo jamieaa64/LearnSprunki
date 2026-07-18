@@ -176,7 +176,7 @@ const state = {
   // 'auto' picks the smallest standard keyboard that safely contains the
   // loaded song. A number is a preferred minimum size; it is expanded when a
   // song needs more notes so required keys are never hidden.
-  keyboardRangeMode: 'auto',
+  keyboardRangeMode: '88',
   keyboardRangeExpanded: false,
 
   // ---- Victory flag ----
