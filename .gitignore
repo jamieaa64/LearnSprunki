@@ -1,0 +1,13 @@
+.DS_Store
+**/.DS_Store
+
+# Local dependencies and generated builds
+node_modules/
+dist/
+
+# Local authoring workbench outputs
+workbench/drafts/
+workbench/tmp/
+
+# Vercel local project linkage
+.vercel/
