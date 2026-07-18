@@ -57,6 +57,7 @@ export async function validateCatalogue(projectDirectory) {
         await requireAsset(projectDirectory, phase.portrait);
         requireValue(instrumentsById.has(phase.instrumentId), `unknown instrument ${phase.instrumentId}`);
         requireValue(effectsById.has(phase.effectId), `unknown effect ${phase.effectId}`);
+        requireValue(typeof phase.category === "string" && phase.category.length > 0, `${character.id}/${phase.id} has no teaching category`);
         if (phase.locked) {
           requireValue(phase.lessonTrackId === null, `${character.id}/${phase.id} is locked but has a track`);
         } else {
@@ -72,11 +73,16 @@ export async function validateCatalogue(projectDirectory) {
     requireValue(lesson && gamesById.has(lesson.gameId), `${track.id} references an unknown game`);
     requireValue(instrumentsById.has(lesson.instrumentId), `${track.id} references an unknown instrument`);
     requireValue(effectsById.has(lesson.effectId), `${track.id} references an unknown effect`);
+    requireValue(["piano", "rhythm"].includes(lesson.playerMode), `${track.id} has an invalid player mode`);
+    if (lesson.playerMode === "rhythm") {
+      requireValue(typeof lesson.rhythmLabel === "string" && lesson.rhythmLabel.length > 0, `${track.id} has no rhythm label`);
+      requireValue(Number.isInteger(lesson.rhythmMidiNote), `${track.id} has no rhythm MIDI note`);
+    }
     requireValue(typeof lesson.loopByDefault === "boolean", `${track.id} is missing its loop default`);
     requireValue(Number.isFinite(lesson.loopDurationMs) && lesson.loopDurationMs > 0, `${track.id} has an invalid loop duration`);
     await requireAsset(projectDirectory, lesson.referenceAudio);
     await requireAsset(projectDirectory, lesson.animation.idle);
-    requireValue(Array.isArray(lesson.animation.frames) && lesson.animation.frames.length > 0, `${track.id} has no animation frames`);
+    requireValue(Array.isArray(lesson.animation.frames), `${track.id} has an invalid animation frame list`);
     for (const frame of lesson.animation.frames) await requireAsset(projectDirectory, frame);
 
     const game = gamesById.get(lesson.gameId);

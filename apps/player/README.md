@@ -41,6 +41,12 @@ Player content is separated into `content/games`, `content/tracks`,
 instrument and visual-effect definitions by ID; Mr Sun currently uses the
 data-driven Sun Sparks note effect.
 
+Original Sprunki currently includes 20 Basic Pitch piano/vocal drafts and 10
+single-lane percussion drafts. Percussion lessons replace the piano with a
+large labelled rhythm pad that works with touch or the space bar. All generated
+lessons remain explicitly marked as drafts until they are reviewed against the
+source loop.
+
 For tablet performance, character SVGs are preloaded once and drawn through a
 fixed canvas instead of repeatedly replacing an image URL. Coarse-pointer
 devices use a 1.5× canvas pixel-ratio cap, disable large live backdrop blurs and

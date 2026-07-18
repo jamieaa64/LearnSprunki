@@ -1,0 +1,29 @@
+{
+  "sourceAudio": "snare3.wav",
+  "rhythmLabel": "Snare",
+  "rhythmMidiNote": 38,
+  "detector": "energy-novelty-v1",
+  "onsetsSeconds": [
+    0.43,
+    0.59,
+    0.69,
+    1.29,
+    1.54,
+    2.15,
+    2.3,
+    2.4,
+    3,
+    3.26,
+    3.86,
+    4.11,
+    4.72,
+    4.97,
+    5.58,
+    5.73,
+    5.83,
+    6.43,
+    6.58,
+    6.68,
+    7.4
+  ]
+}

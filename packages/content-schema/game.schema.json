@@ -31,7 +31,10 @@
                 "locked": { "type": "boolean" },
                 "lessonTrackId": { "type": ["string", "null"] },
                 "instrumentId": { "type": "string" },
-                "effectId": { "type": "string" }
+                "effectId": { "type": "string" },
+                "category": { "type": "string" },
+                "playerMode": { "type": ["string", "null"], "enum": ["piano", "rhythm", null] },
+                "rhythmLabel": { "type": "string" }
               }
             }
           }

@@ -7,6 +7,9 @@ and moves reusable instruments and visual effects into their own catalogues.
 locked phases may have portraits and presentation metadata without claiming a
 playable lesson exists.
 
+Animation frame lists may be empty when an upstream phase intentionally ships
+only a static idle drawing (currently Mr Tree Phase 2).
+
 Playable MIDI remains a separate file. Generated transcriptions carry an
 explicit review status so the player can distinguish a machine-produced draft
 from a human-approved lesson.

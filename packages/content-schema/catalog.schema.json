@@ -60,22 +60,25 @@
       "required": ["idle", "frames", "frameDurationMs"],
       "properties": {
         "idle": { "$ref": "#/$defs/asset" },
-        "frames": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/asset" } },
+        "frames": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
         "frameDurationMs": { "type": "integer", "minimum": 16 }
       }
     },
     "lesson": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["gameId", "characterId", "phaseId", "loopByDefault", "loopDurationMs", "instrumentId", "effectId", "referenceAudio", "theme", "animation"],
+      "required": ["gameId", "characterId", "phaseId", "playerMode", "loopByDefault", "loopDurationMs", "instrumentId", "effectId", "referenceAudio", "theme", "animation"],
       "properties": {
         "gameId": { "$ref": "#/$defs/id" },
         "characterId": { "$ref": "#/$defs/id" },
         "phaseId": { "$ref": "#/$defs/id" },
+        "playerMode": { "enum": ["piano", "rhythm"] },
         "loopByDefault": { "type": "boolean" },
         "loopDurationMs": { "type": "number", "exclusiveMinimum": 0 },
         "instrumentId": { "$ref": "#/$defs/id" },
         "effectId": { "$ref": "#/$defs/id" },
+        "rhythmLabel": { "$ref": "#/$defs/text" },
+        "rhythmMidiNote": { "type": "integer", "minimum": 0, "maximum": 127 },
         "referenceAudio": { "$ref": "#/$defs/asset" },
         "theme": { "$ref": "#/$defs/theme" },
         "animation": { "$ref": "#/$defs/animation" }

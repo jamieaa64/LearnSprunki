@@ -96,6 +96,10 @@ function buildLayout() {
 }
 
 function getKey(midi) {
+  const rhythm = state?.activeLesson?.lesson;
+  if (rhythm?.playerMode === 'rhythm' && midi === rhythm.rhythmMidiNote) {
+    return { midi, isBlack: false, x: W * 0.2, w: W * 0.6 };
+  }
   for (let i = 0; i < keyLayout.length; i++) if (keyLayout[i].midi === midi) return keyLayout[i];
   return null;
 }
@@ -801,7 +805,9 @@ async function loadDefaultSong(trackId) {
     fileNameEl.textContent = song.title;
     updateTracksMenuActive();
     updateDownloadButtonVisibility();
-    const draftLabel = song.reviewStatus === 'draft' ? ' · draft transcription' : '';
+    const draftLabel = song.reviewStatus === 'draft'
+      ? (song.lesson?.playerMode === 'rhythm' ? ' · draft rhythm lesson' : ' · draft transcription')
+      : '';
     showToast(song.emoji + '  Loaded: ' + song.title + draftLabel, 'ok');
     const tabletLayout = window.innerWidth <= 1180 ||
       (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
@@ -1666,7 +1672,9 @@ function characterChoice(game, character, phaseId) {
   const name = document.createElement('strong');
   name.textContent = character.name;
   const detail = document.createElement('small');
-  detail.textContent = instrument ? instrument.label : 'Lesson';
+  detail.textContent = phase.playerMode === 'rhythm'
+    ? `Rhythm · ${phase.rhythmLabel}`
+    : (instrument ? instrument.label : 'Lesson');
   item.append(portrait, name, detail);
   if (locked) {
     const lock = document.createElement('span');
@@ -1814,7 +1822,9 @@ function activateLessonPresentation(trackId) {
   characterCanvas.setAttribute('aria-label', `${character.name}, ${phase.title}`);
   characterName.textContent = character.name;
   characterPhase.textContent = phase.title;
-  characterStatus.textContent = track.reviewStatus === 'draft' ? 'Draft transcription' : 'Lesson ready';
+  characterStatus.textContent = track.reviewStatus === 'draft'
+    ? (lesson.lesson.playerMode === 'rhythm' ? 'Draft rhythm lesson' : 'Draft transcription')
+    : 'Lesson ready';
   referenceAudio.src = lesson.lesson.referenceAudio;
   referenceAudio.loop = state.sprunkiLoopEnabled;
   if (instrument) {
@@ -2036,6 +2046,8 @@ const touchActive = new Map(); // touchId -> midi
 
 function midiAtPoint(x, y) {
   if (y < pianoY) return null;
+  const rhythm = state.activeLesson?.lesson;
+  if (rhythm?.playerMode === 'rhythm') return rhythm.rhythmMidiNote;
   // Check black first (drawn on top)
   for (const k of keyLayout) if (k.isBlack) {
     if (x >= k.x && x <= k.x + k.w && y <= pianoY + blackKeyH) return k.midi;
@@ -2062,6 +2074,23 @@ canvas.addEventListener('pointerup', (e) => {
 canvas.addEventListener('pointercancel', (e) => {
   const m = touchActive.get(e.pointerId);
   if (m != null) { handleUserNoteOff(m, false); touchActive.delete(e.pointerId); }
+});
+
+let rhythmSpaceHeld = false;
+document.addEventListener('keydown', event => {
+  const rhythm = state.activeLesson?.lesson;
+  const tagName = event.target?.tagName?.toLowerCase();
+  if (event.code !== 'Space' || rhythm?.playerMode !== 'rhythm' || event.repeat || ['input', 'select', 'button'].includes(tagName)) return;
+  event.preventDefault();
+  rhythmSpaceHeld = true;
+  initAudio().then(() => handleUserNoteOn(rhythm.rhythmMidiNote, 0.9, false));
+});
+document.addEventListener('keyup', event => {
+  const rhythm = state.activeLesson?.lesson;
+  if (event.code !== 'Space' || !rhythmSpaceHeld || rhythm?.playerMode !== 'rhythm') return;
+  event.preventDefault();
+  rhythmSpaceHeld = false;
+  handleUserNoteOff(rhythm.rhythmMidiNote, false);
 });
 
 // ---------- Game Loop ----------
@@ -2391,10 +2420,12 @@ function drawWaterfall() {
   const t1 = state.songTime + LOOKAHEAD_MS;
 
   // Draw shaded background bands behind black keys for visual alignment
-  ctx.fillStyle = 'rgba(255,255,255,0.015)';
-  for (const k of keyLayout) {
-    if (k.isBlack) {
-      ctx.fillRect(k.x, 0, k.w, waterfallH);
+  if (state.activeLesson?.lesson?.playerMode !== 'rhythm') {
+    ctx.fillStyle = 'rgba(255,255,255,0.015)';
+    for (const k of keyLayout) {
+      if (k.isBlack) {
+        ctx.fillRect(k.x, 0, k.w, waterfallH);
+      }
     }
   }
 
@@ -2542,6 +2573,12 @@ function drawPiano() {
     lit.set(m, { color: '#36e07f', source: 'user' });
   }
 
+  const rhythm = state.activeLesson?.lesson;
+  if (rhythm?.playerMode === 'rhythm') {
+    drawRhythmPad(rhythm, lit.get(rhythm.rhythmMidiNote));
+    return;
+  }
+
   // White keys
   for (const k of keyLayout) {
     if (k.isBlack) continue;
@@ -2668,6 +2705,37 @@ function drawPiano() {
   topGrad.addColorStop(1, 'rgba(0,0,0,0.5)');
   ctx.fillStyle = topGrad;
   ctx.fillRect(0, pianoY - 12, W, 12);
+}
+
+function drawRhythmPad(rhythm, litInfo) {
+  ctx.fillStyle = '#090a12';
+  ctx.fillRect(0, pianoY, W, pianoH);
+  const x = W * 0.2;
+  const width = W * 0.6;
+  const y = pianoY + 12;
+  const height = Math.max(58, pianoH - 24);
+  const color = litInfo?.color || state.theme.rh;
+  const gradient = ctx.createLinearGradient(0, y, 0, y + height);
+  gradient.addColorStop(0, hexToRgba(color, litInfo ? 0.95 : 0.42));
+  gradient.addColorStop(1, hexToRgba(color, litInfo ? 0.48 : 0.12));
+  ctx.fillStyle = gradient;
+  ctx.shadowColor = litInfo ? color : 'transparent';
+  ctx.shadowBlur = litInfo ? 22 : 0;
+  roundRect(ctx, x, y, width, height, 18);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = hexToRgba(color, 0.8);
+  ctx.lineWidth = 2;
+  roundRect(ctx, x, y, width, height, 18);
+  ctx.stroke();
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+  ctx.fillText(rhythm.rhythmLabel.toUpperCase(), W / 2, y + height / 2 - 8);
+  ctx.fillStyle = 'rgba(255,255,255,0.68)';
+  ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+  ctx.fillText('TAP THE PAD · OR PRESS SPACE', W / 2, y + height / 2 + 17);
 }
 
 function roundRect(ctx, x, y, w, h, r) {

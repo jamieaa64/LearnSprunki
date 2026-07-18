@@ -12,19 +12,25 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/orange-oren/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "orange-oren-phase1-draft",
           "instrumentId": "percussion",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Kick"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/orange-oren/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "orange-oren-phase2-draft",
           "instrumentId": "percussion",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Kick"
         }
       ]
     },
@@ -37,19 +43,25 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/red-raddy/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "red-raddy-phase1-draft",
           "instrumentId": "percussion",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Snare"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/red-raddy/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "red-raddy-phase2-draft",
           "instrumentId": "percussion",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Snare"
         }
       ]
     },
@@ -62,19 +74,25 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "silver-clukr-phase1-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Ride"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/silver-clukr/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "silver-clukr-phase2-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Knock"
         }
       ]
     },
@@ -87,19 +105,25 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/fun-bot/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "fun-bot-phase1-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Breakbeat"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/fun-bot/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "fun-bot-phase2-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Breakbeat"
         }
       ]
     },
@@ -112,19 +136,25 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/green-vineria/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "green-vineria-phase1-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Shaker"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/green-vineria/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "green-vineria-phase2-draft",
           "instrumentId": "percussion",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "percussion",
+          "playerMode": "rhythm",
+          "rhythmLabel": "Shaker"
         }
       ]
     },
@@ -137,19 +167,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/gray-gray/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "gray-gray-phase1-draft",
           "instrumentId": "synth-bass",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/gray-gray/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "gray-gray-phase2-draft",
           "instrumentId": "synth-bass",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -165,7 +199,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "effect",
+          "playerMode": null
         },
         {
           "id": "phase2",
@@ -174,7 +210,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "impact-sparks"
+          "effectId": "impact-sparks",
+          "category": "effect",
+          "playerMode": null
         }
       ]
     },
@@ -187,19 +225,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "gold-garnold-phase1-draft",
           "instrumentId": "synth-lead",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/gold-garnold/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "gold-garnold-phase2-draft",
           "instrumentId": "synth-lead",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -215,7 +257,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "effect",
+          "playerMode": null
         },
         {
           "id": "phase2",
@@ -224,7 +268,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "effect",
+          "playerMode": null
         }
       ]
     },
@@ -237,19 +283,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "sky-blue-sky-phase1-draft",
           "instrumentId": "music-box",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/sky-blue-sky/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "sky-blue-sky-phase2-draft",
           "instrumentId": "music-box",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -265,16 +315,20 @@
           "locked": false,
           "lessonTrackId": "mr-sun-phase1-draft",
           "instrumentId": "grand-piano",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/mr-sun/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "mr-sun-phase2-draft",
           "instrumentId": "grand-piano",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -287,19 +341,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/purple-durple/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "purple-durple-phase1-draft",
           "instrumentId": "brass",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/purple-durple/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "purple-durple-phase2-draft",
           "instrumentId": "brass",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -312,19 +370,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/mr-tree/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "mr-tree-phase1-draft",
           "instrumentId": "organ",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/mr-tree/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "mr-tree-phase2-draft",
           "instrumentId": "organ",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-polyphonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -337,19 +399,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "yellow-simon-phase1-draft",
           "instrumentId": "synth-lead",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/yellow-simon/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "yellow-simon-phase2-draft",
           "instrumentId": "synth-lead",
-          "effectId": "sun-sparks"
+          "effectId": "sun-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -362,19 +428,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "tan-tunner-phase1-draft",
           "instrumentId": "whistle",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/tan-tunner/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "tan-tunner-phase2-draft",
           "instrumentId": "whistle",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-monophonic",
+          "playerMode": "piano"
         }
       ]
     },
@@ -390,7 +460,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "vocal-effect",
+          "playerMode": null
         },
         {
           "id": "phase2",
@@ -399,7 +471,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "speech",
+          "playerMode": null
         }
       ]
     },
@@ -415,7 +489,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "choir",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "speech",
+          "playerMode": null
         },
         {
           "id": "phase2",
@@ -424,7 +500,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "choir",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "vocal-effect",
+          "playerMode": null
         }
       ]
     },
@@ -437,19 +515,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "pink-pinki-phase1-draft",
           "instrumentId": "choir",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-vocal",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/pink-pinki/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "pink-pinki-phase2-draft",
           "instrumentId": "choir",
-          "effectId": "bright-sparks"
+          "effectId": "bright-sparks",
+          "category": "pitched-vocal",
+          "playerMode": "piano"
         }
       ]
     },
@@ -462,19 +544,23 @@
           "id": "phase1",
           "title": "Phase 1",
           "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase1.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "blue-jevin-phase1-draft",
           "instrumentId": "choir",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-vocal",
+          "playerMode": "piano"
         },
         {
           "id": "phase2",
           "title": "Phase 2",
           "portrait": "./content/games/original-sprunki/characters/blue-jevin/phase2.svg",
-          "locked": true,
-          "lessonTrackId": null,
+          "locked": false,
+          "lessonTrackId": "blue-jevin-phase2-draft",
           "instrumentId": "choir",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "pitched-vocal",
+          "playerMode": "piano"
         }
       ]
     },
@@ -490,7 +576,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "effect",
+          "playerMode": null
         },
         {
           "id": "phase2",
@@ -499,7 +587,9 @@
           "locked": true,
           "lessonTrackId": null,
           "instrumentId": "sound-effect",
-          "effectId": "shadow-sparks"
+          "effectId": "shadow-sparks",
+          "category": "effect",
+          "playerMode": null
         }
       ]
     }

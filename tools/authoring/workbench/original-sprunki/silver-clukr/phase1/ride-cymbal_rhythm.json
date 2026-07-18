@@ -1,0 +1,15 @@
+{
+  "sourceAudio": "ride-cymbal.wav",
+  "rhythmLabel": "Ride",
+  "rhythmMidiNote": 51,
+  "detector": "energy-novelty-v1",
+  "onsetsSeconds": [
+    0.6,
+    1.2,
+    1.8,
+    2.4,
+    3,
+    3.6,
+    4.2
+  ]
+}
