@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learnsprunki.example/schemas/catalog.schema.json",
+  "title": "LearnSprunki song catalogue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "title", "tracks"],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "filename", "midi"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string",
+          "pattern": "\\.mid(?:i)?$"
+        },
+        "emoji": {
+          "type": "string"
+        },
+        "midi": {
+          "type": "string",
+          "pattern": "\\.mid(?:i)?$"
+        }
+      }
+    }
+  }
+}

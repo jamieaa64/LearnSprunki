@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -37,6 +37,11 @@ if (html.includes("./node_modules/")) {
 }
 
 await writeFile(resolve(outputDirectory, "index.html"), html);
+await copyFile(resolve(projectDirectory, "styles.css"), resolve(outputDirectory, "styles.css"));
+await copyFile(resolve(projectDirectory, "app.js"), resolve(outputDirectory, "app.js"));
+await cp(resolve(projectDirectory, "content"), resolve(outputDirectory, "content"), {
+  recursive: true,
+});
 await copyFile(resolve(projectDirectory, "LICENSE"), resolve(outputDirectory, "LICENSE"));
 
-console.log("Built LearnSprunki Player in dist/ with local browser dependencies.");
+console.log("Built LearnSprunki Player in dist/ with local dependencies and song catalogue.");

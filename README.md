@@ -6,6 +6,7 @@ applications and one shared content format:
 - `apps/player`: the NeoKeys-derived learner PWA;
 - a future authoring workshop for producing reviewed Sprunki and non-Sprunki
   MIDI lesson packs;
+- `packages/content-schema`: the shared, versioned song catalogue contract;
 - `Research`: product, architecture, transcription and delivery research.
 
 ## Player
@@ -37,5 +38,6 @@ The app-level `vercel.json` also records the build/output settings.
 ## Project status
 
 The current player is an attributed, locally packaged NeoKeys baseline with
-LearnSprunki branding and tablet fullscreen controls. The next engineering step
-is behaviour-preserving extraction of its monolithic `index.html`.
+LearnSprunki branding and tablet fullscreen controls. Its source is split into
+HTML, CSS and JavaScript, and its song menu is generated from an external JSON
+catalogue containing paths to ordinary MIDI files.

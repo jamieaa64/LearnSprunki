@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "neokeys-demo-songs",
+  "title": "Built-in Songs",
+  "tracks": [
+    {
+      "id": "moonlight",
+      "title": "Beethoven — Moonlight Sonata",
+      "subtitle": "Op. 27",
+      "filename": "Beethoven-Moonlight-Sonata.mid",
+      "emoji": "🌙",
+      "midi": "./content/midi/moonlight.mid"
+    },
+    {
+      "id": "furelise",
+      "title": "Für Elise",
+      "subtitle": "Bagatelle",
+      "filename": "Fur-Elise.mid",
+      "emoji": "🌹",
+      "midi": "./content/midi/furelise.mid"
+    },
+    {
+      "id": "clairdelune",
+      "title": "Clair de Lune",
+      "subtitle": "Debussy",
+      "filename": "Debussy-Clair-de-Lune.mid",
+      "emoji": "✨",
+      "midi": "./content/midi/clairdelune.mid"
+    }
+  ]
+}

@@ -3,7 +3,8 @@
 > LearnSprunki tablet baseline, derived from NeoKeys commit
 > `50235a332ddcffb0a3567f48a77d8c6b6d70f07e`. NeoKeys remains credited to
 > ArtinSHF under CC BY-NC 4.0. This branch pins its browser dependencies locally
-> and adds explicit fullscreen controls; structural refactoring comes next.
+> and adds explicit fullscreen controls, separated source files, and an external
+> song catalogue.
 
 <img width="1861" height="927" alt="Screenshot" src="https://github.com/user-attachments/assets/86ffb06a-8490-4da8-8d05-52731d9d6398" />
 
@@ -90,7 +91,7 @@ It supports local MIDI file loading, a built-in track library, real-time note na
 
 ## ▶️ How to Run Locally
 
-This project runs completely inside a single file and can be opened using any local server environment.
+This project is a static web app and can be opened using any local server environment.
 
 Recommended method:
 
@@ -106,8 +107,9 @@ http://127.0.0.1:4173/index.html
 
 The launch overlay and transport both provide a fullscreen control for tablet
 play. Browser fullscreen must be entered from a user tap. Touch is the primary
-LearnSprunki input; NeoKeys' Web MIDI support remains available but is not an
-MVP dependency.
+LearnSprunki input. The inherited Web MIDI implementation remains in the
+codebase for future optional keyboard support, but startup no longer requests
+hardware access or waits on MIDI permission.
 
 ## Deploying from the LearnSprunki monorepo
 
@@ -119,8 +121,9 @@ When importing `jamieaa64/LearnSprunki` into Vercel, use:
 - Output Directory: `dist`
 
 The included `vercel.json` records the build and output settings. The production
-build copies the three pinned browser libraries into `dist/vendor`, so the
-deployed player does not expose or depend on `node_modules` URLs.
+build copies the three pinned browser libraries into `dist/vendor` and the song
+catalogue into `dist/content`, so the deployed player does not expose or depend
+on `node_modules` URLs.
 
 ---
 
@@ -141,11 +144,14 @@ For the interactive MIDI features to work properly:
 ## 📁 Project Structure
 
 ```text
-neokeys/
-│
-├── index.html        # Main single-file app
-├── README.md         # Repository documentation
-└── screenshots/      # UI layout and feature screenshots
+apps/player/
+├── index.html              # Page structure
+├── styles.css              # Player presentation
+├── app.js                  # Piano, playback and interaction logic
+├── content/
+│   ├── catalog.json        # Data-driven song menu
+│   └── midi/               # Playable MIDI files
+└── scripts/build.mjs       # Static Vercel build
 ```
 
 ---
